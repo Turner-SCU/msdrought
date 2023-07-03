@@ -1,0 +1,31 @@
+Package: MSD
+Title: Calculate characteristics of a seasonal mid-summer drought
+Version: 0.0.1.0
+Authors@R: 
+  c(person("Kenneth", "Joseph", email = "knjoseph@scu.edu", role = c("aut")),
+    person("Maurer", "Ed", email = "emaurer@scu.edu", role = c("aut", "cre"),
+    person("Avila", "Alex", email = "aaavila@scu.edu", role = c("aut", "cre"),
+    person("Uyeda", "Turner", email = "tuyeda@scu.edu", role = c("aut"),
+    comment = c(ORCID = "0000-0001-7134-487X")))
+Description: Functions for calculating characteristics of a mid-summer drought 
+    (MSD), a phenomenon of decreased rainfall during a typical rainy season. 
+    The MSD is a feature of rainfall in much of Central America, but is also
+    found in other locations, typically those with a Mediterranean climate.
+    The details are described in "The Mesoamerican mid-summer drought: the 
+    impact of its definition on occurrences and recent changes", HESS, Maurer 
+    et al. (2022) '<https://hess.copernicus.org/articles/26/1425/2022/>'.
+Depends: R (>= 3.6.0)
+License: GPL (>= 2)
+Encoding: UTF-8
+LazyData: true
+Imports:
+    dplyr,
+    ggplot2,
+    lubridate,
+    stringr,
+    terra,
+    tidyr,
+    tools
+Suggests:
+    terra
+RoxygenNote: 7.1.1
