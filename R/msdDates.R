@@ -22,7 +22,7 @@
 #' @export
 #'
 #-----------------------------------------------------------------------------------------------------------------------------------------
-msdDates <- function(x, firstStartDate = "05-01", firstEndDate = "06-31", secondStartDate = "08-01", secondEndDate = "10-31"){
+msdDates <- function(x, firstStartDate = "05-01", firstEndDate = "08-31", secondStartDate = "06-01", secondEndDate = "10-31"){
 
   #Find the pre-set date bounds for the MSD (define the first year of the data, January 1, and December 31)
   year1 = lubridate::year(x[1]) #find the first date of the provided date vector, x
