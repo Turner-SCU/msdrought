@@ -1,0 +1,60 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# MSD
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The MSD R package contains functions for calculating characteristics of a mid-summer drought (MSD), a phenomenon of decreased rainfall during a typical rainy season. The MSD is a feature of rainfall in much of Central America, but is also found in other locations, typically those with a Mediterranean climate. The details are described in "The Mesoamerican mid-summer drought: the impact of its definition on occurrences and recent changes", HESS, Maurer et al. (2022) '<https://hess.copernicus.org/articles/26/1425/2022/>'.
+
+## Installation
+
+You can install the development version of MSD from [GitHub](https://github.com/Turner-SCU/MSD)
+
+``` r
+# install.packages("devtools")
+devtools::install_github("Turner-SCU/MSD")
+```
+
+## Example
+
+These are the steps required to create useful MSD data:
+
+1) Begin with a timeseries or spatraster of precipitation data over time.
+2) Filter this data using the msdFilter function.
+3) Use the msdDates function to extract relevant dates for the calculations.
+4) Supply the msd function with the data from msdDates and select a parameter to calculate.
+
+```{r example}
+library(MSD)
+## basic example code
+```
+
+What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+
+```{r cars}
+summary(cars)
+```
+
+You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
+
+You can also embed plots, for example:
+
+```{r pressure, echo = FALSE}
+plot(pressure)
+```
+
+In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.

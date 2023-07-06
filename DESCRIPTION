@@ -3,10 +3,9 @@ Title: Calculate characteristics of a seasonal mid-summer drought
 Version: 0.0.1.0
 Authors@R: 
   c(person("Kenneth", "Joseph", email = "knjoseph@scu.edu", role = c("aut")),
-    person("Maurer", "Ed", email = "emaurer@scu.edu", role = c("aut", "cre"),
-    person("Avila", "Alex", email = "aaavila@scu.edu", role = c("aut", "cre"),
-    person("Uyeda", "Turner", email = "tuyeda@scu.edu", role = c("aut"),
-    comment = c(ORCID = "0000-0001-7134-487X")))
+    person("Maurer", "Ed", email = "emaurer@scu.edu", role = c("aut", "cre")),
+    person("Avila", "Alex", email = "aaavila@scu.edu", role = c("aut")),
+    person("Uyeda", "Turner", email = "tuyeda@scu.edu", role = c("aut")))
 Description: Functions for calculating characteristics of a mid-summer drought 
     (MSD), a phenomenon of decreased rainfall during a typical rainy season. 
     The MSD is a feature of rainfall in much of Central America, but is also
@@ -14,20 +13,25 @@ Description: Functions for calculating characteristics of a mid-summer drought
     The details are described in "The Mesoamerican mid-summer drought: the 
     impact of its definition on occurrences and recent changes", HESS, Maurer 
     et al. (2022) '<https://hess.copernicus.org/articles/26/1425/2022/>'.
+    Github repository can be found at '<https://github.com/Turner-SCU/MSD>'.
 Depends: R (>= 3.6.0)
-License: GPL (>= 2)
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports:
     dplyr,
     ggplot2,
     lubridate,
+    quantmod,
+    signal,
     stringr,
-    terra,
     tidyr,
     tools
 Suggests:
+    knitr,
+    rmarkdown,
     terra
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.1
 URL: https://github.com/Turner-SCU/MSD
 BugReports: https://github.com/Turner-SCU/MSD/issues
+VignetteBuilder: knitr
