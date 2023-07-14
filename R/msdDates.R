@@ -33,7 +33,7 @@ msdDates <- function(x, firstStartDate = "05-01", firstEndDate = "08-31", second
   i<-year1
   l<-round(length(x)/365)
   j<-i+l-1
-  kDates<-c(0) #Values assocaited with key MSD dates
+  kDates<-c(0) #Values associated with key MSD dates
   kYear<-c(0) #Values for the first and last days of a year
 
   for(year in i:j)

@@ -3,7 +3,7 @@
 #' @description This function calculates the different statistics of the mid summer drought from a RasterBrick or a Time Series.
 #'
 #' The input must be in the form of daily data, with the first data point being January 1st of a respective year.
-#' If x is a SpatRaster, then the output is a Spatraster with a data point for each year.
+#' If x is a SpatRaster, then the output is a SpatRaster with a data point for each year.
 #'
 #' @usage msd(x, dates, fcn)
 #'
