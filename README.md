@@ -1,10 +1,3 @@
----
-output: github_document
-editor_options: 
-  markdown: 
-    wrap: sentence
----
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 
