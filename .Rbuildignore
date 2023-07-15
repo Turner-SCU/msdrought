@@ -1,2 +1,3 @@
 ^msdPackage\.Rproj$
 ^\.Rproj\.user$
+^data-raw$
