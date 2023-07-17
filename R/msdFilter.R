@@ -35,7 +35,7 @@ msdFilter <- function(x, window=31, quantity=2) {
   ratio = bartlett_window/bartlett_sum
 
   #apply filter weighted on the average and divided by the sum of the bartlett window to smooth out the data
-  bartlett_noise_filter = function(x, window) {
+  bartlett_noise_filter = function(x, ratio) {
     filtered_data = stats::filter(x, ratio, method="convolution")
   }
 
