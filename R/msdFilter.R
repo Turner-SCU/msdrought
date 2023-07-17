@@ -31,14 +31,16 @@ msdFilter <- function(x, window=31, quantity=2) {
   bartlett_window <- c(signal::bartlett(window))
   #creates a sum of the bartlett window to construct an average
   bartlett_sum <- sum(bartlett_window)
+  #calculate the necessary fraction of the window and sum
+  ratio = bartlett_window/bartlett_sum
 
   #apply filter weighted on the average and divided by the sum of the bartlett window to smooth out the data
   bartlett_noise_filter = function(x, window) {
-    filtered_data = stats::filter(x, bartlett_window/bartlett_sum, method="convolution")
+    filtered_data = stats::filter(x, ratio, method="convolution")
   }
 
   for (i in 1:quantity){ #run the loop as many times as desired
-    filtered_data <- terra::app(filtered_data, bartlett_noise_filter, window=window)
+    filtered <- terra::app(filtered_data, bartlett_noise_filter, window=window)
   }
-  return(filtered_data)
+  return(filtered)
 }
