@@ -12,5 +12,5 @@ extent = terra::ext(-88, -70, 8, 20) #defined for the range of coordinates corre
 croppedData = terra::crop(precip, extent) #trim the data to only the data of interest
 croppedData = terra::ifel(croppedData < 0, 0, croppedData) #replace any negative (errant) values with zeroes
 raster = croppedData
-terra::plot(raster, range=c(0, 3000))
+#terra::plot(raster, range=c(0, 3000))
 #usethis::use_data(raster, overwrite = TRUE) #save data externally
