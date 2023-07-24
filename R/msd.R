@@ -14,8 +14,8 @@
 #' @return SpatRaster or TimeSeries of Yearly data
 #'
 #' @examples
-#' # using SpatRaster
-#' #r<-terra::app(x, msd, dates = d1, fcn="duration")
+#' using SpatRaster
+#' r<-terra::app(x, msd, dates = d1, fcn="duration")
 #'
 #' @export
 #'

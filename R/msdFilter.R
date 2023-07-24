@@ -26,7 +26,6 @@
 #'
 #-----------------------------------------------------------------------------------------------------------------------------------------
 msdFilter <- function(x, window=31, quantity=2) {
-
   #apply filter weighted on the average and divided by the sum of the bartlett window to smooth out the data
   bartlett_noise_filter = function(x, window) {
     #constructs a Bartlett vector with the size of the bartlett filter
