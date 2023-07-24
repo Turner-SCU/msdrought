@@ -19,7 +19,7 @@
 #' @seealso \code{\link{msd}}
 #'
 #' @examples
-#' using Spatrast or a Time Series
+#' # using spatRaster or a Time Series
 #' r<-msdFilter(x, window = 31, quantity = 2)
 #'
 #' @export

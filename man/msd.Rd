@@ -23,7 +23,7 @@ The input must be in the form of daily data, with the first data point being Jan
 If x is a SpatRaster, then the output is a SpatRaster with a data point for each year.
 }
 \examples{
-using SpatRaster
+# using spatRaster
 r<-terra::app(x, msd, dates = d1, fcn="duration")
 
 }
