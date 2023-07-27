@@ -26,7 +26,7 @@ and calculate a weighted average based on how far away the points are from
 the point of interest.
 }
 \examples{
-using Spatrast or a Time Series
+# using spatRaster or a Time Series
 r<-msdFilter(x, window = 31, quantity = 2)
 
 }

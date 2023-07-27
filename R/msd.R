@@ -15,7 +15,7 @@
 #'
 #' @examples
 #' # using spatRaster
-#' r<-terra::app(x, msd, dates = d1, fcn="duration")
+#' r<-terra::app(raster, msd, dates = d1, fcn="duration")
 #'
 #' @export
 #'
@@ -29,12 +29,7 @@ msd <- function(x, dates, fcn){
     stop("fcn must be one of duration, intensity, firstMax, secondMax, min, mindex")
   }
   #-----------------------------------------------------------------------------------------------------------------------------------------
-  #The msd function requires the data to not have any NA or null values,
-  #so we temporarily convert all NA's to 0's.
-  x1 = NA #!!! New
-  x1 <- x[ is.na(x) | is.null(x) ] <- 0
-  x1 = x #!!! New
-  data<-c(as.numeric(x1)) #making sure the data is numeric
+  data<-c(as.numeric(x)) #making sure the data is numeric #!! ERROR: nlyr(x) == 1 is not TRUE, but it's functional with a timeseries
   peaks<-quantmod::findPeaks(data)-1 #finding all of the peaks of the data
   valleys<-quantmod::findValleys(data)-1 #finding all of the valleys of the data
   output<-c(0) #creating a new variable
