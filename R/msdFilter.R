@@ -36,9 +36,45 @@ msdFilter <- function(x, window=31, quantity=2) {
     ratio = bartlett_window/bartlett_sum
     filtered = stats::filter(x, ratio, method="convolution")
   }
-
-  for (i in 1:quantity){ #run the loop as many times as desired
-    x <- terra::app(x, bartlett_noise_filter, window=window)
+  #Find the format of the provided file "x". It should either be a raster or a timeseries
+  format = c(0) #Set up an empty variable for future modification
+  if (as.character(tryCatch(rast(x), error = function(e) FALSE)) == "FALSE") {
+    rasterCheck = FALSE
+  } else {
+    rasterCheck = TRUE
   }
+  if (tryCatch(as.xts(x), error = function(e) FALSE) == "FALSE") {
+    timeseriesCheck = FALSE
+  } else {
+    timeseriesCheck = TRUE
+  }
+
+  if ((rasterCheck == timeseriesCheck)) {
+    print("error! input file is not recognized as a raster or timeseries")
+    format = "error"
+    break
+  }
+  if (rasterCheck == FALSE && timeseriesCheck == TRUE) {
+    format = "timeseries"
+  } else if (timeseriesCheck == FALSE && rasterCheck == TRUE) {
+    format = "raster"
+  }
+  #filter the data for the amount of times specified
+  if (format == "raster") {
+    for (i in 1:quantity){ #run the loop as many times as desired
+      x <- terra::app(x, bartlett_noise_filter, window=window)
+  }
+  }
+    else if (format == "timeseries") {
+      x = data.frame(timeseries)
+      x[] = apply(x, MARGIN = 2, FUN = bartlett_noise_filter, window = window)
+      xtime = time(timeseries)
+      x = data.frame(x, xtime)
+      colnames(x) = c("Precipitation", "Date")
+      x = xts(x$Precipitation, x$Date)
+    }
+    else if (format == "error") {
+      print("error! the input file is not a raster or timeseries")
+    }
   return(x)
 }
