@@ -15,7 +15,7 @@
 #'
 #' @examples
 #' # using spatRaster
-#' r<-terra::app(raster, msdStats, dates = d1, fcn="duration")
+#' # r<-terra::app(raster, msdStats, dates = d1, fcn="duration")
 #'
 #' @export
 #'
