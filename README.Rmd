@@ -62,21 +62,24 @@ These are the steps required to create useful MSD data:
 
 ```{r example}
 library(MSD)
-rainData = data_provided
+rainData = raster
+precipData = terra::rast(rainData, subds = "pr")
+
 #Filter the infile data with a bartlett window of 31. Repeat 2x
-filteredData = msdFilter(rainData, window = 31, quantity = 2)
+filteredData1 = terra::app(precipData, msdFilter, window=31)
+filteredData = terra::app(filteredData1, msdFilter, window=31)
 
 #Grab the appropriate dates, either from a file or by manually assigning them
 someDates <- seq(from = as.Date("1981-01-01"), to = as.Date("1985-12-31"), by = "day")
 dates = msdDates(someDates, firstStartDate="05-01",firstEndDate="08-31", secondStartDate ="06-01",secondEndDate="10-31")
 
 #Put everything all together!
-duration = msd(filteredData, dates, duration)
-intensity = msd(filteredData, dates, intensity)
-firstMax = msd(filteredData, dates, firstMax)
-secondMax = msd(filteredData, dates, secondMax)
-minimum = msd(filteredData, dates, min)
-mindex = msd(filteredData, dates, mindex)
+duration <- terra::app(filteredData, msdStats, dates, fcn="duration")
+intensity <- terra::app(filteredData, msdStats, dates, fcn="intensity")
+firstMax <- terra::app(filteredData, msdStats, dates, fcn="firstMax")
+secondMax <- terra::app(filteredData, msdStats, dates, fcn="secondMax")
+minimum <- terra::app(filteredData, msdStats, dates, fcn="minimum")
+mindex <- terra::app(filteredData, msdStats, dates, fcn="mindex")
 
 #You have now calculated the useful parameters for the Mid-Summer Drought!
 ```
