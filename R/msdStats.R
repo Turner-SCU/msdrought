@@ -5,7 +5,7 @@
 #' The input must be in the form of daily data, with the first data point being January 1st of a respective year.
 #' If x is a SpatRaster, then the output is a SpatRaster with a data point for each year.
 #'
-#' @usage msd(x, dates, fcn)
+#' @usage msdStats(x, dates, fcn)
 #'
 #' @param x         RasterBrick or TimeSeries
 #' @param dates     Vector of Dates (from the msdDates function)
@@ -15,15 +15,15 @@
 #'
 #' @examples
 #' # using spatRaster
-#' r<-terra::app(raster, msd, dates = d1, fcn="duration")
+#' r<-terra::app(raster, msdStats, dates = d1, fcn="duration")
 #'
 #' @export
 #'
 #-----------------------------------------------------------------------------------------------------------------------------------------
-msd <- function(x, dates, fcn){
+msdStats <- function(x, dates, fcn){
   #check for valid arguments
   if(missing(dates)) {
-    stop("missing dates argument in msd function")
+    stop("missing dates argument in msdStats function")
   }
   if(!( fcn %in% c('duration', 'intensity', 'firstMax', 'secondMax', 'min', 'mindex'))){
     stop("fcn must be one of duration, intensity, firstMax, secondMax, min, mindex")
