@@ -15,19 +15,18 @@
 #'
 #' @examples
 #' # using Spatrast or a Time Series
-#' #r<-msdFilter(x, window = 31)
+#' #r<-bartlett_noise_filter(x, window = 31)
 #'
 #' @export
 #'
-msdFilter <- function(x, window) {
+bartlett_noise_filter <- function(x, window) {
   #constructs a Bartlett vector with the size of the bartlett filter
   bartlett_window <- c(signal::bartlett(window))
   #creates a sum of the bartlett window to construct an average
   bartlett_sum <- sum(bartlett_window)
-  ratio = bartlett_window/bartlett_sum
 
   #apply filter weighted on the average and divided by the sum of the bartlett window to smooth out the data
-  filtered_data <- stats::filter(x, ratio, method="convolution")
+  filtered_data <- stats::filter(x,bartlett_window/bartlett_sum,method="convolution")
   return(filtered_data)
 }
 
