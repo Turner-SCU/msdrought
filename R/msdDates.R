@@ -6,7 +6,7 @@
 #'
 #' @usage msdDates(x, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
 #'
-#' @param x                 SpatRaster or TimeSeries
+#' @param x                 Date vector
 #' @param firstStartDate    desired date in MMDD format to begin analysis (window 1)
 #' @param firstEndDate      desired date in MMDD format to end analysis (window 1)
 #' @param secondStartDate   desired date in MMDD format to begin analysis (window 2)
@@ -24,7 +24,6 @@
 #-----------------------------------------------------------------------------------------------------------------------------------------
 msdDates <- function(x, firstStartDate = "05-01", firstEndDate = "08-31", secondStartDate = "06-01", secondEndDate = "10-31"){
 
-  x = time(x) # Convert SpatRaster or TimeSeries to date vector (vector of dates)
   #Find the pre-set date bounds for the MSD (define the first year of the data, January 1, and December 31)
   year1 = lubridate::year(x[1]) #find the first date of the provided date vector, x
   date1="01-01" #January 1st, the first day of the year

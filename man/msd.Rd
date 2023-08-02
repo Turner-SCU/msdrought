@@ -24,6 +24,6 @@ If x is a SpatRaster, then the output is a SpatRaster with a data point for each
 }
 \examples{
 # using spatRaster
-r<-terra::app(x, msd, dates = d1, fcn="duration")
+r<-terra::app(raster, msd, dates = d1, fcn="duration")
 
 }
