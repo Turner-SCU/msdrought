@@ -10,8 +10,6 @@ msdFilter(x, window, quantity)
 \item{x}{RasterBrick, TimeSeries}
 
 \item{window}{Size of Filter, default window is 31}
-
-\item{quantity}{The amount of times the filter will be run, default quantity is 2}
 }
 \value{
 RasterBrick or TimeSeries of Yearly data
@@ -27,7 +25,7 @@ the point of interest.
 }
 \examples{
 # using spatRaster or a Time Series
-r<-msdFilter(x, window = 31, quantity = 2)
+r<-msdFilter(x, window = 31)
 
 }
 \seealso{
