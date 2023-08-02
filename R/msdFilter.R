@@ -1,4 +1,4 @@
-#' Bartlett Noise Filter -- A triangular Filter for smoothing data
+#' msdFilter -- A triangular Filter for smoothing data
 #' The filter will take a weighted average of a specified number of points
 #' around the point of interest to create a smoother time series. For
 #' example, if the size of the filter is set to 31, the filter will take the
@@ -15,11 +15,11 @@
 #'
 #' @examples
 #' # using Spatrast or a Time Series
-#' #r<-bartlett_noise_filter(x, window = 31)
+#' #r<-msdFilter(x, window = 31)
 #'
 #' @export
 #'
-bartlett_noise_filter <- function(x, window) {
+msdFilter <- function(x, window) {
   #constructs a Bartlett vector with the size of the bartlett filter
   bartlett_window <- c(signal::bartlett(window))
   #creates a sum of the bartlett window to construct an average
