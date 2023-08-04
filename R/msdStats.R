@@ -29,7 +29,7 @@ msdStats <- function(x, dates, fcn){
     stop("fcn must be one of duration, intensity, firstMax, secondMax, min, mindex")
   }
   #-----------------------------------------------------------------------------------------------------------------------------------------
-  data<-c(as.numeric(x)) #making sure the data is numeric #!! ERROR: nlyr(x) == 1 is not TRUE, but it's functional with a timeseries
+  data<-c(as.numeric(x)) #making sure the data is numeric
   peaks<-quantmod::findPeaks(data)-1 #finding all of the peaks of the data
   valleys<-quantmod::findValleys(data)-1 #finding all of the valleys of the data
   output<-c(0) #creating a new variable
@@ -60,9 +60,12 @@ msdStats <- function(x, dates, fcn){
     date5<-yearDates[2*years-1]
     date6<-yearDates[2*years]
     #checking for min valley between the inner dates
-    min<-min(data[valleys[valleys>=date1 & valleys<=date2]],na.rm=TRUE)
+    minCheck = date1<=valleys & valleys<=date2 #!!! logical ALL false
+    minInterim = data[valleys[minCheck]] #!!! numeric (empty)
+    min = min(minInterim) #!!! INF
+    #min<-min(data[valleys[dates<=valleys & valleys<=date2]],na.rm=TRUE) #Combined version of lines 63-65
     #checking for min valley between the outer dates
-    min2<-min(data[valleys[valleys>=date3 & valleys<=date4]],na.rm=TRUE)
+    min2<-min(data[valleys[date3<= valleys & valleys<=date4]],na.rm=TRUE)
 
     mindate<-match(min, data) #finding the index of min
     mindate2<-match(min2, data) #finding the index of min2
@@ -70,7 +73,7 @@ msdStats <- function(x, dates, fcn){
     if (is.na(mindate)==TRUE){ #making sure we have a minimum, otherwise an NA is output
       output[years]<-NA
     }else{
-      dates<-c(peaks[peaks>=date3 & peaks<=date4], mindate) #finding all the peaks between the outer dates
+      dates<-c(peaks[date3<=peaks & peaks<=date4], mindate) #finding all the peaks between the outer dates
       dates<-sort(dates) #sorting them in order with the mindate
       mindex<-match(mindate,dates) #finding the index of the mindate
       maxdex1<-dates[1:(mindex-1)] #the next few lines find the max before the minimum and after
@@ -119,6 +122,6 @@ msdStats <- function(x, dates, fcn){
       }else
         output[years]<-NA
     }
-  }
+  } #end of For years loop
   return(output)
 }
