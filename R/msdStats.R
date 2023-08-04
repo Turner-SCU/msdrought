@@ -60,10 +60,7 @@ msdStats <- function(x, dates, fcn){
     date5<-yearDates[2*years-1]
     date6<-yearDates[2*years]
     #checking for min valley between the inner dates
-    minCheck = date1<=valleys & valleys<=date2 #!!! logical ALL false
-    minInterim = data[valleys[minCheck]] #!!! numeric (empty)
-    min = min(minInterim) #!!! INF
-    #min<-min(data[valleys[dates<=valleys & valleys<=date2]],na.rm=TRUE) #Combined version of lines 63-65
+    min<-min(data[valleys[dates<=valleys & valleys<=date2]],na.rm=TRUE)
     #checking for min valley between the outer dates
     min2<-min(data[valleys[date3<= valleys & valleys<=date4]],na.rm=TRUE)
 
