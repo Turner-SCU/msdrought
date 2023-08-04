@@ -11,7 +11,6 @@
 #'
 #' @return RasterBrick or TimeSeries of Yearly data
 #'
-#' @seealso \code{\link{msd}}
 #'
 #' @examples
 #' # using Spatrast or a Time Series

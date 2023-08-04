@@ -35,5 +35,5 @@ the point of interest.
 
 }
 \seealso{
-\code{\link{msd}}
+\code{\link{msdFilter}}
 }
