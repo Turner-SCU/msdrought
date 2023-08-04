@@ -34,6 +34,3 @@ the point of interest.
 #r<-msdFilter(x, window = 31)
 
 }
-\seealso{
-\code{\link{msdFilter}}
-}
