@@ -6,6 +6,8 @@
 #' and calculate a weighted average based on how far away the points are from
 #' the point of interest.
 #'
+#' @usage msdFilter(x, window)
+#'
 #' @param x          RasterBrick or TimeSeries
 #' @param window     Size of Filter
 #'
