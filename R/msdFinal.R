@@ -30,16 +30,11 @@ msdFinal<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartD
   if (inherits(x, "timeseries")) {
   time = stats::time(x)
   dates = msdDates(time, firstStartDate = "05-01", firstEndDate = "06-01", secondStartDate = "08-31", secondEndDate = "10-31")
-  }
-
-  else if (inherits(x, "xts")) {
+  } else if (inherits(x, "xts")) {
   time = stats::time(x)
   dates = msdDates(time, firstStartDate = "05-01", firstEndDate = "06-01", secondStartDate = "08-31", secondEndDate = "10-31")
-  }
-
-  else {
-    request = readline("No dates found in the input file, please attach a dates sequence in the following form:
-                       seq(from = as.Date('1981-01-01'), to = as.Date('1985-12-31'), by = 'day')")
+  } else {
+    request = readline("No dates found in the input file, please attach a dates sequence using 'seq'")
     dates = msdDates(request, firstStartDate = "05-01", firstEndDate = "06-01", secondStartDate = "08-31", secondEndDate = "10-31")
   }
 
