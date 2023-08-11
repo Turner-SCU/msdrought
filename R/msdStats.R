@@ -30,6 +30,18 @@ msdStats <- function(x, quantity = 2, dates, fcn){
     stop("fcn must be one of duration, intensity, firstMax, secondMax, min, mindex")
   }
   #-----------------------------------------------------------------------------------------------------------------------------------------
+  # !!!define the msdFilter function
+  msdFilter <- function(x, window) {
+    #constructs a Bartlett vector with the size of the bartlett filter
+    bartlett_window <- c(signal::bartlett(window))
+    #creates a sum of the bartlett window to construct an average
+    bartlett_sum <- sum(bartlett_window)
+
+    #apply filter weighted on the average and divided by the sum of the bartlett window to smooth out the data
+    filtered_data <- stats::filter(x,bartlett_window/bartlett_sum,method="convolution")
+    return(filtered_data)
+  }
+  #-----------------------------------------------------------------------------------------------------------------------------------------
   # filter the data
   for(i in 1:quantity){
     interim = apply(x, MARGIN = 2, FUN = msdFilter, window = 31)
