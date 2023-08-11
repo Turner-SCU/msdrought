@@ -2,4 +2,5 @@
 
 export(msdDates)
 export(msdFilter)
+export(msdFinal)
 export(msdStats)

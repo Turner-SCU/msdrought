@@ -20,14 +20,15 @@
 #' @examples
 #' # using timeseries (ts)
 #' # output = msdFinal(ts, firstStartDate="05-01", firstEndDate="08-31",
-#' secondStartDate ="06-01", secondEndDate="10-31", quantity = 2, window = 31)
+#' # secondStartDate ="06-01", secondEndDate="10-31", quantity = 2, window = 31)
 #'
 #' @export
 #-----------------------------------------------------------------------------------------------------------------------------------------
 msdFinal<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDate="08-31", secondEndDate="10-31", quantity=2, window=31){
 
 # msdDates
-dates = msdDates(time(x), firstStartDate = "05-01", firstEndDate = "06-01", secondStartDate = "08-31", secondEndDate = "10-31")
+time = stats::time(x)
+dates = msdDates(time, firstStartDate = "05-01", firstEndDate = "06-01", secondStartDate = "08-31", secondEndDate = "10-31")
 
 # msdFilter
 for(i in 1:quantity){
