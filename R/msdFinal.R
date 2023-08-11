@@ -12,7 +12,7 @@
 #' @param secondStartDate   desired date in MMDD format to begin analysis (window 2)
 #' @param secondEndDate     desired date in MMDD format to end analysis (window 2)
 #' @param quantity          Amount of times the filter is run
-#' @param window          Size of filter
+#' @param window            Size of filter
 #'
 #' @return Dataframe of all relevant MSD Statistics
 #'
@@ -27,25 +27,39 @@
 msdFinal<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDate="08-31", secondEndDate="10-31", quantity=2, window=31){
 
 # msdDates
-time = stats::time(x)
-dates = msdDates(time, firstStartDate = "05-01", firstEndDate = "06-01", secondStartDate = "08-31", secondEndDate = "10-31")
+  if inherits(x, "timeseries") {
+  time = stats::time(x)
+  dates = msdDates(time, firstStartDate = "05-01", firstEndDate = "06-01", secondStartDate = "08-31", secondEndDate = "10-31")
+  }
+
+  else if (inherits(x, "xts") {
+  time = stats::time(x)
+  dates = msdDates(time, firstStartDate = "05-01", firstEndDate = "06-01", secondStartDate = "08-31", secondEndDate = "10-31")
+  }
+
+  else {
+    request = readline("No dates found in the input file, please attach a dates sequence in the following form:
+                       seq(from = as.Date('1981-01-01'), to = as.Date('1985-12-31'), by = 'day')")
+    dates = msdDates(request, firstStartDate = "05-01", firstEndDate = "06-01", secondStartDate = "08-31", secondEndDate = "10-31")
+
+
 
 # msdFilter
-for(i in 1:quantity){
-  x = apply(x, MARGIN = 2, FUN = msdFilter, window = window)
-}
+  for(i in 1:quantity){
+    x = apply(x, MARGIN = 2, FUN = msdFilter, window = window)
+  }
 
 # msdStats
-duration <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="duration")
-intensity <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="intensity")
-firstMax <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="firstMax")
-secondMax <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="secondMax")
-min <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="min")
-minDex <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="mindex")
+  duration <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="duration")
+  intensity <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="intensity")
+  firstMax <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="firstMax")
+  secondMax <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="secondMax")
+  min <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="min")
+  minDex <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="mindex")
 
 # prepare output
-combined = cbind(duration, intensity, firstMax, secondMax, min, minDex)
-colnames(combined) = c("Duration", "Intensity", "firstMax", "secondMax", "min", "minDex")
-output = data.frame(combined)
-return(output)
+  combined = cbind(duration, intensity, firstMax, secondMax, min, minDex)
+  colnames(combined) = c("Duration", "Intensity", "firstMax", "secondMax", "min", "minDex")
+  output = data.frame(combined)
+  return(output)
 }
