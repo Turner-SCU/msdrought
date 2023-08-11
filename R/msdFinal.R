@@ -12,7 +12,7 @@
 #' @param secondStartDate   desired date in MMDD format to begin analysis (window 2)
 #' @param secondEndDate     desired date in MMDD format to end analysis (window 2)
 #' @param quantity          Amount of times the filter is run
-#' @param quantity          Size of filter
+#' @param window          Size of filter
 #'
 #' @return Dataframe of all relevant MSD Statistics
 #'
