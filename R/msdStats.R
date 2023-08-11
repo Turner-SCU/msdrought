@@ -8,25 +8,31 @@
 #' @usage msdStats(x, dates, fcn)
 #'
 #' @param x         RasterBrick or TimeSeries
+#' @param quantity  Amount of times the data should be filtered. The default option is 2
 #' @param dates     Vector of Dates (from the msdDates function)
 #' @param fcn       Specify what values to be pulled from the function. Options are 'duration', 'intensity', 'firstMax', 'secondMax', 'min', and 'mindex'.
 #'
 #' @return SpatRaster or TimeSeries of Yearly data
 #'
 #' @examples
-#' # using spatRaster
-#' # r<-terra::app(raster, msdStats, dates = d1, fcn="duration")
+#' # using timeseries
+#' # r <- apply(timeseries, MARGIN = 2, FUN = msdStats, quantity = 2, dates = keyDatesTS, fcn="secondMax")
 #'
 #' @export
 #'
 #-----------------------------------------------------------------------------------------------------------------------------------------
-msdStats <- function(x, dates, fcn){
+msdStats <- function(x, quantity, dates, fcn){
   #check for valid arguments
   if(missing(dates)) {
     stop("missing dates argument in msdStats function")
   }
   if(!( fcn %in% c('duration', 'intensity', 'firstMax', 'secondMax', 'min', 'mindex'))){
     stop("fcn must be one of duration, intensity, firstMax, secondMax, min, mindex")
+  }
+  #-----------------------------------------------------------------------------------------------------------------------------------------
+  # filter the data
+  for(w in 1:quantity){
+    x = apply(x, MARGIN = 2, FUN = msdFilter, window = 31)
   }
   #-----------------------------------------------------------------------------------------------------------------------------------------
   data<-c(as.numeric(x)) #making sure the data is numeric
