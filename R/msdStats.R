@@ -21,7 +21,7 @@
 #' @export
 #'
 #-----------------------------------------------------------------------------------------------------------------------------------------
-msdStats <- function(x, quantity, dates, fcn){
+msdStats <- function(x, quantity = 2, dates, fcn){
   #check for valid arguments
   if(missing(dates)) {
     stop("missing dates argument in msdStats function")
@@ -31,7 +31,10 @@ msdStats <- function(x, quantity, dates, fcn){
   }
   #-----------------------------------------------------------------------------------------------------------------------------------------
   # filter the data
-    x = apply(X = x, MARGIN = 2, FUN = msdFilter, window = 31)
+  for(i in 1:quantity){
+    x = apply(x, MARGIN = 2, FUN = msdFilter, window = 31)
+  }
+  x = x
   #-----------------------------------------------------------------------------------------------------------------------------------------
   data<-c(as.numeric(x)) #making sure the data is numeric
   peaks<-quantmod::findPeaks(data)-1 #finding all of the peaks of the data
