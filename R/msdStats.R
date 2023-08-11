@@ -32,8 +32,8 @@ msdStats <- function(x, quantity = 2, dates, fcn){
   #-----------------------------------------------------------------------------------------------------------------------------------------
   # filter the data
   for(i in 1:quantity){
-    x = msdFilter(x, 31)
-    #x = apply(x, MARGIN = 2, FUN = msdFilter, window = 31)
+    x = data.frame(x)
+    x[] = apply(x, MARGIN = 2, FUN = bartlett_noise_filter, window = window)
   }
   #-----------------------------------------------------------------------------------------------------------------------------------------
   data<-c(as.numeric(x)) #making sure the data is numeric
