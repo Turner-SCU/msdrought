@@ -9,6 +9,8 @@ msdStats(x, dates, fcn)
 \arguments{
 \item{x}{RasterBrick or TimeSeries}
 
+\item{quantity}{Amount of times the data should be filtered. The default option is 2}
+
 \item{dates}{Vector of Dates (from the msdDates function)}
 
 \item{fcn}{Specify what values to be pulled from the function. Options are 'duration', 'intensity', 'firstMax', 'secondMax', 'min', and 'mindex'.}
@@ -23,7 +25,7 @@ The input must be in the form of daily data, with the first data point being Jan
 If x is a SpatRaster, then the output is a SpatRaster with a data point for each year.
 }
 \examples{
-# using spatRaster
-# r<-terra::app(raster, msdStats, dates = d1, fcn="duration")
+# using timeseries
+# r <- apply(timeseries, MARGIN = 2, FUN = msdStats, quantity = 2, dates = keyDatesTS, fcn="secondMax")
 
 }
