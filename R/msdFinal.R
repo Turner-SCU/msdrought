@@ -32,7 +32,7 @@ msdFinal<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartD
   dates = msdDates(time, firstStartDate = "05-01", firstEndDate = "06-01", secondStartDate = "08-31", secondEndDate = "10-31")
   }
 
-  else if (inherits(x, "xts") {
+  else if inherits(x, "xts") {
   time = stats::time(x)
   dates = msdDates(time, firstStartDate = "05-01", firstEndDate = "06-01", secondStartDate = "08-31", secondEndDate = "10-31")
   }
