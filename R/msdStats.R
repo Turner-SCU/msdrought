@@ -16,7 +16,7 @@
 #'
 #' @examples
 #' # using timeseries
-#' # r <- apply(timeseries, MARGIN = 2, FUN = msdStats, quantity = 2, dates = keyDatesTS, fcn="secondMax")
+#' # r <- apply(timeseries, MARGIN=2, FUN=msdStats, quantity=2, dates=keyDatesTS, fcn="secondMax")
 #'
 #' @export
 #'
@@ -32,7 +32,8 @@ msdStats <- function(x, quantity = 2, dates, fcn){
   #-----------------------------------------------------------------------------------------------------------------------------------------
   # filter the data
   for(i in 1:quantity){
-    x = apply(x, MARGIN = 2, FUN = msdFilter, window = 31)
+    interim = apply(x, MARGIN = 2, FUN = msdFilter, window = 31)
+    x = interim
   }
   x = x
   #-----------------------------------------------------------------------------------------------------------------------------------------
