@@ -16,7 +16,7 @@
 #'
 #' @examples
 #' # using timeseries
-#' # r <- apply(timeseries, MARGIN=2, FUN=msdStats, quantity=2, dates=keyDatesTS, fcn="secondMax")
+#' # output <- apply(timeseries, MARGIN=2, FUN=msdStats, quantity=2, dates=keyDatesTS, fcn="secondMax")
 #'
 #' @export
 #'
