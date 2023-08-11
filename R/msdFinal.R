@@ -38,7 +38,7 @@ msdFinal<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartD
       print("Error: no dates vector present")
       stop
   } else {
-    dates = msdDates(time, firstStartDate, firstEndDate, secondStartDate, secondEndDate))
+    dates = msdDates(time, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
   }
 
 # msdFilter
