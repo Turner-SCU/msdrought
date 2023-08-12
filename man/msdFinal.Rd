@@ -7,7 +7,7 @@
 msdFinal(x, firstStartDate, firstEndDate, secondStartDate, secondEndDate, quantity, window)
 }
 \arguments{
-\item{x}{Date vector}
+\item{x}{Vector or TimeSeries}
 
 \item{firstStartDate}{desired date in MMDD format to begin analysis (window 1)}
 
@@ -17,7 +17,11 @@ msdFinal(x, firstStartDate, firstEndDate, secondStartDate, secondEndDate, quanti
 
 \item{secondEndDate}{desired date in MMDD format to end analysis (window 2)}
 
-\item{quantity}{Size of filter}
+\item{quantity}{Amount of times the filter is run}
+
+\item{window}{Size of filter}
+
+\item{time}{Vector of dates (not needed for TimeSeries inputs)}
 }
 \value{
 Dataframe of all relevant MSD Statistics
