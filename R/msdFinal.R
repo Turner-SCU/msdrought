@@ -2,7 +2,8 @@
 #'
 #' @description Generates all relevant statistics for the Mid Summer Drought
 #'
-#' @usage msdFinal(x, firstStartDate, firstEndDate, secondStartDate, secondEndDate, quantity, window)
+#' @usage msdFinal(x, firstStartDate, firstEndDate,
+#' secondStartDate, secondEndDate, quantity, window)
 #'
 #' @param x                 Vector or TimeSeries
 #' @param firstStartDate    desired date in MMDD format to begin analysis (window 1)
