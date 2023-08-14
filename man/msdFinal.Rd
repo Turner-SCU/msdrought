@@ -4,7 +4,8 @@
 \alias{msdFinal}
 \title{Mid Summer Drought Function}
 \usage{
-msdFinal(x, firstStartDate, firstEndDate, secondStartDate, secondEndDate, quantity, window)
+msdFinal(x, firstStartDate, firstEndDate,
+secondStartDate, secondEndDate, quantity, window, time)
 }
 \arguments{
 \item{x}{Vector or TimeSeries}
