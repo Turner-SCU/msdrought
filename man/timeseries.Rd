@@ -3,7 +3,7 @@
 \docType{data}
 \name{timeseries}
 \alias{timeseries}
-\title{Steps to produce the sample data provided in the MSD package}
+\title{Steps to produce the raster sample data provided in the MSD package}
 \format{
 ## `see data-raw file on GitHub to see process to generating timeseries and raster data`
 
