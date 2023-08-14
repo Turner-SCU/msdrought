@@ -1,5 +1,6 @@
 #' msdFilter -- A triangular Filter for smoothing data
-#' The filter will take a weighted average of a specified number of points
+#'
+#' @description The filter will take a weighted average of a specified number of points
 #' around the point of interest to create a smoother time series. For
 #' example, if the size of the filter is set to 31, the filter will take the
 #' 15 points before and after the point of interest (for a total of 31 points),

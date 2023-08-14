@@ -1,8 +1,6 @@
 #' @title Mid Summer Drought Function
 #'
-#' @description Generates the relevant statistics for the Mid Summer Drought
-#'
-#' @description HERE
+#' @description Generates all relevant statistics for the Mid Summer Drought
 #'
 #' @usage msdFinal(x, firstStartDate, firstEndDate, secondStartDate, secondEndDate, quantity, window)
 #'
@@ -15,7 +13,7 @@
 #' @param window            Size of filter
 #' @param time              Vector of dates (not needed for TimeSeries inputs)
 #'
-#' @return Dataframe of all relevant MSD Statistics
+#' @return Data frame of all relevant MSD Statistics
 #'
 #'
 #' @examples
