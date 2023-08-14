@@ -17,7 +17,7 @@ Description: Functions for calculating characteristics of a mid-summer drought
 Depends: R (>= 3.6.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
-LazyData: true
+LazyData: false
 Imports:
     dplyr,
     ggplot2,
