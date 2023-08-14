@@ -24,12 +24,10 @@ msdFinal(x, firstStartDate, firstEndDate, secondStartDate, secondEndDate, quanti
 \item{time}{Vector of dates (not needed for TimeSeries inputs)}
 }
 \value{
-Dataframe of all relevant MSD Statistics
+Data frame of all relevant MSD Statistics
 }
 \description{
-Generates the relevant statistics for the Mid Summer Drought
-
-HERE
+Generates all relevant statistics for the Mid Summer Drought
 }
 \examples{
 # using timeseries (ts)

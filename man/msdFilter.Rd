@@ -2,13 +2,7 @@
 % Please edit documentation in R/msdFilter.R
 \name{msdFilter}
 \alias{msdFilter}
-\title{msdFilter -- A triangular Filter for smoothing data
-The filter will take a weighted average of a specified number of points
-around the point of interest to create a smoother time series. For
-example, if the size of the filter is set to 31, the filter will take the
-15 points before and after the point of interest (for a total of 31 points),
-and calculate a weighted average based on how far away the points are from
-the point of interest.}
+\title{msdFilter -- A triangular Filter for smoothing data}
 \usage{
 msdFilter(x, window)
 }
@@ -21,7 +15,6 @@ msdFilter(x, window)
 RasterBrick or TimeSeries of Yearly data
 }
 \description{
-msdFilter -- A triangular Filter for smoothing data
 The filter will take a weighted average of a specified number of points
 around the point of interest to create a smoother time series. For
 example, if the size of the filter is set to 31, the filter will take the
