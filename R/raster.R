@@ -1,4 +1,4 @@
-#' Steps to produce the sample data provided in the MSD package
+#' Steps to produce the raster sample data provided in the MSD package
 #'
 #' Daily precipitation data recorded from 1981 to 1985, trimmed to only highlight Nicaragua
 #'
