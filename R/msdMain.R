@@ -2,7 +2,7 @@
 #'
 #' @description Generates all relevant statistics for the Mid Summer Drought
 #'
-#' @usage msdFinal(x, firstStartDate, firstEndDate,
+#' @usage msdMain(x, firstStartDate, firstEndDate,
 #' secondStartDate, secondEndDate, quantity,
 #' window, time)
 #'
@@ -20,12 +20,12 @@
 #'
 #' @examples
 #' # using timeseries (ts)
-#' # output = msdFinal(ts, firstStartDate="05-01", firstEndDate="08-31",
+#' # output = msdMain(ts, firstStartDate="05-01", firstEndDate="08-31",
 #' # secondStartDate ="06-01", secondEndDate="10-31", quantity = 2, window = 31)
 #'
 #' @export
 #-----------------------------------------------------------------------------------------------------------------------------------------
-msdFinal<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDate="08-31", secondEndDate="10-31", quantity=2, window=31, time=0){
+msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDate="08-31", secondEndDate="10-31", quantity=2, window=31, time=0){
 
 # msdDates
   if (inherits(x, "timeseries")) {
@@ -49,14 +49,20 @@ msdFinal<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartD
 # msdStats
   duration <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="duration")
   intensity <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="intensity")
-  firstMax <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="firstMax")
-  secondMax <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="secondMax")
+  firstMax <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="firstMaxValue")
+  secondMax <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="secondMaxValue")
   min <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="min")
   minDex <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="mindex")
+  firstMaxDate <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="min")
+  secondMaxDate <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="mindex")
 
 # prepare output
-  combined = cbind(duration, intensity, firstMax, secondMax, min, minDex)
-  colnames(combined) = c("Duration", "Intensity", "firstMax", "secondMax", "min", "minDex")
+  combined = cbind(duration, intensity, firstMaxValue, firstMaxDate, secondMaxValue, secondMaxDate, min, minDex)
+  colnames(combined) = c("Duration", "Intensity", "firstMax", "firstMaxDate", "secondMax", "secondMaxDate", "min", "minDex")
+  year1 = lubridate::year(time[1]) #find the first date of the provided date vector, x
+  length = l<-round(length(xtimeseries)/365)
+  years = seq(from = year1, to = year1+length, by = 1)
+  rownames(combined) = c(years)
   output = data.frame(combined)
   return(output)
 }
