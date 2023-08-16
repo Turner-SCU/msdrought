@@ -27,7 +27,7 @@ msdStats <- function(x, dates, fcn){
     stop("missing dates argument in msdStats function")
   }
   if(!( fcn %in% c('duration', 'intensity', 'firstMaxValue', 'secondMaxValue', 'min', 'mindex', 'firstMaxDate', 'secondMaxDate'))){
-    stop("fcn must be one of duration, intensity, firstMax, secondMax, min, mindex")
+    stop("fcn must be one of duration, intensity, firstMaxValue, firstMaxDate, secondMaxValue, secondMaxDate, min, mindex")
   }
   #-----------------------------------------------------------------------------------------------------------------------------------------
   data<-c(as.numeric(x)) #making sure the data is numeric
