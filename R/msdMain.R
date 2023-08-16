@@ -57,12 +57,12 @@ msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDa
   secondMaxDate <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="mindex")
 
 # prepare output
-  combined = cbind(duration, intensity, firstMaxValue, firstMaxDate, secondMaxValue, secondMaxDate, min, minDex)
-  colnames(combined) = c("Duration", "Intensity", "firstMax", "firstMaxDate", "secondMax", "secondMaxDate", "min", "minDex")
   year1 = lubridate::year(time[1]) #find the first date of the provided date vector, x
-  length = l<-round(length(xtimeseries)/365)
+  length = round(length(xtimeseries)/365) - 1
   years = seq(from = year1, to = year1+length, by = 1)
-  rownames(combined) = c(years)
+  yearsFrame = data.frame(years)
+  combined = cbind(yearsFrame, duration, intensity, firstMaxValue, firstMaxDate, secondMaxValue, secondMaxDate, min, minDex)
+  colnames(combined) = c("Years", "Duration", "Intensity", "firstMaxValue", "firstMaxDate", "secondMaxValue", "secondMaxDate", "min", "minDex")
   output = data.frame(combined)
   return(output)
 }
