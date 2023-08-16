@@ -63,7 +63,7 @@ msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDa
     na.omit()
   firstMaxDate = as.character(origin + firstMaxFinal$X1.length.x.)
 
-  SecondMaxFrame = data.frame(match(x, SecondMaxValue))
+  SecondMaxFrame = data.frame(match(x, secondMaxValue))
   SecondMaxFinal = cbind(countDaysFrame, SecondMaxFrame) %>%
     na.omit()
   SecondMaxDate = as.character(origin + SecondMaxFinal$X1.length.x.)
