@@ -57,8 +57,16 @@ msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDa
   origin = time[1]
   minDex = as.character(origin + minDex)
 
-  firstMaxDate = 0
-  secondMaxDate = 0
+  countDaysFrame = data.frame(1:length(x))
+  firstMaxFrame = data.frame(match(x, firstMaxValue))
+  firstMaxFinal = cbind(countDaysFrame, firstMaxFrame) %>%
+    na.omit()
+  firstMaxDate = as.character(origin + firstMaxFinal$X1.length.x.)
+
+  SecondMaxFrame = data.frame(match(x, SecondMaxValue))
+  SecondMaxFinal = cbind(countDaysFrame, SecondMaxFrame) %>%
+    na.omit()
+  SecondMaxDate = as.character(origin + SecondMaxFinal$X1.length.x.)
 
 # prepare output
   year1 = lubridate::year(time[1]) #find the first date of the provided date vector, x
