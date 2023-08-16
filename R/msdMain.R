@@ -49,13 +49,14 @@ msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDa
 # msdStats
   duration <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="duration")
   intensity <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="intensity")
-  firstMax <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="firstMaxValue")
-  secondMax <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="secondMaxValue")
+  firstMaxValue <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="firstMaxValue")
+  secondMaxValue <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="secondMaxValue")
   min <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="min")
   minDex <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="mindex")
 
   origin = time[1]
-  minDex = origin + minDex
+  minDex = as.character(origin + minDex)
+
   firstMaxDate = 0
   secondMaxDate = 0
 
