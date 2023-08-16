@@ -10,7 +10,7 @@
 #' @param x         RasterBrick or TimeSeries
 #' @param dates     Vector of Dates (from the msdDates function)
 #' @param fcn       Specify what values to be pulled from the function.
-#' Options are 'duration', 'intensity', 'firstMaxValue', 'secondMaxValue', 'min', 'mindex', 'firstMaxDate', and 'secondMaxDate'.
+#' Options are 'duration', 'intensity', 'firstMaxValue', 'secondMaxValue', 'min', 'mindex'.
 #'
 #' @return SpatRaster or TimeSeries of Yearly data
 #'
@@ -26,8 +26,8 @@ msdStats <- function(x, dates, fcn){
   if(missing(dates)) {
     stop("missing dates argument in msdStats function")
   }
-  if(!( fcn %in% c('duration', 'intensity', 'firstMaxValue', 'secondMaxValue', 'min', 'mindex', 'firstMaxDate', 'secondMaxDate'))){
-    stop("fcn must be one of duration, intensity, firstMaxValue, firstMaxDate, secondMaxValue, secondMaxDate, min, mindex")
+  if(!( fcn %in% c('duration', 'intensity', 'firstMaxValue', 'secondMaxValue', 'min', 'mindex'))){
+    stop("fcn must be one of duration, intensity, firstMaxValue, secondMaxValue, min, mindex")
   }
   #-----------------------------------------------------------------------------------------------------------------------------------------
   data<-c(as.numeric(x)) #making sure the data is numeric
@@ -117,10 +117,6 @@ msdStats <- function(x, dates, fcn){
         output[years]<-min
       }else if (fcn=="mindex"){
         output[years]<-index1
-      }else if (fcn=="firstMaxDate"){
-        output[years]<-max1
-      }else if (fcn=="secondMaxDate"){
-        output[years]<-max2
       }else
         output[years]<-NA
     }

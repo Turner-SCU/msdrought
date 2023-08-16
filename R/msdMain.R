@@ -53,8 +53,11 @@ msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDa
   secondMax <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="secondMaxValue")
   min <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="min")
   minDex <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="mindex")
-  firstMaxDate <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="min")
-  secondMaxDate <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="mindex")
+
+  origin = time[1]
+  minDex = origin + minDex
+  firstMaxDate = 0
+  secondMaxDate = 0
 
 # prepare output
   year1 = lubridate::year(time[1]) #find the first date of the provided date vector, x
