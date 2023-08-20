@@ -52,7 +52,6 @@ msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDa
   firstMaxValue <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="firstMaxValue")
   secondMaxValue <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="secondMaxValue")
   min <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="min")
-  minDex <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="mindex")
 
   origin = time[1]
   minDex = as.character(origin + minDex)
@@ -68,13 +67,18 @@ msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDa
     na.omit()
   secondMaxDate = as.character(origin + secondMaxFinal$X1.length.x.)
 
+  minFrame = data.frame(match(x, min))
+  minFinal = cbind(countDaysFrame, minFrame) %>%
+    na.omit()
+  minDate = as.character(origin + minFinall$X1.length.x.)
+
 # prepare output
   year1 = lubridate::year(time[1]) #find the first date of the provided date vector, x
   length = round(length(xtimeseries)/365) - 1
   years = seq(from = year1, to = year1+length, by = 1)
   yearsFrame = data.frame(years)
-  combined = cbind(yearsFrame, duration, intensity, firstMaxValue, firstMaxDate, secondMaxValue, secondMaxDate, min, minDex)
+  combined = cbind(yearsFrame, duration, intensity, firstMaxValue, firstMaxDate, secondMaxValue, secondMaxDate, min, minDate)
   output = data.frame(combined)
-  colnames(output) = c("Years", "Duration", "Intensity", "firstMaxValue", "firstMaxDate", "secondMaxValue", "secondMaxDate", "min", "minDex")
+  colnames(output) = c("Years", "Duration", "Intensity", "firstMaxValue", "firstMaxDate", "secondMaxValue", "secondMaxDate", "min", "minDate")
   return(output)
 }
