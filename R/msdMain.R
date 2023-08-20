@@ -70,7 +70,7 @@ msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDa
   minFrame = data.frame(match(x, min))
   minFinal = cbind(countDaysFrame, minFrame) %>%
     na.omit()
-  minDate = as.character(origin + minFinall$X1.length.x.)
+  minDate = as.character(origin + minFinal$X1.length.x.)
 
 # prepare output
   year1 = lubridate::year(time[1]) #find the first date of the provided date vector, x
