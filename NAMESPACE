@@ -2,5 +2,6 @@
 
 export(msdDates)
 export(msdFilter)
+export(msdGraph)
 export(msdMain)
 export(msdStats)

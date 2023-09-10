@@ -11,7 +11,8 @@ msdStats(x, dates, fcn)
 
 \item{dates}{Vector of Dates (from the msdDates function)}
 
-\item{fcn}{Specify what values to be pulled from the function. Options are 'duration', 'intensity', 'firstMax', 'secondMax', 'min', and 'mindex'.}
+\item{fcn}{Specify what values to be pulled from the function.
+Options are 'duration', 'intensity', 'firstMaxValue', 'secondMaxValue', 'min', 'mindex'.}
 }
 \value{
 SpatRaster or TimeSeries of Yearly data
