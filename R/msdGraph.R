@@ -113,7 +113,7 @@ msdGraph<-function(x, year, firstStartDate="05-01", firstEndDate="06-01", second
     theme(text = element_text(size=20))
 
   }
-  if (c == "white")) {
+  if (c == "white") {
     output = output + ggtitle(subtitle = "No MSD")
 
   } else if (c == "lightblue") {
