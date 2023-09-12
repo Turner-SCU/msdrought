@@ -108,15 +108,16 @@ msdGraph<-function(x, year, firstStartDate="05-01", firstEndDate="06-01", second
     geom_vline(xintercept=endDate1, color="blue")+
     geom_vline(xintercept=startDate2, color="blue")+
     geom_vline(xintercept=endDate2, color="red")+
+    xlab("")+
     ylab("Precipitation (mm/day)")+
     scale_y_continuous(breaks = seq(0,25, by = 5), limits=c(0,25), expand = c(0,0))+
     theme(text = element_text(size=20))
 
   if (color1 == "white") {
-    output = output + ggtitle(subtitle = "No MSD")
+    output = output + ggtitle(title = "", subtitle = "No MSD")
 
   } else if (color1 == "lightblue") {
-    output = output + ggtitle(subtitle = "MSD")
+    output = output + ggtitle(title = "", subtitle = "MSD")
 
   } else {
     print("Error! MSD neither existing nor nonexistent.")
