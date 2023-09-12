@@ -112,7 +112,6 @@ msdGraph<-function(x, year, firstStartDate="05-01", firstEndDate="06-01", second
     scale_y_continuous(breaks = seq(0,25, by = 5), limits=c(0,25), expand = c(0,0))+
     theme(text = element_text(size=20))
 
-  }
   if (c == "white") {
     output = output + ggtitle(subtitle = "No MSD")
 
