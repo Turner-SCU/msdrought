@@ -99,7 +99,7 @@ msdGraph<-function(x, year, firstStartDate="05-01", firstEndDate="06-01", second
   color1<-colors(DIsum)
 #-----------------------------------------------------------------------------------------------------------------------------------------
   output<-ggplot(data = timeseriesFrame, mapping = aes(x=Date,y=Precipitation))+theme_bw()+
-    annotate("rect", xmin=timeseriesFrame[1,1], xmax=timeseriesFrame[length(tsDates),1], ymin=0, ymax=25, fill=color1[1], alpha=0.5)+
+    annotate("rect", xmin=timeseriesFrame[1,1], xmax=timeseriesFrame[length(tsDates),1], ymin=0, ymax=(max(firstMaxVal, secondMaxVal)+2), fill=color1[1], alpha=0.5)+
     geom_line(data=timeseriesFrame[1:nrow(timeseriesFrame),])+
     geom_point(data=firstMax, mapping = aes(x=as.Date(Date),y=Precipitation), size=2, color="red")+
     geom_point(data=secondMax, mapping = aes(x=as.Date(Date),y=Precipitation), size=2, color="red")+
@@ -110,14 +110,14 @@ msdGraph<-function(x, year, firstStartDate="05-01", firstEndDate="06-01", second
     geom_vline(xintercept=endDate2, color="red")+
     xlab("")+
     ylab("Precipitation (mm/day)")+
-    scale_y_continuous(breaks = seq(0,25, by = 5), limits=c(0,25), expand = c(0,0))+
+    scale_y_continuous(breaks = seq(0,(max(firstMaxVal, secondMaxVal)+2), by = 5), limits=c(0,(max(firstMaxVal, secondMaxVal)+2)), expand = c(0,0))+
     theme(text = element_text(size=20))
 
   if (color1 == "white") {
-    output = output + ggtitle(title = "", subtitle = "No MSD")
+    output = output + annotate("text", x=timeseriesFrame[30,1], y=max(firstMaxVal, secondMaxVal), label= "No MSD", size = 5)
 
   } else if (color1 == "lightblue") {
-    output = output + ggtitle(title = "", subtitle = "MSD")
+    output + annotate("text", x=timeseriesFrame[30,1], y=max(firstMaxVal, secondMaxVal), label= "MSD", size = 5)
 
   } else {
     print("Error! MSD neither existing nor nonexistent.")
