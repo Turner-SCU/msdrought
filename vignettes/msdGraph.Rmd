@@ -1,8 +1,8 @@
 ---
-title: "Mid Summer Drought Time Series Graph"
+title: "msdGraph"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Mid-Summer Time Series Graph}
+  %\VignetteIndexEntry{msdGraph}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

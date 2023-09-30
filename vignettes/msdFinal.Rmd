@@ -1,8 +1,8 @@
 ---
-title: "Mid-Summer Drought Combined Function"
+title: "msdMain"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Mid-Summer Combined Function}
+  %\VignetteIndexEntry{msdMain}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
