@@ -31,6 +31,7 @@ library(tidyr)
 library(lubridate)
 library(stringr)
 library(ggplot2)
+library(xts)
 data("raster") #This loads the data included in the package, but you would attach your own
 
 # Extract 1 spatial point from the raster data
