@@ -22,7 +22,7 @@ library(MSD)
 
 The purpose of the MSD package is to take the input of a series of rainfall data and to extract some key information (such as dates, rainfall intensity, duration of a rainfall period, and more) to characterize the Mid-Summer Drought climatic phenomenon present in Central America. This vignette will walk you through the process of taking a raster input and extracting a the statistics for the entire timeseries of the provided data.
 
-We will begin by loading in the relevant packages and the raster data we plan to use. In order to get this data to function with the MSD package's functions, we'll need to extract a single point of spatial data in the form of a timeseries. This will be done using the "terra" package. The "tidyr" package will be useful for streamlining the code. If the data you plan to analyze is in the form of a timeseries (TS), you only need to load the package and proceed to the next step.
+We will begin by loading in the relevant packages and the raster data we plan to use. In order to get this data to function with the MSD package's functions, we'll need to extract a single point of spatial data in the form of a timeseries. This will be done using the "terra" package. The "tidyr" package will be useful for streamlining the code. If the data you plan to analyze is in the form of an xtimeseries (xts), you only need to load the package and proceed to the next step.
 
 ```{r}
 library(MSD)
@@ -42,24 +42,24 @@ lonLat = data.frame(lon=lon,lat=lat)
 
 # Set up precipitation data by extracting the data located at our longitude and lattitude
 location = vect(lonLat, crs = "+proj=longlat +datum=WGS84")
-#precip = terra::extract(infile, location, method = 'bilinear') %>%
-#  subset(select = -ID) %>%
-#  t()
-#precip[precip < 0] <- 0 #replace any negative (errant) values with zeroes
-#precipFrame = data.frame(precip)
+precip = terra::extract(infile, location, method = 'bilinear') %>%
+  subset(select = -ID) %>%
+  t()
+precip[precip < 0] <- 0 #replace any negative (errant) values with zeroes
+precipFrame = data.frame(precip)
 
 # Set up dates (time) data which will be used in creating our time series
-#timeFrame = terra::time(infile) %>%
-#  as.Date() %>%
-#  data.frame()
-#startDate = as.Date(as.character(timeFrame[1,1]))
-#endDate = as.Date(as.character(timeFrame[nrow(timeFrame),1]))
-#datesSequence = seq(from = startDate, to = endDate, by = 1)
-#timeseriesFrame = cbind(timeFrame, precipFrame)
-#colnames(timeseriesFrame) = c("Date", "Precipitation")
+timeFrame = terra::time(infile) %>%
+  as.Date() %>%
+  data.frame()
+startDate = as.Date(as.character(timeFrame[1,1]))
+endDate = as.Date(as.character(timeFrame[nrow(timeFrame),1]))
+datesSequence = seq(from = startDate, to = endDate, by = 1)
+timeseriesFrame = cbind(timeFrame, precipFrame)
+colnames(timeseriesFrame) = c("Date", "Precipitation")
 
-# Make the data into a timeseries that the package recognizes
-#x = xts(timeseriesFrame$Precipitation, timeseriesFrame$Date)
+# Make the data into an xtimeseries that the package recognizes
+x = xts(timeseriesFrame$Precipitation, timeseriesFrame$Date)
 ```
 
 At this point, we taken a raster of data and extracted from it a series of precipitation values and a series of time for a single location. This data can now be used with the MSD package and its functions. Alternatively, as mentioned above, you could directly load in timeseries data. The workflow for that is much simpler than that of loading and preparing a raster.
