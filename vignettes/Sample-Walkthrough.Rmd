@@ -32,10 +32,10 @@ library(lubridate)
 library(stringr)
 library(ggplot2)
 library(xts)
-data("prcp_cropped.tif") #This loads the data included in the package, but you would attach your own
+data = system.file("data", "prcp_cropped.tif", package="MSD") #This loads the data included in the package, but you would attach your own
 
 # Extract 1 spatial point from the raster data
-infile = prcp_cropped.tif
+infile = terra::rast(data)
 lon = -86.2621555581 #Longitude of the spatial point we're interested in analyzing
 lat = 13.3816217871 #Lattitude of the spatial point we're interested in analyzing
 lonLat = data.frame(lon=lon,lat=lat)
