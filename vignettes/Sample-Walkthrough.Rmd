@@ -32,10 +32,10 @@ library(lubridate)
 library(stringr)
 library(ggplot2)
 library(xts)
-data("raster") #This loads the data included in the package, but you would attach your own
+data("prcp_cropped.tif") #This loads the data included in the package, but you would attach your own
 
 # Extract 1 spatial point from the raster data
-infile = raster
+infile = prcp_cropped.tif
 lon = -86.2621555581 #Longitude of the spatial point we're interested in analyzing
 lat = 13.3816217871 #Lattitude of the spatial point we're interested in analyzing
 lonLat = data.frame(lon=lon,lat=lat)
