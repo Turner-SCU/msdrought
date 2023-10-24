@@ -114,7 +114,7 @@ allStats = msdMain(x)
 
 msdGraph is used to plot the timeseries and perform an analysis on the calculated data and parameters to determine if a single year in question represents a year with a Mid-Summer Drought or not. Below, we'll use 1982 as an example, as there was a Mid-Summer Drought during that year.
 
-```{r}
+```{r fig.height=5, fig.width=5}
 # Use msdGraph to calculate the statistics and analyze them to determine if an MSD was present or not during the course of one year
 # msdGraph = msdGraph(x, year, firstStartDate, firstEndDate, secondStartDate, secondEndDate, window, quantity)
 graph1982 = msdGraph(x, 1982)
