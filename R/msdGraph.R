@@ -52,7 +52,7 @@ msdGraph<-function(x, year, firstStartDate="05-01", firstEndDate="06-01", second
     timeseriesFull = apply(timeseriesFull, MARGIN = 2, FUN = msdFilter, window = window)
   }
   timeseriesPrecip = timeseriesFull[validDates == TRUE]
-  timeseriesFrame = data.frame(tsDates, timeseriesPrecip)
+  timeseriesFrame = data.frame(as.Date(tsDates), as.numeric(timeseriesPrecip))
   colnames(timeseriesFrame) = c("Date", "Precipitation")
 #Create variables for the firstStart, secondStart, firstEnd, and secondEnd MM-DD inputs in YY-MM-DD format (add year of interest)
   startDate1 = as.Date(paste(year, firstStartDate, sep = "-"))
@@ -62,11 +62,11 @@ msdGraph<-function(x, year, firstStartDate="05-01", firstEndDate="06-01", second
 
 #-----------------------------------------------------------------------------------------------------------------------------------------
 #Assign individual variables to each important column value from the yearStats dataframe (from msdMain)
-  durationVal = yearStats[2]
-  intensityVal = yearStats[3]
-  firstMaxVal = yearStats[4]
-  secondMaxVal = yearStats[6]
-  minVal = yearStats[8]
+  durationVal = as.numeric(yearStats[2])
+  intensityVal = as.numeric(yearStats[3])
+  firstMaxVal = as.numeric(yearStats[4])
+  secondMaxVal = as.numeric(yearStats[6])
+  minVal = as.numeric(yearStats[8])
 #Create data frames of the dates and values corresponding to the maximums and minimums
   firstMax = data.frame(yearStats[5], firstMaxVal)
   colnames(firstMax) = c("Date", "Precipitation")
@@ -89,7 +89,7 @@ msdGraph<-function(x, year, firstStartDate="05-01", firstEndDate="06-01", second
   }
   intensityX<-inten(intensityVal)
 
-  DIsum<-durationX + intensityX
+  DIsum<- as.numeric(durationX) + as.numeric(intensityX)
 
   colors<-function(c){
     c[c!=2]<-"white"
