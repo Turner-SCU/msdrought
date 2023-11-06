@@ -77,17 +77,18 @@ plot(x)
 As you can see, this data set has data for 1981, 1982, 1983, 1984, and 1985. In general, the MSD package can analyze one of these years at a time. In order to analyze multiple years at once, we'll need to create loops.
 
 ```{r}
+#!! INCOMPLETE
 # We need the "egg" package to arrange our plots
-library(egg)
-plotList = ggplot()
-startYear = year(x[1,1])
-endYear = year(x[length(x),1])
-lengthYears = (endYear-startYear) + 1
-for(i in startYear:endYear){
-    plot = msdGraph(x, i)
-    plotList = list(plotList, plot)
-}
-combinedPlots = plotList[-1]
+#library(egg)
+#plotList = ggplot()
+#startYear = year(x[1,1])
+#endYear = year(x[length(x),1])
+#lengthYears = (endYear-startYear) + 1
+#for(i in startYear:endYear){
+#    plot = msdGraph(x, i)
+#    plotList = list(plotList, plot)
+#}
+#combinedPlots = plotList[-1]
 ```
 
 Now we can view the MSD data for all the years of rainfall data we have. If you only want to see a certain range of data, simply replace startYear and endYear with the years you're interested in.
@@ -95,5 +96,5 @@ Now we can view the MSD data for all the years of rainfall data we have. If you 
 Let's view our combined plot!
 
 ```{r fig.height=5, fig.width=5}
-plot(combinedPlots)
+#plot(combinedPlots)
 ```
