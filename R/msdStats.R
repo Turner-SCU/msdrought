@@ -121,5 +121,5 @@ msdStats <- function(x, dates, fcn){
         output[years]<-NA
     }
   } #end of For years loop
-  return(output)
+  return(c(output))
 }
