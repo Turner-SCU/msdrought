@@ -67,17 +67,17 @@ msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDa
   firstMaxFrame = data.frame(match(x, checkNA$firstMaxValue))
   firstMaxFinal = cbind(countDaysFrame, firstMaxFrame) %>%
     na.omit()
-  firstMaxDate = as.character(origin + days(firstMaxFinal$X1.length.x.))
+  firstMaxDate = as.character(origin + lubridate::days(firstMaxFinal$X1.length.x.))
 
   secondMaxFrame = data.frame(match(x, checkNA$secondMaxValue))
   secondMaxFinal = cbind(countDaysFrame, secondMaxFrame) %>%
     na.omit()
-  secondMaxDate = as.character(origin + days(secondMaxFinal$X1.length.x.))
+  secondMaxDate = as.character(origin + lubridate::days(secondMaxFinal$X1.length.x.))
 
   minFrame = data.frame(match(x,checkNA$min))
   minFinal = cbind(countDaysFrame, minFrame) %>%
     na.omit()
-  minDate = as.character(origin + days(minFinal$X1.length.x.))
+  minDate = as.character(origin + lubridate::days(minFinal$X1.length.x.))
 
   # prepare output
   combined = cbind(checkNA$Years, checkNA$Duration, checkNA$Intensity, checkNA$firstMaxValue, firstMaxDate, checkNA$secondMaxValue, secondMaxDate, checkNA$min, minDate)
