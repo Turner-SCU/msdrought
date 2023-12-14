@@ -35,38 +35,21 @@ msdStats <- function(x, dates, fcn){
   valleys<-quantmod::findValleys(data)-1 #finding all of the valleys of the data
   output<-c(0) #creating a new variable
   #-----------------------------------------------------------------------------------------------------------------------------------------
-  # Pull the values for the critical MSD dates (formerly ipdates2, msdDates)
-  criticalDates = c(0)
-  for(i in 1:length(dates)){
-    if(dates[i] == 1){
-      break
-    }
-    else{
-      criticalDates = c(criticalDates, dates[i])
-    }
-  }
-  criticalDates = criticalDates[ -c(1)]
-  # Pull the values for the start and end of each year (formerly ipdates4, msdYear)
-  yearDates = c(0)
-  for(j in i:length(dates)){
-    yearDates = c(yearDates, dates[j])
-  }
-  yearDates = yearDates[ -c(1)]
-  #-----------------------------------------------------------------------------------------------------------------------------------------
-  for (years in 1:(round(length(data)/365))){ #running for every year
-    date1<-criticalDates[4*years-2] #the next six lines just pull the proper indices
-    date2<-criticalDates[4*years-1]
-    date3<-criticalDates[4*years-3]
-    date4<-criticalDates[4*years]
-    date5<-yearDates[2*years-1]
-    date6<-yearDates[2*years]
+  nyears <- ceiling(lubridate::interval(times[1], times[length(times)]) / lubridate::years(1))
+  for (years in 1:nyears){ #running for every year #running for every year
+    date1 = dates[6*years-3] #the next six lines just pull the proper indices
+    date2 = dates[6*years-2]
+    date3 = dates[6*years-4]
+    date4 = dates[6*years-1]
+    date5 = dates[6*years-5]
+    date6 = dates[6*years]
     #checking for min valley between the inner dates
     min<-min(data[valleys[date1<=valleys & valleys<=date2]],na.rm=TRUE) #Combined version of lines 63-65
     #checking for min valley between the outer dates
     min2<-min(data[valleys[date3<= valleys & valleys<=date4]],na.rm=TRUE)
 
-    mindate<-match(min, data) #finding the index of min
-    mindate2<-match(min2, data) #finding the index of min2
+    mindate = which.min(data[valleys[date1<=valleys & valleys<=date2]],na.rm=TRUE) #finding the index of min
+    mindate2 = which.min(data[valleys[date3<= valleys & valleys<=date4]],na.rm=TRUE)
     check1<-mindate==mindate2 #making sure that the index does overlap
     if (is.na(mindate)==TRUE){ #making sure we have a minimum, otherwise an NA is output
       output[years]<-NA
@@ -121,5 +104,5 @@ msdStats <- function(x, dates, fcn){
         output[years]<-NA
     }
   } #end of For years loop
-  return(c(output))
+  return(as.vector(output))
 }
