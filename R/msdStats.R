@@ -34,8 +34,9 @@ msdStats <- function(x, dates, fcn, quantity=2, window=31){
   #-----------------------------------------------------------------------------------------------------------------------------------------
   # msdFilter and dates generation
   times = time(x)
+  filtered = x
   for(i in 1:quantity){
-    x = apply(x, MARGIN = 2, FUN = msdFilter, window = window)
+    filtered = apply(filtered, MARGIN = 2, FUN = msdFilter, window = window)
   }
   data<-c(as.numeric(filtered)) #making sure the data is numeric
   peaks<-quantmod::findPeaks(data)-1 #finding all of the peaks of the data
@@ -51,7 +52,7 @@ msdStats <- function(x, dates, fcn, quantity=2, window=31){
     date5 = dates[6*years-5]
     date6 = dates[6*years]
     #checking for min valley between the inner dates
-    min<-min(data[valleys[date1<=valleys & valleys<=date2]],na.rm=TRUE) #Combined version of lines 63-65
+    min<-min(data[valleys[date1<=valleys & valleys<=date2]],na.rm=TRUE)
     #checking for min valley between the outer dates
     min2<-min(data[valleys[date3<= valleys & valleys<=date4]],na.rm=TRUE)
 
