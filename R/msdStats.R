@@ -23,7 +23,7 @@
 #' @export
 #'
 #-----------------------------------------------------------------------------------------------------------------------------------------
-msdStats <- function(x, dates, fcn, quantity=2, window=31,{
+msdStats <- function(x, dates, fcn, quantity=2, window=31){
   #check for valid arguments
   if(missing(dates)) {
     stop("missing dates argument in msdStats function")
