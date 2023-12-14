@@ -1,16 +1,16 @@
 #' @title Finding indices for Dates Relevant to the MSD Calculations
 #'
-#' @description This function pulls the indices associated with dates that correspond 
-#' with the Mid Summer Drought, and is used in conjunction with the MSD function. 
+#' @description This function pulls the indices associated with dates that correspond
+#' with the Mid Summer Drought, and is used in conjunction with the MSD function.
 #' It also pulls the first and last day of each calendar year.
 #'
 #' @usage msdDates(x, peakwindow1, minwindow1, minwindow2, peakwindow2)
 #'
-#' @param x                 Date vector
+#' @param x              Date vector
 #' @param peakwindow1    desired date in MMDD format to begin search for early peak
-#' @param minwindow1      desired date in MMDD format to begin search for minimum
-#' @param minwindow2   desired date in MMDD format to end search for minimum
-#' @param peakwindow2     desired date in MMDD format to end search for late peak
+#' @param minwindow1     desired date in MMDD format to begin search for minimum
+#' @param minwindow2     desired date in MMDD format to end search for minimum
+#' @param peakwindow2    desired date in MMDD format to end search for late peak
 #'
 #' @return Date vector containing each year's beginning date, end date, and critical MSD dates
 #'
@@ -24,10 +24,10 @@
 msdDates <- function(x, peakwindow1 = "05-01", minwindow1 = "06-01", minwindow2 = "08-31", peakwindow2 = "10-31"){
 
   #Check that data begin on Jan 1
-  if((format(index(p.xts[1]), "%m-%d") != "01-01")) {
+  if((format(index(x[1]), "%m-%d") != "01-01")) {
     stop("current function requires a January 1 start date\n")
   }
-  
+
   #find indices for all years for key dates
   jan01 <- which(format(times,"%m-%d") == "01-01")
   dec31 <- which(format(times,"%m-%d") == "12-31")
@@ -35,14 +35,14 @@ msdDates <- function(x, peakwindow1 = "05-01", minwindow1 = "06-01", minwindow2 
   mw1 <- which(format(times,"%m-%d") == minwindow1)
   mw2 <- which(format(times,"%m-%d") == minwindow2)
   pw2 <- which(format(times,"%m-%d") == peakwindow2)
-  
+
   #make sure lengths are the same
   if (!(all.equal(length(pw1),length(pw2),length(mw1),length(mw2),length(jan01),length(dec31)))) {
     stop("Date vectors have different lengths, possible incomplete years\n")
   }
-  
+
   #interleave them together, so the six dates for each year are together
   k <- as.vector(rbind(jan01, pw1, mw1, mw2, pw2, dec31))
-  
+
   return(k)
 }
