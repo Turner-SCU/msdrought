@@ -16,25 +16,25 @@
 #'
 #' @examples
 #' x <- seq(from = as.Date("1981-01-01"), to = as.Date("1985-12-31"), by = "day")
-#' msdDates(x, peakwindow1="05-01",minwindow1="06-01",minwindow2 ="08-31",peakwindow2="10-31")
+#' msdDates(x, peakWindow1="05-01",minWindow1="06-01",minWindow2 ="08-31",peakWindow2="10-31")
 #'
 #' @export
 #'
 #-----------------------------------------------------------------------------------------------------------------------------------------
-msdDates <- function(x, peakwindow1 = "05-01", minwindow1 = "06-01", minwindow2 = "08-31", peakwindow2 = "10-31"){
+msdDates <- function(times, peakWindow1 = "05-01", minWindow1 = "06-01", minWindow2 = "08-31", peakWindow2 = "10-31"){
 
   #Check that data begin on Jan 1
-  if((format(index(x[1]), "%m-%d") != "01-01")) {
+  if((format(time[1], "%m-%d") != "01-01")) {
     stop("current function requires a January 1 start date\n")
   }
 
   #find indices for all years for key dates
   jan01 <- which(format(times,"%m-%d") == "01-01")
   dec31 <- which(format(times,"%m-%d") == "12-31")
-  pw1 <- which(format(times,"%m-%d") == peakwindow1)
-  mw1 <- which(format(times,"%m-%d") == minwindow1)
-  mw2 <- which(format(times,"%m-%d") == minwindow2)
-  pw2 <- which(format(times,"%m-%d") == peakwindow2)
+  pw1 <- which(format(times,"%m-%d") == peakWindow1)
+  mw1 <- which(format(times,"%m-%d") == minWindow1)
+  mw2 <- which(format(times,"%m-%d") == minWindow2)
+  pw2 <- which(format(times,"%m-%d") == peakWindow2)
 
   #make sure lengths are the same
   if (!(all.equal(length(pw1),length(pw2),length(mw1),length(mw2),length(jan01),length(dec31)))) {
