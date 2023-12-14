@@ -16,7 +16,7 @@
 #'
 #' @examples
 #' x <- seq(from = as.Date("1981-01-01"), to = as.Date("1985-12-31"), by = "day")
-#' msdDates(x, peakWindow1="05-01",minWindow1="06-01",minWindow2 ="08-31",peakWindow2="10-31")
+#' msdDates(times = x, peakWindow1="05-01",minWindow1="06-01",minWindow2 ="08-31",peakWindow2="10-31")
 #'
 #' @export
 #'
