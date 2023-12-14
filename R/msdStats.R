@@ -33,14 +33,13 @@ msdStats <- function(x, dates, fcn, nFilterPasses=2, window=31){
   }
   #-----------------------------------------------------------------------------------------------------------------------------------------
   # msdFilter and dates generation
-  times = time(x)
   filtered = msdFilter(x, window, nFilterPasses)
   data<-c(as.numeric(filtered)) #making sure the data is numeric
   peaks<-quantmod::findPeaks(data)-1 #finding all of the peaks of the data
   valleys<-quantmod::findValleys(data)-1 #finding all of the valleys of the data
   output<-c(0) #creating a new variable
   #-----------------------------------------------------------------------------------------------------------------------------------------
-  nyears <- round(length(times)/365)
+  nyears <- round(length(filtered)/365)
   for (years in 1:nyears){ #running for every year
     date1 = dates[6*years-3] #the next six lines just pull the proper indices
     date2 = dates[6*years-2]
