@@ -3,15 +3,15 @@
 #' @description Generates all relevant statistics for the Mid Summer Drought
 #'
 #' @usage msdMain(x, peakWindow1, minWindow1,
-#' minWindow2, peakWindow2, quantity,
+#' minWindow2, peakWindow2, nFilterPasses,
 #' window, time)
 #'
 #' @param x                 Vector or TimeSeries
-#' @param peakWindow1    desired date in MMDD format to begin analysis (window 1)
-#' @param minWindow1      desired date in MMDD format to end analysis (window 1)
-#' @param minWindow2   desired date in MMDD format to begin analysis (window 2)
-#' @param peakWindow2     desired date in MMDD format to end analysis (window 2)
-#' @param quantity          Amount of times the filter is run
+#' @param peakWindow1       desired date in MMDD format to begin analysis (window 1)
+#' @param minWindow1        desired date in MMDD format to end analysis (window 1)
+#' @param minWindow2        desired date in MMDD format to begin analysis (window 2)
+#' @param peakWindow2       desired date in MMDD format to end analysis (window 2)
+#' @param nFilterPasses     Amount of times the filter is run
 #' @param window            Size of filter
 #' @param time              Vector of dates (not needed for TimeSeries inputs)
 #'
@@ -21,11 +21,11 @@
 #' @examples
 #' # using timeseries (ts)
 #' # output = msdMain(ts, peakWindow1="05-01", minWindow1="06-01",
-#' # minWindow2 ="08-31", peakWindow2="10-31", quantity = 2, window = 31)
+#' # minWindow2 ="08-31", peakWindow2="10-31", nFilterPasses = 2, window = 31)
 #'
 #' @export
 #-----------------------------------------------------------------------------------------------------------------------------------------
-msdMain<-function(x, peakWindow1="05-01", minWindow1="06-01", minWindow2="08-31", peakWindow2="10-31", quantity=2, window=31, time=0){
+msdMain<-function(x, peakWindow1="05-01", minWindow1="06-01", minWindow2="08-31", peakWindow2="10-31", nFilterPasses=2, window=31, time=0){
 
 # msdDates
   if (inherits(x, "timeseries")) {
@@ -42,7 +42,7 @@ msdMain<-function(x, peakWindow1="05-01", minWindow1="06-01", minWindow2="08-31"
   }
 
 # msdFilter
-  for(i in 1:quantity){
+  for(i in 1:nFilterPasses){
     x = apply(x, MARGIN = 2, FUN = msdFilter, window = window)
   }
 
