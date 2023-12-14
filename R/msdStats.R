@@ -11,6 +11,8 @@
 #' @param dates     Vector of Dates (from the msdDates function)
 #' @param fcn       Specify what values to be pulled from the function.
 #' Options are 'duration', 'intensity', 'firstMaxValue', 'secondMaxValue', 'min', 'mindex'.
+#' @param quantity  Amount of times the filter is run (prior to determining the stats)
+#' @param window    Size of filter (prior to determining the stats)
 #'
 #' @return SpatRaster or TimeSeries of Yearly data
 #'
@@ -21,7 +23,7 @@
 #' @export
 #'
 #-----------------------------------------------------------------------------------------------------------------------------------------
-msdStats <- function(x, dates, fcn){
+msdStats <- function(x, dates, fcn, quantity=2, window=31,{
   #check for valid arguments
   if(missing(dates)) {
     stop("missing dates argument in msdStats function")
@@ -30,7 +32,12 @@ msdStats <- function(x, dates, fcn){
     stop("fcn must be one of duration, intensity, firstMaxValue, secondMaxValue, min, mindex")
   }
   #-----------------------------------------------------------------------------------------------------------------------------------------
-  data<-c(as.numeric(x)) #making sure the data is numeric
+  times = time(x)
+  filtered = x
+  for(i in 1:quantity){
+    filtered = apply(filtered, MARGIN = 2, FUN = msdFilter, window = window)
+  }
+  data<-c(as.numeric(filtered)) #making sure the data is numeric
   peaks<-quantmod::findPeaks(data)-1 #finding all of the peaks of the data
   valleys<-quantmod::findValleys(data)-1 #finding all of the valleys of the data
   output<-c(0) #creating a new variable
