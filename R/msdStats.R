@@ -35,7 +35,7 @@ msdStats <- function(x, dates, fcn, quantity=2, window=31){
   times = time(x)
   filtered = x
   for(i in 1:quantity){
-    filtered = apply(filtered, MARGIN = 2, FUN = msdFilter, window = window)
+    filtered = apply(filtered, MARGIN = 1, FUN = msdFilter, window = window)
   }
   data<-c(as.numeric(filtered)) #making sure the data is numeric
   peaks<-quantmod::findPeaks(data)-1 #finding all of the peaks of the data
