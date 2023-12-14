@@ -34,10 +34,7 @@ msdStats <- function(x, dates, fcn, nFilterPasses=2, window=31){
   #-----------------------------------------------------------------------------------------------------------------------------------------
   # msdFilter and dates generation
   times = time(x)
-  filtered = as.data.frame(x)
-  for(i in 1:nFilterPasses){
-    filtered = apply(filtered, MARGIN = 2, FUN = msdFilter, window = window)
-  }
+  filtered = msdFilter(x, window, nFilterPasses)
   data<-c(as.numeric(filtered)) #making sure the data is numeric
   peaks<-quantmod::findPeaks(data)-1 #finding all of the peaks of the data
   valleys<-quantmod::findValleys(data)-1 #finding all of the valleys of the data
