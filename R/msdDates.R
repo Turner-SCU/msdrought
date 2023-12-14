@@ -24,7 +24,7 @@
 msdDates <- function(times, peakWindow1 = "05-01", minWindow1 = "06-01", minWindow2 = "08-31", peakWindow2 = "10-31"){
 
   #Check that data begin on Jan 1
-  if((format(time[1], "%m-%d") != "01-01")) {
+  if((format(times[1], "%m-%d") != "01-01")) {
     stop("current function requires a January 1 start date\n")
   }
 
