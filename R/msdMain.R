@@ -3,7 +3,7 @@
 #' @description Generates all relevant statistics for the Mid Summer Drought
 #'
 #' @usage msdMain(x, peakWindow1, minWindow1,
-#' minWindow2, peakWindow2, quantity,
+#' minWindow2, peakWindow2, nFilterPasses,
 #' window, time)
 #'
 #' @param x                 Vector or TimeSeries
@@ -11,7 +11,7 @@
 #' @param minWindow1        desired date in MMDD format to end analysis (window 1)
 #' @param minWindow2        desired date in MMDD format to begin analysis (window 2)
 #' @param peakWindow2       desired date in MMDD format to end analysis (window 2)
-#' @param quantity          amount of time the filter is run
+#' @param nFilterPasses     amount of times the filter is run
 #' @param window            size of the filter
 #' @param time              Vector of dates (not needed for TimeSeries inputs)
 #'
@@ -25,7 +25,7 @@
 #'
 #' @export
 #-----------------------------------------------------------------------------------------------------------------------------------------
-msdMain<-function(x, peakWindow1="05-01", minWindow1="06-01", minWindow2="08-31", peakWindow2="10-31", quantity=2, window=31, time=0){
+msdMain<-function(x, peakWindow1="05-01", minWindow1="06-01", minWindow2="08-31", peakWindow2="10-31", nFilterPasses=2, window=31, time=0){
 
 # msdDates
   if (inherits(x, "timeseries")) {
@@ -42,11 +42,11 @@ msdMain<-function(x, peakWindow1="05-01", minWindow1="06-01", minWindow2="08-31"
   }
 
 # msdStats
-  duration <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="duration", quantity, window)
-  intensity <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="intensity", quantity, window)
-  firstMaxValue <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="firstMaxValue", quantity, window)
-  secondMaxValue <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="secondMaxValue", quantity, window)
-  min <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="min", quantity, window)
+  duration <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="duration", nFilterPasses, window)
+  intensity <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="intensity", nFilterPasses, window)
+  firstMaxValue <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="firstMaxValue", nFilterPasses, window)
+  secondMaxValue <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="secondMaxValue", nFilterPasses, window)
+  min <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="min", nFilterPasses, window)
 
   year1 = lubridate::year(time[1]) #find the first date of the provided date vector, x
   length = round(length(x)/365) - 1

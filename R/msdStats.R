@@ -11,7 +11,7 @@
 #' @param dates     Vector of Dates (from the msdDates function)
 #' @param fcn       Specify what values to be pulled from the function.
 #' Options are 'duration', 'intensity', 'firstMaxValue', 'secondMaxValue', 'min', 'mindex'.
-#' @param quantity  Amount of times the filter is run (prior to determining the stats)
+#' @param nFilterPasses  Amount of times the filter is run (prior to determining the stats)
 #' @param window    Size of filter (prior to determining the stats)
 #'
 #' @return SpatRaster or TimeSeries of Yearly data
@@ -23,7 +23,7 @@
 #' @export
 #'
 #-----------------------------------------------------------------------------------------------------------------------------------------
-msdStats <- function(x, dates, fcn, quantity=2, window=31){
+msdStats <- function(x, dates, fcn, nFilterPasses=2, window=31){
   #check for valid arguments
   if(missing(dates)) {
     stop("missing dates argument in msdStats function")
@@ -35,7 +35,7 @@ msdStats <- function(x, dates, fcn, quantity=2, window=31){
   # msdFilter and dates generation
   times = time(x)
   filtered = as.data.frame(x)
-  for(i in 1:quantity){
+  for(i in 1:nFilterPasses){
     filtered = apply(filtered, MARGIN = 2, FUN = msdFilter, window = window)
   }
   data<-c(as.numeric(filtered)) #making sure the data is numeric
