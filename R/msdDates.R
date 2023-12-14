@@ -1,48 +1,50 @@
-#' @title Finding indices for Dates Relevant to the MSD Calculations
+#' @title Pulling Dates Relevant to the MSD Calculations
 #'
-#' @description This function pulls the indices associated with dates that correspond
-#' with the Mid Summer Drought, and is used in conjunction with the MSD function.
-#' It also pulls the first and last day of each calendar year.
+#' @description This function pulls the dates that correspond with the Mid Summer Drought, and is used in conjuction with the MSD function.
+#' It also pulls the first and last day of each calendar year provided.
+
 #'
-#' @usage msdDates(x, peakwindow1, minwindow1, minwindow2, peakwindow2)
+#' @usage msdDates(x, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
 #'
-#' @param x              Date vector
-#' @param peakwindow1    desired date in MMDD format to begin search for early peak
-#' @param minwindow1     desired date in MMDD format to begin search for minimum
-#' @param minwindow2     desired date in MMDD format to end search for minimum
-#' @param peakwindow2    desired date in MMDD format to end search for late peak
+#' @param x                 Date vector
+#' @param firstStartDate    desired date in MMDD format to begin analysis (window 1)
+#' @param firstEndDate      desired date in MMDD format to end analysis (window 1)
+#' @param secondStartDate   desired date in MMDD format to begin analysis (window 2)
+#' @param secondEndDate     desired date in MMDD format to end analysis (window 2)
 #'
 #' @return Date vector containing each year's beginning date, end date, and critical MSD dates
 #'
 #' @examples
 #' x <- seq(from = as.Date("1981-01-01"), to = as.Date("1985-12-31"), by = "day")
-#' msdDates(times = x, peakWindow1="05-01",minWindow1="06-01",minWindow2 ="08-31",peakWindow2="10-31")
+#' msdDates(x, firstStartDate="05-01",firstEndDate="08-31",
+#' secondStartDate ="06-01",secondEndDate="10-31")
 #'
 #' @export
 #'
 #-----------------------------------------------------------------------------------------------------------------------------------------
-msdDates <- function(times, peakWindow1 = "05-01", minWindow1 = "06-01", minWindow2 = "08-31", peakWindow2 = "10-31"){
+msdDates <- function(x, firstStartDate = "05-01", firstEndDate = "06-01", secondStartDate = "08-31", secondEndDate = "10-31"){
 
-  #Check that data begin on Jan 1
-  if((format(times[1], "%m-%d") != "01-01")) {
-    stop("current function requires a January 1 start date\n")
+  #Find the pre-set date bounds for the MSD (define the first year of the data, January 1, and December 31)
+  year1 = lubridate::year(x[1]) #find the first date of the provided date vector, x
+  date1="01-01" #January 1st, the first day of the year
+  date2="12-31" #December 31st, the first day of the year
+
+  #Calculate the MSD boundaries as well as the first and last days of the year
+  i<-year1
+  l<-round(length(x)/365)
+  j<-i+l-1
+  kDates<-c(0) #Values associated with key MSD dates
+  kYear<-c(0) #Values for the first and last days of a year
+
+  for(year in i:j)
+  {
+    kDates[((year-i)*4)+1]<-which(grepl(paste(as.character(year), firstStartDate, sep="-"),x))
+    kDates[((year-i)*4)+2]<-which(grepl(paste(as.character(year), firstEndDate, sep="-"),x))
+    kDates[((year-i)*4)+3]<-which(grepl(paste(as.character(year), secondStartDate, sep="-"),x))
+    kDates[((year-i)*4)+4]<-which(grepl(paste(as.character(year), secondEndDate, sep="-"),x))
+    kYear[((year-i)*2)+1]<-which(grepl(paste(as.character(year),date1,sep="-"),x))
+    kYear[((year-i)*2)+2]<-which(grepl(paste(as.character(year),date2,sep="-"),x))
   }
-
-  #find indices for all years for key dates
-  jan01 <- which(format(times,"%m-%d") == "01-01")
-  dec31 <- which(format(times,"%m-%d") == "12-31")
-  pw1 <- which(format(times,"%m-%d") == peakWindow1)
-  mw1 <- which(format(times,"%m-%d") == minWindow1)
-  mw2 <- which(format(times,"%m-%d") == minWindow2)
-  pw2 <- which(format(times,"%m-%d") == peakWindow2)
-
-  #make sure lengths are the same
-  if (!(all.equal(length(pw1),length(pw2),length(mw1),length(mw2),length(jan01),length(dec31)))) {
-    stop("Date vectors have different lengths, possible incomplete years\n")
-  }
-
-  #interleave them together, so the six dates for each year are together
-  k <- as.vector(rbind(jan01, pw1, mw1, mw2, pw2, dec31))
-
+  k = c(kDates, kYear)
   return(k)
 }

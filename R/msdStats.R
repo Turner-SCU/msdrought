@@ -7,12 +7,10 @@
 #'
 #' @usage msdStats(x, dates, fcn)
 #'
-#' @param x         xts object
+#' @param x         RasterBrick or TimeSeries
 #' @param dates     Vector of Dates (from the msdDates function)
 #' @param fcn       Specify what values to be pulled from the function.
 #' Options are 'duration', 'intensity', 'firstMaxValue', 'secondMaxValue', 'min', 'mindex'.
-#' @param nFilterPasses  Amount of times the filter is run (prior to determining the stats)
-#' @param window    Size of filter (prior to determining the stats)
 #'
 #' @return SpatRaster or TimeSeries of Yearly data
 #'
@@ -23,7 +21,7 @@
 #' @export
 #'
 #-----------------------------------------------------------------------------------------------------------------------------------------
-msdStats <- function(x, dates, fcn, nFilterPasses=2, window=31){
+msdStats <- function(x, dates, fcn){
   #check for valid arguments
   if(missing(dates)) {
     stop("missing dates argument in msdStats function")
@@ -32,25 +30,41 @@ msdStats <- function(x, dates, fcn, nFilterPasses=2, window=31){
     stop("fcn must be one of duration, intensity, firstMaxValue, secondMaxValue, min, mindex")
   }
   #-----------------------------------------------------------------------------------------------------------------------------------------
-  # msdFilter and dates generation
-  filtered = msdFilter(x, window, nFilterPasses)
-  data<-c(as.numeric(filtered)) #making sure the data is numeric
+  data<-c(as.numeric(x)) #making sure the data is numeric
   peaks<-quantmod::findPeaks(data)-1 #finding all of the peaks of the data
   valleys<-quantmod::findValleys(data)-1 #finding all of the valleys of the data
   output<-c(0) #creating a new variable
   #-----------------------------------------------------------------------------------------------------------------------------------------
-  nyears <- round(length(filtered)/365)
-  for (years in 1:nyears){ #running for every year
-    date1 = dates[6*years-3] #the next six lines just pull the proper indices
-    date2 = dates[6*years-2]
-    date3 = dates[6*years-4]
-    date4 = dates[6*years-1]
-    date5 = dates[6*years-5]
-    date6 = dates[6*years]
+  # Pull the values for the critical MSD dates (formerly ipdates2, msdDates)
+  criticalDates = c(0)
+  for(i in 1:length(dates)){
+    if(dates[i] == 1){
+      break
+    }
+    else{
+      criticalDates = c(criticalDates, dates[i])
+    }
+  }
+  criticalDates = criticalDates[ -c(1)]
+  # Pull the values for the start and end of each year (formerly ipdates4, msdYear)
+  yearDates = c(0)
+  for(j in i:length(dates)){
+    yearDates = c(yearDates, dates[j])
+  }
+  yearDates = yearDates[ -c(1)]
+  #-----------------------------------------------------------------------------------------------------------------------------------------
+  for (years in 1:(round(length(data)/365))){ #running for every year
+    date1<-criticalDates[4*years-2] #the next six lines just pull the proper indices
+    date2<-criticalDates[4*years-1]
+    date3<-criticalDates[4*years-3]
+    date4<-criticalDates[4*years]
+    date5<-yearDates[2*years-1]
+    date6<-yearDates[2*years]
     #checking for min valley between the inner dates
-    min<-min(data[valleys[date1<=valleys & valleys<=date2]],na.rm=TRUE)
+    min<-min(data[valleys[date1<=valleys & valleys<=date2]],na.rm=TRUE) #Combined version of lines 63-65
     #checking for min valley between the outer dates
     min2<-min(data[valleys[date3<= valleys & valleys<=date4]],na.rm=TRUE)
+
     mindate<-match(min, data) #finding the index of min
     mindate2<-match(min2, data) #finding the index of min2
     check1<-mindate==mindate2 #making sure that the index does overlap
@@ -107,5 +121,5 @@ msdStats <- function(x, dates, fcn, nFilterPasses=2, window=31){
         output[years]<-NA
     }
   } #end of For years loop
-  return(as.vector(output))
+  return(c(output))
 }
