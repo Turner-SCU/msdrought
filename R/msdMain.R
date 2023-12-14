@@ -2,15 +2,15 @@
 #'
 #' @description Generates all relevant statistics for the Mid Summer Drought
 #'
-#' @usage msdMain(x, firstStartDate, firstEndDate,
-#' secondStartDate, secondEndDate, quantity,
+#' @usage msdMain(x, peakWindow1, minWindow1,
+#' minWindow2, peakWindow2, quantity,
 #' window, time)
 #'
 #' @param x                 Vector or TimeSeries
-#' @param firstStartDate    desired date in MMDD format to begin analysis (window 1)
-#' @param firstEndDate      desired date in MMDD format to end analysis (window 1)
-#' @param secondStartDate   desired date in MMDD format to begin analysis (window 2)
-#' @param secondEndDate     desired date in MMDD format to end analysis (window 2)
+#' @param peakWindow1    desired date in MMDD format to begin analysis (window 1)
+#' @param minWindow1      desired date in MMDD format to end analysis (window 1)
+#' @param minWindow2   desired date in MMDD format to begin analysis (window 2)
+#' @param peakWindow2     desired date in MMDD format to end analysis (window 2)
 #' @param quantity          Amount of times the filter is run
 #' @param window            Size of filter
 #' @param time              Vector of dates (not needed for TimeSeries inputs)
@@ -20,25 +20,25 @@
 #'
 #' @examples
 #' # using timeseries (ts)
-#' # output = msdMain(ts, firstStartDate="05-01", firstEndDate="08-31",
-#' # secondStartDate ="06-01", secondEndDate="10-31", quantity = 2, window = 31)
+#' # output = msdMain(ts, peakWindow1="05-01", minWindow1="06-01",
+#' # minWindow2 ="08-31", peakWindow2="10-31", quantity = 2, window = 31)
 #'
 #' @export
 #-----------------------------------------------------------------------------------------------------------------------------------------
-msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDate="08-31", secondEndDate="10-31", quantity=2, window=31, time=0){
+msdMain<-function(x, peakWindow1="05-01", minWindow1="06-01", minWindow2="08-31", peakWindow2="10-31", quantity=2, window=31, time=0){
 
 # msdDates
   if (inherits(x, "timeseries")) {
   time = stats::time(x)
-  dates = msdDates(time, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
+  dates = msdDates(time, peakWindow1, minWindow1, minWindow2, peakWindow2)
   } else if (inherits(x, "xts")) {
   time = stats::time(x)
-  dates = msdDates(time, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
+  dates = msdDates(time, peakWindow1, minWindow1, minWindow2, peakWindow2)
   } else if (time == 0){
       print("Error: no dates vector present")
       stop
   } else {
-    dates = msdDates(time, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
+    dates = msdDates(time, peakWindow1, minWindow1, minWindow2, peakWindow2)
   }
 
 # msdFilter
