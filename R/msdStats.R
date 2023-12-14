@@ -34,7 +34,7 @@ msdStats <- function(x, dates, fcn, quantity=2, window=31){
   #-----------------------------------------------------------------------------------------------------------------------------------------
   # msdFilter and dates generation
   times = time(x)
-  filtered = x
+  filtered = as.data.frame(x)
   for(i in 1:quantity){
     filtered = apply(filtered, MARGIN = 2, FUN = msdFilter, window = window)
   }
