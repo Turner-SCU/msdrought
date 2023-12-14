@@ -40,8 +40,8 @@ msdStats <- function(x, dates, fcn, nFilterPasses=2, window=31){
   valleys<-quantmod::findValleys(data)-1 #finding all of the valleys of the data
   output<-c(0) #creating a new variable
   #-----------------------------------------------------------------------------------------------------------------------------------------
-  nyears <- ceiling(lubridate::interval(times[1], times[length(times)]) / lubridate::years(1))
-  for (years in 1:nyears){ #running for every year #running for every year
+  nyears <- round(length(times)/365)
+  for (years in 1:nyears){ #running for every year
     date1 = dates[6*years-3] #the next six lines just pull the proper indices
     date2 = dates[6*years-2]
     date3 = dates[6*years-4]
