@@ -74,21 +74,36 @@ The end result of either of these processes is a time series that has rainfall d
 plot(x)
 ```
 
-As you can see, this data set has data for 1981, 1982, 1983, 1984, and 1985. In general, the MSD package can analyze one of these years at a time. In order to analyze multiple years at once, we'll need to create loops.
+As you can see, this data set has data for 1981, 1982, 1983, 1984, and 1985. In general, the MSD package can analyze one of these years at a time. In order to analyze multiple years at once, we'll need to create loops, extract the data from each individual (single-year) graph, then create a new plot with all the data together.
 
 ```{r}
-#!! INCOMPLETE
-# We need the "egg" package to arrange our plots
-#library(egg)
-#plotList = ggplot()
-#startYear = year(x[1,1])
-#endYear = year(x[length(x),1])
-#lengthYears = (endYear-startYear) + 1
-#for(i in startYear:endYear){
-#    plot = msdGraph(x, i)
-#    plotList = list(plotList, plot)
-#}
-#combinedPlots = plotList[-1]
+combinedPlots = NULL
+firstYear = lubridate::year(startDate)
+lastYear = lubridate::year(endDate)
+for (i in firstYear:lastYear) {
+  onePlot = msdGraph(x, i)
+  plotData = ggplot_build(onePlot)$plot$data
+  plotColor = ggplot_build(onePlot)$plot$plot_env$color1
+  allPlot = data.frame(plotData, plotColor)
+  combinedPlots = rbind(combinedPlots, allPlot)
+}
+colnames(combinedPlots) = c("Date", "Precip", "Color")
+combinedPlotData = data.frame(as.Date(combinedPlots$Date), as.numeric(combinedPlots$Precip))
+colnames(combinedPlotData) = c("Date", "Precip")
+
+```
+
+Now let's use ggplot to create a new combined graph
+
+```{r}
+finalPlot = ggplot(data = combinedPlotData, mapping = aes(x=Date,y=Precip))+
+  theme_bw()+annotate("rect", xmin=combinedPlotData[1,1], 
+  xmax=combinedPlotData[nrow(combinedPlotData),1], ymin=0, 
+  ymax=(max(combinedPlotData$Precip, na.rm=TRUE)+2),
+  fill=combinedPlots$Color, alpha=0.5)+
+  xlab("")+
+  ylab("Precipitation (mm/day)")
+#WORK IN PROGRESS
 ```
 
 Now we can view the MSD data for all the years of rainfall data we have. If you only want to see a certain range of data, simply replace startYear and endYear with the years you're interested in.
@@ -96,5 +111,6 @@ Now we can view the MSD data for all the years of rainfall data we have. If you 
 Let's view our combined plot!
 
 ```{r fig.height=5, fig.width=5}
-#plot(combinedPlots)
+#plot(finalPlot)
 ```
+
