@@ -1,0 +1,99 @@
+---
+title: "average-daily"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{average-daily}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(MSD)
+```
+
+The MSD package is designed to analyze one year of data at a time. For the AGU '23 conference, a graphic was made that showcased the trends of the average rainfall across a set of years. That is, each day's rainfall data across multiple years were averaged, then analyzed. For example, in a data set with precipitation data from 1981 to 1985, every day of the year (from January 1st to December 31st) had its rainfall data averaged (example: the precipitation values of 1-1-81, 1-1-82, 1-1-83, 1-1-84, and 1-1-85 were averaged), then put into a dummy xts to be analyzed. This vignette shows how that graphic was created.
+
+The first step is to extract the relevant data from a SpatRaster.
+
+```{r}
+library(MSD)
+library(terra)
+library(tidyr)
+library(lubridate)
+library(stringr)
+library(ggplot2)
+library(xts)
+data = system.file("data", "prcp_cropped.tif", package="MSD") #This loads the data included in the package, but you would attach your own
+infile = terra::rast(data)
+
+# Make a SpatRast for one point
+lon = -86.2621555581 #El Bramadero lon (from NicaAgua)
+lat = 13.3816217871 #El Bramadero lat (from NicaAgua)
+lonLat = data.frame(lon=lon,lat=lat)
+
+# Set up precipitation data
+location = terra::vect(lonLat, crs = "+proj=longlat +datum=WGS84")
+precip = terra::extract(infile, location, method = 'bilinear') %>%
+  subset(select = -ID) %>%
+  t()
+precip[precip < 0] <- 0 #replace any negative (errant) values with zeroes
+precip = as.vector(precip)
+```
+
+Because we will be using the msdGraph function, a year value will need to be provided. We will create a dummy year that will be used for the sake of plotting. This can be any year, but it is easiest to just use the first year in the data set.
+
+```{r}
+# Set up dates (time) data for ONE year (365 days)
+time = terra::time(infile) %>%
+  as.Date() %>% 
+  data.frame()
+timeFrame = as.Date(c(time[1,1]:time[365,1])) %>% 
+  data.frame()
+# Make a Dataframe for each year
+chunkLength = 365
+divYears = (split(precip,ceiling(seq_along(precip) / chunkLength)))
+divYearsFrame = data.frame(divYears)
+
+averagePrecip = c()
+for (i in 1:nrow(divYearsFrame)) {
+  daySum = sum(divYearsFrame[i,])
+  averagePrecip = rbind(averagePrecip, daySum)
+}
+nyears = round(length(precip)/365)
+averagePrecip = averagePrecip/nyears #(average over number of years)
+```
+
+Now, an averaged xts object can be created. This will display the data set's average rainfall over the dummy year.
+
+```{r}
+# Assemble the Timeseries
+timeseriesFrame = cbind(timeFrame, averagePrecip)
+colnames(timeseriesFrame) = c("Date", "Precipitation")
+x = xts(timeseriesFrame$Precipitation, timeseriesFrame$Date) #This produces the "xts" screenshot
+```
+
+Now, perform the MSD calculations and plot the averaged graph!
+
+```{r}
+# Perform MSD calculations with the new xts
+keyDatesTS = msdDates(time(x))
+filterTS1 = apply(x, MARGIN = 2, FUN = msdFilter, window = 31)
+filterTS2 = apply(filterTS1, MARGIN = 2, FUN = msdFilter, window = 31)
+duration <- apply(filterTS2, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="duration")
+intensity <- apply(filterTS2, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="intensity")
+firstMaxValue <- apply(filterTS2, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="firstMaxValue")
+secondMaxValue <- apply(filterTS2, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="secondMaxValue")
+min <- apply(filterTS2, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="min")
+allStats = msdMain(x)
+graph1981 = msdGraph(x, 1981)
+plot(graph1981)
+```
+
+Note that the first 31 days and the final 31 days will not have values due to the behavior of the msdFilter function with a single "year" of data.
