@@ -24,7 +24,7 @@
 #' # secondStartDate ="06-01", secondEndDate="10-31", quantity = 2, window = 31)
 #'
 #' @export
-#-----------------------------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------------------------------------------------------
 msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDate="08-31", secondEndDate="10-31", quantity=2, window=31, time=0){
 
 # msdDates
@@ -40,17 +40,17 @@ msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDa
   } else {
     dates = msdDates(time, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
   }
-#----------------------------------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------------------------------------------------------
 # msdFilter
     x = apply(x, MARGIN = 2, FUN = msdFilter, window = window, quantity = quantity)
-#----------------------------------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------------------------------------------------------
 # msdStats
   duration <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="duration")
   intensity <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="intensity")
   firstMaxValue <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="firstMaxValue")
   secondMaxValue <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="secondMaxValue")
   min <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="min")
-#----------------------------------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------------------------------------------------------
 # prepare output
   year1 = lubridate::year(time[1]) #find the first date of the provided date vector, x
   length = round(length(x)/365) - 1
