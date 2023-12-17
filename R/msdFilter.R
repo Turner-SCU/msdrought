@@ -7,10 +7,11 @@
 #' and calculate a weighted average based on how far away the points are from
 #' the point of interest.
 #'
-#' @usage msdFilter(x, window)
+#' @usage msdFilter(x, window = 31, quantity = 2)
 #'
-#' @param x          RasterBrick or TimeSeries
-#' @param window     Size of Filter
+#' @param x           RasterBrick or TimeSeries
+#' @param window      Size of Filter [Default = 31]
+#' @param quantity    Number of passes to apply filter [Default = 2]
 #'
 #' @return RasterBrick or TimeSeries of Yearly data
 #'
@@ -21,14 +22,18 @@
 #'
 #' @export
 #'
-msdFilter <- function(x, window) {
+#-----------------------------------------------------------------------------------------------------------------------------------------
+msdFilter <- function(x, window = 31, quantity = 2) {
   #constructs a Bartlett vector with the size of the bartlett filter
   bartlett_window <- c(signal::bartlett(window))
   #creates a sum of the bartlett window to construct an average
   bartlett_sum <- sum(bartlett_window)
 
   #apply filter weighted on the average and divided by the sum of the bartlett window to smooth out the data
-  filtered_data <- stats::filter(x,bartlett_window/bartlett_sum,method="convolution")
+  filtered_data <- c(x) # coerce to vector if it is a timeseries
+  for (i in 1:quantity) {
+    filtered_data <- stats::filter(filtered_data,bartlett_window/bartlett_sum,method="convolution")
+  }
   return(filtered_data)
 }
 

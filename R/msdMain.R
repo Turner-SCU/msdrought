@@ -40,19 +40,18 @@ msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDa
   } else {
     dates = msdDates(time, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
   }
-
+#----------------------------------------------------------------------------------------------------------------------------------------------
 # msdFilter
-  for(i in 1:quantity){
-    x = apply(x, MARGIN = 2, FUN = msdFilter, window = window)
-  }
-
+    x = apply(x, MARGIN = 2, FUN = msdFilter, window = window, quantity = quantity)
+#----------------------------------------------------------------------------------------------------------------------------------------------
 # msdStats
   duration <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="duration")
   intensity <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="intensity")
   firstMaxValue <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="firstMaxValue")
   secondMaxValue <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="secondMaxValue")
   min <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="min")
-
+#----------------------------------------------------------------------------------------------------------------------------------------------
+# prepare output
   year1 = lubridate::year(time[1]) #find the first date of the provided date vector, x
   length = round(length(x)/365) - 1
   years = seq(from = year1, to = year1+length, by = 1)
@@ -79,7 +78,6 @@ msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDa
     na.omit()
   minDate = as.character(origin + lubridate::days(minFinal$X1.length.x.))
 
-  # prepare output
   combined = cbind(checkNA$Years, checkNA$Duration, checkNA$Intensity, checkNA$firstMaxValue, firstMaxDate, checkNA$secondMaxValue, secondMaxDate, checkNA$min, minDate)
   output = data.frame(combined)
   colnames(output) = c("Years", "Duration", "Intensity", "firstMaxValue", "firstMaxDate", "secondMaxValue", "secondMaxDate", "min", "minDate")
