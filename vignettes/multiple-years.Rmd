@@ -113,4 +113,3 @@ Let's view our combined plot!
 ```{r fig.height=5, fig.width=5}
 #plot(finalPlot)
 ```
-
