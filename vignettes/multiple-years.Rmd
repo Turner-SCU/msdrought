@@ -97,13 +97,12 @@ Now let's use ggplot to create a new combined graph
 
 ```{r}
 finalPlot = ggplot(data = combinedPlotData, mapping = aes(x=Date,y=Precip))+
-  theme_bw()+annotate("rect", xmin=combinedPlotData[1,1], 
-  xmax=combinedPlotData[nrow(combinedPlotData),1], ymin=0, 
-  ymax=(max(combinedPlotData$Precip, na.rm=TRUE)+2),
-  fill=combinedPlots$Color, alpha=0.5)+
+  geom_line(data=combinedPlotData[1:nrow(combinedPlotData),])+
   xlab("")+
-  ylab("Precipitation (mm/day)")
-#WORK IN PROGRESS
+  ylab("Precipitation (mm/day)")+
+  theme_bw()+
+  annotate("rect", xmin=combinedPlotData[1,1], xmax=combinedPlotData[nrow(combinedPlotData),1], ymin=0, ymax=(max(combinedPlotData$Precip, na.rm=TRUE)+2), fill="white", alpha=0.5)
+#WIP: fill needs to be changed, also needs to have the lines and dots
 ```
 
 Now we can view the MSD data for all the years of rainfall data we have. If you only want to see a certain range of data, simply replace startYear and endYear with the years you're interested in.
@@ -111,5 +110,5 @@ Now we can view the MSD data for all the years of rainfall data we have. If you 
 Let's view our combined plot!
 
 ```{r fig.height=5, fig.width=5}
-#plot(finalPlot)
+plot(finalPlot)
 ```
