@@ -48,9 +48,7 @@ msdGraph<-function(x, year, firstStartDate="05-01", firstEndDate="06-01", second
   validDates = (year == yearsOnly)
   tsDates = allDates[validDates == TRUE]
 #Filter the data for the purpose of graphing
-  for(i in 1:quantity){
-    timeseriesFull = apply(timeseriesFull, MARGIN = 2, FUN = msdFilter, window = window)
-  }
+  timeseriesFull = apply(timeseriesFull, MARGIN = 2, FUN = msdFilter, window = window, quantity = quantity)
   timeseriesPrecip = timeseriesFull[validDates == TRUE]
   timeseriesFrame = data.frame(as.Date(tsDates), as.numeric(timeseriesPrecip))
   colnames(timeseriesFrame) = c("Date", "Precipitation")

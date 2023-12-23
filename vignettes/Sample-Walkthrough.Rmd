@@ -83,8 +83,7 @@ keyDatesTS = msdDates(time(x))
 
 # Filter the data using a bartlett noise filter by using the msdFilter function
 # msdFilter = msdFilter(x, window)
-filterTS1 = apply(x, MARGIN = 2, FUN = msdFilter, window = 31)
-filterTS2 = apply(filterTS1, MARGIN = 2, FUN = msdFilter, window = 31)
+filterTS = apply(x, MARGIN = 2, FUN = msdFilter, window = 31, quantity = 2)
 # Note: The founders of this package recommend filtering the data twice, but this is left up to the user to decide
 ```
 
@@ -93,11 +92,11 @@ Now that we have the key dates and a filtered timeseries, it is time to calculat
 ```{r}
 # Use msdStats and r's built-in apply function to apply the intensity calculation across the filtered timeseries data
 # msdStats = msdStats(x, dates, fcn)
-duration <- apply(filterTS2, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="duration")
-intensity <- apply(filterTS2, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="intensity")
-firstMaxValue <- apply(filterTS2, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="firstMaxValue")
-secondMaxValue <- apply(filterTS2, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="secondMaxValue")
-min <- apply(filterTS2, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="min")
+duration <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="duration")
+intensity <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="intensity")
+firstMaxValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="firstMaxValue")
+secondMaxValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="secondMaxValue")
+min <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="min")
 ```
 
 After completing this step, we will have a numeric list of all the statistics values for every year of data.

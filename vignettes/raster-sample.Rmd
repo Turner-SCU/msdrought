@@ -45,13 +45,12 @@ dates = msdDates(formattedDates)
 
 # Use the terra::app function to apply the bartlett noise filter (msdFilter) to the raster
 # msdFilter = msdFilter(x, window)
-filter1 <- terra::app(infile, msdFilter, window=31)
-filter2 <- terra::app(filter1, msdFilter, window=31)
+filtered <- terra::app(infile, msdFilter, window=31, quantity=2)
 
 # Use the terra::app function to apply the bartlett noise filter (msdFilter) to the raster
 # msdStats = msdStats(x, dates, fcn)
 suppressWarnings({
-intensity <- terra::app(filter2, msdStats, dates, fcn="intensity")
+intensity <- terra::app(filtered, msdStats, dates, fcn="intensity")
 })
 ```
 
