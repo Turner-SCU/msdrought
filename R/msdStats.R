@@ -53,7 +53,7 @@ msdStats <- function(x, dates, fcn){
   }
   yearDates = yearDates[ -c(1)]
   #-----------------------------------------------------------------------------------------------------------------------------------------
-  for (years in 1:(round(length(data)/365))){ #running for every year
+  for (years in 1:xts::nyears(x)){ #running for every year
     date1<-criticalDates[4*years-2] #the next six lines just pull the proper indices
     date2<-criticalDates[4*years-1]
     date3<-criticalDates[4*years-3]
@@ -65,7 +65,7 @@ msdStats <- function(x, dates, fcn){
     #checking for min valley between the outer dates
     min2<-min(data[valleys[date3<= valleys & valleys<=date4]],na.rm=TRUE)
 
-    mindate<-match(min, data) #finding the index of min
+    mindate<-match(min, data) #finding the index of min #!!!
     mindate2<-match(min2, data) #finding the index of min2
     check1<-mindate==mindate2 #making sure that the index does overlap
     if (is.na(mindate)==TRUE){ #making sure we have a minimum, otherwise an NA is output
