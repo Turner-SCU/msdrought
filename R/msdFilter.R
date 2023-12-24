@@ -38,7 +38,7 @@ msdFilter <- function(x, window = 31, quantity = 2) {
   }
   timeseriesFrame = cbind(timeFrame, filtered_data)
   colnames(timeseriesFrame) = c("Date", "Precipitation")
-  allFiltered = xts(timeseriesFrame$Precipitation, timeseriesFrame$Date, order.by = timeFrame)
+  allFiltered = xts(timeseriesFrame$Precipitation, order.by = timeseriesFrame$Date)
   return(allFiltered)
 }
 
