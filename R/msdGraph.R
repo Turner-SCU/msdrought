@@ -53,10 +53,10 @@ msdGraph<-function(x, year, peakwindow1 = "05-01", minwindow1 = "06-01", minwind
   timeseriesFrame = data.frame(as.Date(tsDates), as.numeric(timeseriesPrecip))
   colnames(timeseriesFrame) = c("Date", "Precipitation")
 #Create variables for the firstStart, secondStart, firstEnd, and secondEnd MM-DD inputs in YY-MM-DD format (add year of interest)
-  startDate1 = as.Date(paste(year, peakwindow1, sep = "-"))
-  endDate1 = as.Date(paste(year, minwindow2, sep = "-"))
-  startDate2 = as.Date(paste(year, minwindow1, sep = "-"))
-  endDate2 = as.Date(paste(year, peakwindow2, sep = "-"))
+  pw1 = as.Date(paste(year, peakwindow1, sep = "-"))
+  mw2 = as.Date(paste(year, minwindow2, sep = "-"))
+  mw1 = as.Date(paste(year, minwindow1, sep = "-"))
+  pw2 = as.Date(paste(year, peakwindow2, sep = "-"))
 
 #-----------------------------------------------------------------------------------------------------------------------------------------
 #Assign individual variables to each important column value from the yearStats dataframe (from msdMain)
@@ -102,10 +102,10 @@ msdGraph<-function(x, year, peakwindow1 = "05-01", minwindow1 = "06-01", minwind
     geom_point(data=firstMax, mapping = aes(x=as.Date(Date),y=Precipitation), size=2, color="red")+
     geom_point(data=secondMax, mapping = aes(x=as.Date(Date),y=Precipitation), size=2, color="red")+
     geom_point(data=theMin, mapping = aes(x=as.Date(Date),y=Precipitation), size=2, color="blue")+
-    geom_vline(xintercept=startDate1, color="red")+ #!!! add year to these dates
-    geom_vline(xintercept=endDate1, color="blue")+
-    geom_vline(xintercept=startDate2, color="blue")+
-    geom_vline(xintercept=endDate2, color="red")+
+    geom_vline(xintercept=pw1, color="red")+ #!!! add year to these dates
+    geom_vline(xintercept=mw2, color="blue")+
+    geom_vline(xintercept=mw1, color="blue")+
+    geom_vline(xintercept=pw2, color="red")+
     xlab("")+
     ylab("Precipitation (mm/day)")+
     scale_y_continuous(breaks = seq(0,(max(firstMaxVal, secondMaxVal)+2), by = 5), limits=c(0,(max(firstMaxVal, secondMaxVal)+2)), expand = c(0,0))+
