@@ -31,7 +31,6 @@ msdFilter <- function(x, window = 31, quantity = 2) {
 
   #apply filter weighted on the average and divided by the sum of the bartlett window to smooth out the data, and return an xts object
   timeFrame = terra::time(x) %>%
-    as.Date() %>%
     data.frame()
   filtered_data <- as.vector(x) # coerce to vector if it is a timeseries
   for (i in 1:quantity) {
