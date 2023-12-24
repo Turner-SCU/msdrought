@@ -13,7 +13,7 @@
 #' @param window      Size of Filter [Default = 31]
 #' @param quantity    Number of passes to apply filter [Default = 2]
 #'
-#' @return RasterBrick or TimeSeries of Yearly data
+#' @return DataFrame of filtered yearly data
 #'
 #'
 #' @examples
