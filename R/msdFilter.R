@@ -13,7 +13,7 @@
 #' @param window      Size of Filter [Default = 31]
 #' @param quantity    Number of passes to apply filter [Default = 2]
 #'
-#' @return DataFrame of filtered yearly data
+#' @return RasterBrick or TimeSeries of Yearly data
 #'
 #'
 #' @examples
@@ -29,17 +29,10 @@ msdFilter <- function(x, window = 31, quantity = 2) {
   #creates a sum of the bartlett window to construct an average
   bartlett_sum <- sum(bartlett_window)
 
-  #apply filter weighted on the average and divided by the sum of the bartlett window to smooth out the data, and return an xts object
-  timeFrame = terra::time(x) %>%
-    as.Date() %>%
-    data.frame()
-  filtered_data <- as.vector(x) # coerce to vector if it is a timeseries
+  #apply filter weighted on the average and divided by the sum of the bartlett window to smooth out the data
+  filtered_data <- c(x) # coerce to vector if it is a timeseries
   for (i in 1:quantity) {
     filtered_data <- stats::filter(filtered_data,bartlett_window/bartlett_sum,method="convolution")
   }
-  filtered = data.frame(filtered_data)
-  allFiltered = cbind(timeFrame, filtered)
-  colnames(allFiltered) = c("Date", "Precip")
-  return(allFiltered)
+  return(filtered_data)
 }
-
