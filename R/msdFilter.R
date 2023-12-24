@@ -37,7 +37,8 @@ msdFilter <- function(x, window = 31, quantity = 2) {
     filtered_data <- stats::filter(filtered_data,bartlett_window/bartlett_sum,method="convolution")
   }
   timeseriesFrame = cbind(timeFrame, filtered_data)
-  allFiltered = xts(timeseriesFrame[2], order.by = timeseriesFrame[1])
+  colnames(timeseriesFrame) = c("Date", "Precip")
+  allFiltered = xts(timeseriesFrame$Precip, order.by = timeseriesFrame$Date)
   return(allFiltered)
 }
 
