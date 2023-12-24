@@ -7,7 +7,7 @@
 #'
 #' @usage msdStats(x, dates, fcn)
 #'
-#' @param x         TimeSeries, xts, or numeric vector
+#' @param x         Filtered xts data (from msdFilter)
 #' @param dates     Vector of Dates (from the msdDates function)
 #' @param fcn       Specify what values to be pulled from the function.
 #' Options are 'duration', 'intensity', 'firstMaxValue', 'secondMaxValue', 'min', 'mindex'.

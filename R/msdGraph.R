@@ -4,16 +4,16 @@
 #'
 #' @description The input must be in the form of daily data, with the first data point being January 1st of a respective year.
 #'
-#' @usage msdGraph(x, year, firstStartDate, firstEndDate,
-#' secondStartDate, secondEndDate, quantity,
+#' @usage msdGraph(x, year, peakwindow1, minwindow2,
+#' minwindow1, peakwindow2, quantity,
 #' window, time)
 #'
 #' @param x                 Vector or TimeSeries
 #' @param year              Year of interest
-#' @param firstStartDate    desired date in MMDD format to begin analysis (window 1)
-#' @param firstEndDate      desired date in MMDD format to end analysis (window 1)
-#' @param secondStartDate   desired date in MMDD format to begin analysis (window 2)
-#' @param secondEndDate     desired date in MMDD format to end analysis (window 2)
+#' @param peakwindow1    desired date in MMDD format to begin analysis (window 1)
+#' @param minwindow2      desired date in MMDD format to end analysis (window 1)
+#' @param minwindow1   desired date in MMDD format to begin analysis (window 2)
+#' @param peakwindow2     desired date in MMDD format to end analysis (window 2)
 #' @param quantity          Amount of times the filter is run
 #' @param window            Size of filter
 #' @param time              Vector of dates (not needed for TimeSeries inputs)
@@ -22,15 +22,15 @@
 #'
 #'
 #' @examples
-#' # graph = msdGraph(x, year, firstStartDate="05-01", firstEndDate="08-31",
-#' # secondStartDate ="06-01", secondEndDate="10-31", quantity = 2, window = 31)
+#' # graph = msdGraph(x, year, peakwindow1="05-01", minwindow2="08-31",
+#' # minwindow1 ="06-01", peakwindow2="10-31", quantity = 2, window = 31)
 #'
 #' @export
 #-----------------------------------------------------------------------------------------------------------------------------------------
-msdGraph<-function(x, year, firstStartDate="05-01", firstEndDate="06-01", secondStartDate="08-31", secondEndDate="10-31", quantity=2, window=31, time=0){
+msdGraph<-function(x, year, peakwindow1 = "05-01", minwindow1 = "06-01", minwindow2 = "08-31", peakwindow2 = "10-31", quantity=2, window=31, time=0){
 #-----------------------------------------------------------------------------------------------------------------------------------------
 #Calculate all stats for all years of the provided data, then select only the relevant year's data.
-  allStats = msdMain(x, firstStartDate, firstEndDate, secondStartDate, secondEndDate, quantity, window, time)
+  allStats = msdMain(x, peakwindow1, minwindow2, minwindow1, peakwindow2, quantity, window, time)
   yearStats = subset(allStats, Years == year)
 #-----------------------------------------------------------------------------------------------------------------------------------------
 #Assemble the base timeseries to be plotted (if the input "x" is not already a timeseries)
@@ -53,10 +53,10 @@ msdGraph<-function(x, year, firstStartDate="05-01", firstEndDate="06-01", second
   timeseriesFrame = data.frame(as.Date(tsDates), as.numeric(timeseriesPrecip))
   colnames(timeseriesFrame) = c("Date", "Precipitation")
 #Create variables for the firstStart, secondStart, firstEnd, and secondEnd MM-DD inputs in YY-MM-DD format (add year of interest)
-  startDate1 = as.Date(paste(year, firstStartDate, sep = "-"))
-  endDate1 = as.Date(paste(year, firstEndDate, sep = "-"))
-  startDate2 = as.Date(paste(year, secondStartDate, sep = "-"))
-  endDate2 = as.Date(paste(year, secondEndDate, sep = "-"))
+  startDate1 = as.Date(paste(year, peakwindow1, sep = "-"))
+  endDate1 = as.Date(paste(year, minwindow2, sep = "-"))
+  startDate2 = as.Date(paste(year, minwindow1, sep = "-"))
+  endDate2 = as.Date(paste(year, peakwindow2, sep = "-"))
 
 #-----------------------------------------------------------------------------------------------------------------------------------------
 #Assign individual variables to each important column value from the yearStats dataframe (from msdMain)
