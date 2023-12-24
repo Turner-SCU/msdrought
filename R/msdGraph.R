@@ -8,15 +8,15 @@
 #' minwindow1, peakwindow2, quantity,
 #' window, time)
 #'
-#' @param x                 Vector or TimeSeries
-#' @param year              Year of interest
-#' @param peakwindow1    desired date in MMDD format to begin analysis (window 1)
+#' @param x               Vector or TimeSeries
+#' @param year            Year of interest
+#' @param peakwindow1     desired date in MMDD format to begin analysis (window 1)
 #' @param minwindow2      desired date in MMDD format to end analysis (window 1)
-#' @param minwindow1   desired date in MMDD format to begin analysis (window 2)
+#' @param minwindow1      desired date in MMDD format to begin analysis (window 2)
 #' @param peakwindow2     desired date in MMDD format to end analysis (window 2)
-#' @param quantity          Amount of times the filter is run
-#' @param window            Size of filter
-#' @param time              Vector of dates (not needed for TimeSeries inputs)
+#' @param quantity        Amount of times the filter is run
+#' @param window          Size of filter
+#' @param time            Vector of dates (not needed for TimeSeries inputs)
 #'
 #' @return Graph of Time Series Data
 #'
