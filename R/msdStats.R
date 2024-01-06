@@ -109,7 +109,7 @@ msdStats <- function(x, dates, fcn){
       else if (fcn=="duration"){ #the different cases to choose from for 'fcn'
         output[years]<-index2-index1
       }else if (fcn=="intensity"){
-        output[years]<-((max1+max2)/2)-min
+        output[years]<-((max1+max2)/2)-min1
       }else if (fcn=="firstMaxValue"){
         output[years]<-max1
       }else if (fcn=="secondMaxValue"){
