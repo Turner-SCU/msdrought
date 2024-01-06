@@ -92,11 +92,11 @@ Now that we have the key dates and a filtered timeseries, it is time to calculat
 ```{r}
 # Use msdStats and r's built-in apply function to apply the intensity calculation across the filtered timeseries data
 # msdStats = msdStats(x, dates, fcn)
-duration <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="duration")
-intensity <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="intensity")
+durationValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="duration")
+intensityValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="intensity")
 firstMaxValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="firstMaxValue")
 secondMaxValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="secondMaxValue")
-min <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="min")
+minValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="min")
 ```
 
 After completing this step, we will have a numeric list of all the statistics values for every year of data.

@@ -54,7 +54,7 @@ Because we will be using the msdGraph function, a year value will need to be pro
 allTimes = terra::time(infile) %>%
   as.Date() %>% 
   data.frame()
-timeFrame = as.Date(c(allTime[1,1]:allTime[365,1])) %>% 
+timeFrame = as.Date(c(allTimes[1,1]:allTimes[365,1])) %>% 
   data.frame()
 # Make a Dataframe for each year
 chunkLength = 365
