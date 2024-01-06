@@ -60,7 +60,7 @@ msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDa
   checkNA = na.omit(checkNA)
   colnames(checkNA) = c("Years", "durationValue", "intensityValue", "firstMaxValue","secondMaxValue", "minValue")
 
-  origin = time[1]
+  origin = timeVector[1]
 
   countDaysFrame = data.frame(1:length(x))
   firstMaxFrame = data.frame(match(x, checkNA$firstMaxValue))
