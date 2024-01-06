@@ -6,7 +6,7 @@
 #'
 #' @usage msdGraph(x, year, peakwindow1, minwindow2,
 #' minwindow1, peakwindow2, quantity,
-#' window, time)
+#' window, timeVector)
 #'
 #' @param x               Vector or TimeSeries
 #' @param year            Year of interest
@@ -16,7 +16,7 @@
 #' @param peakwindow2     desired date in MMDD format to end analysis (window 2)
 #' @param quantity        Amount of times the filter is run
 #' @param window          Size of filter
-#' @param time            Vector of dates (not needed for TimeSeries inputs)
+#' @param timeVector      Vector of dates (not needed for TimeSeries inputs)
 #'
 #' @return Graph of Time Series Data
 #'
@@ -27,10 +27,10 @@
 #'
 #' @export
 #-----------------------------------------------------------------------------------------------------------------------------------------
-msdGraph<-function(x, year, peakwindow1 = "05-01", minwindow1 = "06-01", minwindow2 = "08-31", peakwindow2 = "10-31", quantity=2, window=31, time=0){
+msdGraph<-function(x, year, peakwindow1 = "05-01", minwindow1 = "06-01", minwindow2 = "08-31", peakwindow2 = "10-31", quantity=2, window=31, timeVector=0){
 #-----------------------------------------------------------------------------------------------------------------------------------------
 #Calculate all stats for all years of the provided data, then select only the relevant year's data.
-  allStats = msdMain(x, peakwindow1, minwindow2, minwindow1, peakwindow2, quantity, window, time)
+  allStats = msdMain(x, peakwindow1, minwindow2, minwindow1, peakwindow2, quantity, window, timeVector)
   yearStats = subset(allStats, Years == year)
 #-----------------------------------------------------------------------------------------------------------------------------------------
 #Assemble the base timeseries to be plotted (if the input "x" is not already a timeseries)
@@ -102,7 +102,7 @@ msdGraph<-function(x, year, peakwindow1 = "05-01", minwindow1 = "06-01", minwind
     geom_point(data=firstMax, mapping = aes(x=as.Date(Date),y=Precipitation), size=2, color="red")+
     geom_point(data=secondMax, mapping = aes(x=as.Date(Date),y=Precipitation), size=2, color="red")+
     geom_point(data=theMin, mapping = aes(x=as.Date(Date),y=Precipitation), size=2, color="blue")+
-    geom_vline(xintercept=pw1, color="red")+ #!!! add year to these dates
+    geom_vline(xintercept=pw1, color="red")+
     geom_vline(xintercept=mw2, color="blue")+
     geom_vline(xintercept=mw1, color="blue")+
     geom_vline(xintercept=pw2, color="red")+

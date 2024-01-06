@@ -4,7 +4,7 @@
 #'
 #' @usage msdMain(x, firstStartDate, firstEndDate,
 #' secondStartDate, secondEndDate, quantity,
-#' window, time)
+#' window, timeVector)
 #'
 #' @param x                 Vector or TimeSeries
 #' @param firstStartDate    desired date in MMDD format to begin analysis (window 1)
@@ -13,7 +13,7 @@
 #' @param secondEndDate     desired date in MMDD format to end analysis (window 2)
 #' @param quantity          Amount of times the filter is run
 #' @param window            Size of filter
-#' @param time              Vector of dates (not needed for TimeSeries inputs)
+#' @param timeVector        Vector of dates (not needed for TimeSeries inputs)
 #'
 #' @return Data frame of all relevant MSD Statistics
 #'
@@ -25,20 +25,20 @@
 #'
 #' @export
 #-------------------------------------------------------------------------------------------------------------------------------------------------
-msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDate="08-31", secondEndDate="10-31", quantity=2, window=31, time=0){
+msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDate="08-31", secondEndDate="10-31", quantity=2, window=31, timeVector=0){
 
 # msdDates
   if (inherits(x, "timeseries")) {
-  time = stats::time(x)
-  dates = msdDates(time, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
+  timeVector = stats::time(x)
+  dates = msdDates(timeVector, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
   } else if (inherits(x, "xts")) {
-  time = stats::time(x)
-  dates = msdDates(time, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
-  } else if (time == 0){
+  timeVector = stats::time(x)
+  dates = msdDates(timeVector, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
+  } else if (timeVector == 0){
       print("Error: no dates vector present")
       stop
   } else {
-    dates = msdDates(time, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
+    dates = msdDates(timeVector, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
   }
 #-------------------------------------------------------------------------------------------------------------------------------------------------
 # msdFilter
