@@ -31,7 +31,7 @@ msdGraph<-function(x, year, peakwindow1 = "05-01", minwindow1 = "06-01", minwind
 #-----------------------------------------------------------------------------------------------------------------------------------------
 #Calculate all stats for all years of the provided data, then select only the relevant year's data.
   allStats = msdMain(x, peakwindow1, minwindow2, minwindow1, peakwindow2, quantity, window, timeVector)
-  yearStats = subset(allStats, Years == year)
+  yearStats = subset(allStats, years == year)
 #-----------------------------------------------------------------------------------------------------------------------------------------
 #Assemble the base timeseries to be plotted (if the input "x" is not already a timeseries)
   if (inherits(x, "timeseries")) {
