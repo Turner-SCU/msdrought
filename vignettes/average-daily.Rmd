@@ -51,10 +51,10 @@ Because we will be using the msdGraph function, a year value will need to be pro
 
 ```{r}
 # Set up dates (time) data for ONE year (365 days)
-time = terra::time(infile) %>%
+allTimes = terra::time(infile) %>%
   as.Date() %>% 
   data.frame()
-timeFrame = as.Date(c(time[1,1]:time[365,1])) %>% 
+timeFrame = as.Date(c(allTime[1,1]:allTime[365,1])) %>% 
   data.frame()
 # Make a Dataframe for each year
 chunkLength = 365
@@ -89,7 +89,7 @@ duration <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="duratio
 intensity <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="intensity")
 firstMaxValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="firstMaxValue")
 secondMaxValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="secondMaxValue")
-min <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="min")
+minValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="min")
 allStats = msdMain(x)
 graph1981 = msdGraph(x, 1981)
 plot(graph1981)

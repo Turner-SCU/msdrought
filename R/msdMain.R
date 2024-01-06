@@ -45,8 +45,8 @@ msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDa
     x = apply(x, MARGIN = 2, FUN = msdFilter, window = window, quantity = quantity)
 #-------------------------------------------------------------------------------------------------------------------------------------------------
 # msdStats
-  duration <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="duration")
-  intensity <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="intensity")
+  durationValue <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="duration")
+  intensityValue <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="intensity")
   firstMaxValue <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="firstMaxValue")
   secondMaxValue <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="secondMaxValue")
   minValue <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="min")
@@ -56,9 +56,9 @@ msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDa
   nyears = round(length(x)/365) - 1
   years = seq(from = year1, to = year1+nyears, by = 1)
   yearsFrame = data.frame(years)
-  checkNA = cbind(yearsFrame, duration, intensity, firstMaxValue, secondMaxValue, minValue)
+  checkNA = cbind(yearsFrame, durationValue, intensityValue, firstMaxValue, secondMaxValue, minValue)
   checkNA = na.omit(checkNA)
-  colnames(checkNA) = c("Years", "Duration", "Intensity", "firstMaxValue","secondMaxValue", "minValue")
+  colnames(checkNA) = c("Years", "durationValue", "intensityValue", "firstMaxValue","secondMaxValue", "minValue")
 
   origin = time[1]
 
@@ -78,9 +78,9 @@ msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDa
     na.omit()
   minDate = as.character(origin + lubridate::days(minFinal$X1.length.x.))
 
-  combined = cbind(checkNA$Years, checkNA$Duration, checkNA$Intensity, checkNA$firstMaxValue, firstMaxDate, checkNA$secondMaxValue, secondMaxDate, checkNA$minValue, minDate)
+  combined = cbind(checkNA$Years, checkNA$durationValue, checkNA$intensityValue, checkNA$firstMaxValue, firstMaxDate, checkNA$secondMaxValue, secondMaxDate, checkNA$minValue, minDate)
   output = data.frame(combined)
-  colnames(output) = c("Years", "Duration", "Intensity", "firstMaxValue", "firstMaxDate", "secondMaxValue", "secondMaxDate", "minValue", "minDate")
+  colnames(output) = c("years", "durationValue", "intensityValue", "firstMaxValue", "firstMaxDate", "secondMaxValue", "secondMaxDate", "minValue", "minDate")
 
   return(output)
 }
