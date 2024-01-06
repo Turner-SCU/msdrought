@@ -52,7 +52,7 @@ msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDa
   minValue <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="min")
 #-------------------------------------------------------------------------------------------------------------------------------------------------
 # prepare output
-  year1 = lubridate::year(time[1]) #find the first date of the provided date vector, x
+  year1 = lubridate::year(timeVector[1]) #find the first date of the provided date vector, x
   nyears = round(length(x)/365) - 1
   years = seq(from = year1, to = year1+nyears, by = 1)
   yearsFrame = data.frame(years)
