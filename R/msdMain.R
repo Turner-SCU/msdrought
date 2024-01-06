@@ -49,16 +49,16 @@ msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDa
   intensity <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="intensity")
   firstMaxValue <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="firstMaxValue")
   secondMaxValue <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="secondMaxValue")
-  min <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="min")
+  minValue <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="min")
 #-------------------------------------------------------------------------------------------------------------------------------------------------
 # prepare output
   year1 = lubridate::year(time[1]) #find the first date of the provided date vector, x
-  length = round(length(x)/365) - 1
-  years = seq(from = year1, to = year1+length, by = 1)
+  nyears = round(length(x)/365) - 1
+  years = seq(from = year1, to = year1+nyears, by = 1)
   yearsFrame = data.frame(years)
-  checkNA = cbind(yearsFrame, duration, intensity, firstMaxValue, secondMaxValue, min)
+  checkNA = cbind(yearsFrame, duration, intensity, firstMaxValue, secondMaxValue, minValue)
   checkNA = na.omit(checkNA)
-  colnames(checkNA) = c("Years", "Duration", "Intensity", "firstMaxValue","secondMaxValue", "min")
+  colnames(checkNA) = c("Years", "Duration", "Intensity", "firstMaxValue","secondMaxValue", "minValue")
 
   origin = time[1]
 
@@ -73,14 +73,14 @@ msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDa
     na.omit()
   secondMaxDate = as.character(origin + lubridate::days(secondMaxFinal$X1.length.x.))
 
-  minFrame = data.frame(match(x,checkNA$min))
+  minFrame = data.frame(match(x,checkNA$minValue))
   minFinal = cbind(countDaysFrame, minFrame) %>%
     na.omit()
   minDate = as.character(origin + lubridate::days(minFinal$X1.length.x.))
 
-  combined = cbind(checkNA$Years, checkNA$Duration, checkNA$Intensity, checkNA$firstMaxValue, firstMaxDate, checkNA$secondMaxValue, secondMaxDate, checkNA$min, minDate)
+  combined = cbind(checkNA$Years, checkNA$Duration, checkNA$Intensity, checkNA$firstMaxValue, firstMaxDate, checkNA$secondMaxValue, secondMaxDate, checkNA$minValue, minDate)
   output = data.frame(combined)
-  colnames(output) = c("Years", "Duration", "Intensity", "firstMaxValue", "firstMaxDate", "secondMaxValue", "secondMaxDate", "min", "minDate")
+  colnames(output) = c("Years", "Duration", "Intensity", "firstMaxValue", "firstMaxDate", "secondMaxValue", "secondMaxDate", "minValue", "minDate")
 
   return(output)
 }
