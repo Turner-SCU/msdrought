@@ -53,7 +53,8 @@ msdStats <- function(x, dates, fcn){
   }
   yearDates = yearDates[ -c(1)]
   #-----------------------------------------------------------------------------------------------------------------------------------------
-  for (years in 1:(floor(nrow(x)/365))){ #running for every year
+  nyears = round(nrow(x)/365)
+  for (years in 1:nyears){ #running for every year
     date1<-criticalDates[4*years-2] #the next six lines just pull the proper indices
     date2<-criticalDates[4*years-1]
     date3<-criticalDates[4*years-3]
