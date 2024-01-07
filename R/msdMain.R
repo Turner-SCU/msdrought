@@ -28,13 +28,13 @@
 msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDate="08-31", secondEndDate="10-31", quantity=2, window=31, timeVector=0){
 
 # msdDates
-  if (inherits(x, "timeseries")) {
+  if (inherits(x, "timeseries") == TRUE) {
   timeVector = stats::time(x)
   dates = msdDates(timeVector, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
-  } else if (inherits(x, "xts")) {
+  } else if (inherits(x, "xts") == TRUE) {
   timeVector = stats::time(x)
   dates = msdDates(timeVector, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
-  } else if (inherits(x, "SpatRaster")) {
+  } else if (inherits(x, "SpatRaster") == TRUE) {
     timeVector = terra::time(x)
     dates = msdDates(timeVector, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
   } else if (timeVector == 0){
