@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 library(MSD)
 ```
 
-In general, the MSD Package works best when the data from a specific point in a raster is pulled, converted into an xts object, and then analyzed. This vignette will show an alternative approach, when an entire raster is analyzed for its duration and intensity values, then a single specific point and its corresponding data is extracted to a vector. The process for both duration and intensity (as well as any other given parameter for the msdStats function) is identical, so only one process will be explained.
+In general, the MSD Package works best when the data from a specific point in a raster is pulled, converted into an xts object, and then analyzed. This vignette will show an alternative approach, when an entire raster is analyzed for its duration and intensity values, then a single specific point and its corresponding data is extracted to a vector. The process for both duration and intensity (as well as any other given parameter for the msdStats function) is identical.
 
 ```{r}
 # Load the necessary packages and the included data, for the purpose of demonstration
