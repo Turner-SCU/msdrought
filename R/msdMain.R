@@ -31,12 +31,15 @@ msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDa
   if (inherits(x, "timeseries") == TRUE) {
   timeVector = stats::time(x)
   dates = msdDates(timeVector, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
+  break
   } else if (inherits(x, "xts") == TRUE) {
   timeVector = stats::time(x)
   dates = msdDates(timeVector, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
+  break
   } else if (inherits(x, "SpatRaster") == TRUE) {
     timeVector = terra::time(x)
     dates = msdDates(timeVector, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
+    break
   } else if (timeVector == 0){
       print("Error: no dates vector present")
       stop
