@@ -44,6 +44,5 @@ sSD = "06-01" #secondStartDate
 sED = "10-31" #secondEndDate
 w = 31 #window
 q = 2 #quantity
-# WORK IN PROGRESS
-#allStatsRaster <- terra::app(x = infile, msdMain, fSD, fED, sSD, sED, w, q)
+allStatsRaster <- terra::app(x = infile, msdMain, fSD, fED, sSD, sED, w, q)
 ```
