@@ -47,4 +47,3 @@ q = 2 #quantity
 # WORK IN PROGRESS
 #allStatsRaster <- terra::app(x = infile, msdMain, fSD, fED, sSD, sED, w, q)
 ```
-
