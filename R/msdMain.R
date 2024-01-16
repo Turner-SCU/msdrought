@@ -13,7 +13,6 @@
 #' @param secondEndDate     desired date in MMDD format to end analysis (window 2)
 #' @param quantity          Amount of times the filter is run
 #' @param window            Size of filter
-#' @param givenTimeVector        Vector of dates (not needed for TimeSeries or SpatRaster inputs)
 #'
 #' @return Data frame of all relevant MSD Statistics
 #'
@@ -25,41 +24,60 @@
 #'
 #' @export
 #-------------------------------------------------------------------------------------------------------------------------------------------------
-msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDate="08-31", secondEndDate="10-31", quantity=2, window=31, givenTimeVector=0){
+msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDate="08-31", secondEndDate="10-31", quantity=2, window=31){
 
 # msdDates
   if (inherits(x, "timeseries") == TRUE) {
-  timeVector = stats::time(x)
-  dates = msdDates(timeVector, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
-  } else if (inherits(x, "xts") == TRUE) {
-  timeVector = stats::time(x)
-  dates = msdDates(timeVector, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
-  } else if (inherits(x, "SpatRaster") == TRUE) {
-    timeVector = terra::time(x)
+    timeVector = stats::time(x)
     dates = msdDates(timeVector, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
-  } else if (givenTimeVector == 0){
-      print("Error: no dates vector present")
+    ID = "ts"
+  } else if (inherits(x, "xts") == TRUE) {
+      timeVector = stats::time(x)
+      dates = msdDates(timeVector, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
+      ID = "ts"
+  } else if (inherits(x, "SpatRaster") == TRUE) {
+      timeVector = terra::time(x)
+      dates = msdDates(timeVector, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
+      ID = "sr"
+  } else (givenTimeVector == 0){
+      print("Error: format not recognized. Please see Vignettes for manual application")
       stop
-  } else {
-    dates = msdDates(givenTimeVector, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
   }
 #-------------------------------------------------------------------------------------------------------------------------------------------------
 # msdFilter
+  if ((ID == "ts") == TRUE) {
     x = apply(x, MARGIN = 2, FUN = msdFilter, window = window, quantity = quantity)
+  } else if ((ID == "sr") == TRUE) {
+    x = terra::app(x, msdFilter, window = window, quantity = quantity)
+  } else{
+    print("Error: format not recognized. Please see Vignettes for manual application")
+  }
 #-------------------------------------------------------------------------------------------------------------------------------------------------
 # msdStats
-  durationValue <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="duration")
-  intensityValue <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="intensity")
-  firstMaxValue <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="firstMaxValue")
-  secondMaxValue <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="secondMaxValue")
-  minValue <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="min")
+  if ((ID == "ts") == TRUE) {
+    durationValue <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="duration")
+    intensityValue <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="intensity")
+    firstMaxValue <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="firstMaxValue")
+    secondMaxValue <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="secondMaxValue")
+    minValue <- apply(x, MARGIN = 2, FUN = msdStats, dates, fcn="min")
+  } else if ((ID == "sr") == TRUE) {
+    durationValue = terra::app(x, msdStats, dates = dates, fcn="duration")
+    intensityValue = terra::app(x, msdStats, dates = dates, fcn="intensity")
+    firstMaxValue = terra::app(x, msdStats, dates = dates, fcn="firstMaxValue")
+    secondMaxValue = terra::app(x, msdStats, dates = dates, fcn="secondMaxValue")
+    minValue = terra::app(x, msdStats, dates = dates, fcn="min")
+
+  } else{
+    print("Error: format not recognized. Please see Vignettes for manual application")
+  }
+
 #-------------------------------------------------------------------------------------------------------------------------------------------------
 # prepare output
-  year1 = lubridate::year(timeVector[1]) #find the first date of the provided date vector, x
-  nyears = floor(length(x)/365) - 1
-  years = seq(from = year1, to = year1+nyears, by = 1)
+  firstYear = lubridate::year(timeVector[1]) #find the first date of the provided date vector, x
+  finalYear = lubridate::year(timeVector[length(timeVector)]) #find the final date of the provided date vector
+  years = seq(from = firstYear, to = finalYear, by = 1)
   yearsFrame = data.frame(years)
-  checkNA = cbind(yearsFrame, durationValue, intensityValue, firstMaxValue, secondMaxValue, minValue)
+  checkNA = cbind(yearsFrame, durationValue, intensityValue, firstMaxValue, secondMaxValue, minValue) #!!! Something needs to give here
   checkNA = na.omit(checkNA)
   colnames(checkNA) = c("Years", "durationValue", "intensityValue", "firstMaxValue","secondMaxValue", "minValue")
 
