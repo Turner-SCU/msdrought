@@ -13,7 +13,7 @@
 #' @param secondEndDate     desired date in MMDD format to end analysis (window 2)
 #' @param quantity          Amount of times the filter is run
 #' @param window            Size of filter
-#' @param timeVector        Vector of dates (not needed for TimeSeries inputs)
+#' @param givenTimeVector        Vector of dates (not needed for TimeSeries or SpatRaster inputs)
 #'
 #' @return Data frame of all relevant MSD Statistics
 #'
@@ -25,7 +25,7 @@
 #'
 #' @export
 #-------------------------------------------------------------------------------------------------------------------------------------------------
-msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDate="08-31", secondEndDate="10-31", quantity=2, window=31, timeVector=0){
+msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDate="08-31", secondEndDate="10-31", quantity=2, window=31, givenTimeVector=0){
 
 # msdDates
   if (inherits(x, "timeseries") == TRUE) {
@@ -37,11 +37,11 @@ msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDa
   } else if (inherits(x, "SpatRaster") == TRUE) {
     timeVector = terra::time(x)
     dates = msdDates(timeVector, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
-  } else if (timeVector == 0){
+  } else if (givenTimeVector == 0){
       print("Error: no dates vector present")
       stop
   } else {
-    dates = msdDates(timeVector, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
+    dates = msdDates(givenTimeVector, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
   }
 #-------------------------------------------------------------------------------------------------------------------------------------------------
 # msdFilter
