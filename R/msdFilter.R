@@ -30,7 +30,7 @@ msdFilter <- function(x, window = 31, quantity = 2) {
   bartlett_sum <- sum(bartlett_window)
 
   #apply filter weighted on the average and divided by the sum of the bartlett window to smooth out the data
-  filtered_data <- as.vector(x) # coerce to vector if it is a timeseries
+  filtered_data <- c(x) # coerce to vector if it is a timeseries
   for (i in 1:quantity) {
     filtered_data <- stats::filter(filtered_data,bartlett_window/bartlett_sum,method="convolution")
   }
