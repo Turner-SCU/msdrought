@@ -102,7 +102,7 @@ finalPlot = ggplot(data = combinedPlotData, mapping = aes(x=Date,y=Precip))+
   ylab("Precipitation (mm/day)")+
   theme_bw()+
   annotate("rect", xmin=combinedPlotData[1,1], xmax=combinedPlotData[nrow(combinedPlotData),1], ymin=0, ymax=(max(combinedPlotData$Precip, na.rm=TRUE)+2), fill="white", alpha=0.5)
-#WIP: fill needs to be changed, also needs to have the lines and dots
+#!! WIP: fill needs to be changed, also needs to have the lines and dots
 ```
 
 Now we can view the MSD data for all the years of rainfall data we have. If you only want to see a certain range of data, simply replace startYear and endYear with the years you're interested in.
