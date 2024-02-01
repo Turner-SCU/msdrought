@@ -66,8 +66,8 @@ msdStats <- function(x, dates, fcn){
     #checking for min valley between the outer dates
     min2<-min(data[valleys[date3<= valleys & valleys<=date4]],na.rm=TRUE)
 
-    mindate <- which.min(data[valleys[date1<=valleys & valleys<=date2]],na.rm=TRUE) #finding the index of min1
-    mindate2 <- which.min(data[valleys[date3<= valleys & valleys<=date4]],na.rm=TRUE) #finding the index of min2
+    mindate <- which.min(data[valleys[date1<=valleys & valleys<=date2]]) #finding the index of min1
+    mindate2 <- which.min(data[valleys[date3<= valleys & valleys<=date4]]) #finding the index of min2
     check1<-mindate==mindate2 #making sure that the index does overlap
     if (is.na(mindate)==TRUE){ #making sure we have a minimum, otherwise an NA is output
       output[years]<-NA
