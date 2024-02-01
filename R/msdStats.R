@@ -66,23 +66,23 @@ msdStats <- function(x, dates, fcn){
     #checking for min valley between the outer dates
     min2<-min(data[valleys[date3<= valleys & valleys<=date4]],na.rm=TRUE)
 
-    mindate<-match(min1, data) #finding the index of min  #!! USE WHICH.MIN/WHICH.MAX
-    mindate2<-match(min2, data) #finding the index of min2  #!! USE WHICH.MIN/WHICH.MAX
+    mindate<-which.max(data == min1) #finding the index of min  #!! USE WHICH.MIN/WHICH.MAX
+    mindate2<-which.max(data == min1) #finding the index of min2  #!! USE WHICH.MIN/WHICH.MAX
     check1<-mindate==mindate2 #making sure that the index does overlap
     if (is.na(mindate)==TRUE){ #making sure we have a minimum, otherwise an NA is output
       output[years]<-NA
     }else{
       dates<-c(peaks[date3<=peaks & peaks<=date4], mindate) #finding all the peaks between the outer dates
       dates<-sort(dates) #sorting them in order with the mindate
-      mindex<-match(mindate,dates) #finding the index of the mindate
+      mindex<-which.max(dates == mindate) #finding the index of the mindate
       maxdex1<-dates[1:(mindex-1)] #the next few lines find the max before the minimum and after
       maxdex2<-dates[(mindex+1):length(dates)]
       maxpos1<-data[maxdex1]
       maxpos2<-data[maxdex2]
       max1<-max(maxpos1,na.rm=TRUE)
       max2<-max(maxpos2,na.rm=TRUE)
-      pos1<-match(max1,maxpos1)
-      pos2<-match(max2,maxpos2)
+      pos1<-which.max(maxpos1 == max1)
+      pos2<-which.max(maxpos2 == max2)
       index1<-maxdex1[pos1]
       index2<-maxdex2[pos2]
       maxcheck1<-max(data[date5:mindate],na.rm=TRUE) #making sure that the max is the real between january and mindex
