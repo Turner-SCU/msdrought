@@ -49,9 +49,7 @@ filtered <- terra::app(infile, msdFilter, window=31, quantity=2)
 
 # Use the terra::app function to apply the bartlett noise filter (msdFilter) to the raster
 # msdStats = msdStats(x, dates, fcn)
-suppressWarnings({
 intensity <- terra::app(filtered, msdStats, dates, fcn="intensity")
-})
 ```
 
 From this, we have achieved our goal of finding all the intensity values for every cell of the raster data set. This data can be viewed via the terra::plot function.
