@@ -69,7 +69,7 @@ msdStats <- function(x, dates, fcn){
     mindate<-which.max(data == min1) #finding the index of min  #!! USE WHICH.MIN/WHICH.MAX
     mindate2<-which.max(data == min2) #finding the index of min2  #!! USE WHICH.MIN/WHICH.MAX
     check1<-mindate==mindate2 #making sure that the index does overlap
-    if (is.na(mindate)==TRUE){ #making sure we have a minimum, otherwise an NA is output #!!ERROR: argument is of length zero
+    if (anyNA(mindate)==TRUE){ #making sure we have a minimum, otherwise an NA is output #!!ERROR: argument is of length zero
       output[years]<-NA
     }else{
       dates<-c(peaks[date3<=peaks & peaks<=date4], mindate) #finding all the peaks between the outer dates
@@ -91,15 +91,15 @@ msdStats <- function(x, dates, fcn){
       maxval2<-max2==maxcheck2
       max1<-max1*maxval1
       max2<-max2*maxval2
-      if (is.na(check1)==TRUE){ #making sure that the minimum is the minimum
+      if (anyNA(check1)==TRUE){ #making sure that the minimum is the minimum
         output[years]<-NA
       }else if (length(max1)==0){#the next couple ensure that we have values to pull from
         output[years]<-NA
       }else if (length(max2)==0){
         output[years]<-NA
-      }else if (is.na(max1)==TRUE){
+      }else if (anyNA(max1)==TRUE){
         output[years]<-NA
-      }else if (is.na(max2)==TRUE){
+      }else if (anyNA(max2)==TRUE){
         output[years]<-NA
       }else if (max1==0){
         output[years]<-NA
