@@ -30,7 +30,7 @@ msdStats <- function(x, dates, fcn){
     stop("fcn must be one of duration, intensity, firstMaxValue, secondMaxValue, min, mindex")
   }
   #-----------------------------------------------------------------------------------------------------------------------------------------
-  data<-c(as.numeric(x)) #making sure the data is numeric
+  data<-as.numeric(x) #making sure the data is numeric
   peaks<-quantmod::findPeaks(data)-1 #finding all of the peaks of the data
   valleys<-quantmod::findValleys(data)-1 #finding all of the valleys of the data
   output<-c(0) #creating a new variable
