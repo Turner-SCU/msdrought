@@ -9,15 +9,15 @@
 #'
 #' @usage msdFilter(x, window = 31, quantity = 2)
 #'
-#' @param x           RasterBrick or TimeSeries
+#' @param x           TimeSeries or numeric vector
 #' @param window      Size of Filter [Default = 31]
 #' @param quantity    Number of passes to apply filter [Default = 2]
 #'
-#' @return RasterBrick or TimeSeries of Yearly data
+#' @return Vector of Yearly data
 #'
 #'
 #' @examples
-#' # using Spatrast or a Time Series
+#' # using a Time Series
 #' #r<-msdFilter(x, window = 31)
 #'
 #' @export
@@ -28,11 +28,12 @@ msdFilter <- function(x, window = 31, quantity = 2) {
   bartlett_window <- c(signal::bartlett(window))
   #creates a sum of the bartlett window to construct an average
   bartlett_sum <- sum(bartlett_window)
+  weights <- bartlett_window/bartlett_sum
 
   #apply filter weighted on the average and divided by the sum of the bartlett window to smooth out the data
   filtered_data <- as.vector(x) # coerce to vector if it is a timeseries
   for (i in 1:quantity) {
-    filtered_data <- stats::filter(filtered_data,bartlett_window/bartlett_sum,method="convolution")
+    filtered_data <- stats::filter(filtered_data, weights, method="convolution", circular = TRUE)
   }
-  return(filtered_data)
+  return(as.vector(filtered_data))
 }
