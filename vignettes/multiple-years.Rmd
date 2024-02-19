@@ -23,7 +23,6 @@ The basic function of the MSD package is to create a timeseries plot of smoothed
 Begin by loading in your data, either in the form of a raster or an xtimeseries.
 
 ```{r}
-library(MSD)
 library(terra)
 library(tidyr)
 library(lubridate)
@@ -77,31 +76,31 @@ plot(x)
 As you can see, this data set has data for 1981, 1982, 1983, 1984, and 1985. In general, the MSD package can analyze one of these years at a time. In order to analyze multiple years at once, we'll need to create loops, extract the data from each individual (single-year) graph, then create a new plot with all the data together.
 
 ```{r}
-combinedPlots = NULL
-firstYear = lubridate::year(startDate)
-lastYear = lubridate::year(endDate)
-for (i in firstYear:lastYear) {
-  onePlot = msdGraph(x, i)
-  plotData = ggplot_build(onePlot)$plot$data
-  plotColor = ggplot_build(onePlot)$plot$plot_env$color1
-  allPlot = data.frame(plotData, plotColor)
-  combinedPlots = rbind(combinedPlots, allPlot)
-}
-colnames(combinedPlots) = c("Date", "Precip", "Color")
-combinedPlotData = data.frame(as.Date(combinedPlots$Date), as.numeric(combinedPlots$Precip))
-colnames(combinedPlotData) = c("Date", "Precip")
+#combinedPlots = NULL
+#firstYear = lubridate::year(startDate)
+#lastYear = lubridate::year(endDate)
+#for (i in firstYear:lastYear) {
+  #onePlot = msdGraph(x, i)
+  #plotData = ggplot_build(onePlot)$plot$data
+  #plotColor = ggplot_build(onePlot)$plot$plot_env$color1
+  #allPlot = data.frame(plotData, plotColor)
+  #combinedPlots = rbind(combinedPlots, allPlot)
+#}
+#colnames(combinedPlots) = c("Date", "Precip", "Color")
+#combinedPlotData = data.frame(as.Date(combinedPlots$Date), as.numeric(combinedPlots$Precip))
+#colnames(combinedPlotData) = c("Date", "Precip")
 
 ```
 
 Now let's use ggplot to create a new combined graph
 
 ```{r}
-finalPlot = ggplot(data = combinedPlotData, mapping = aes(x=Date,y=Precip))+
-  geom_line(data=combinedPlotData[1:nrow(combinedPlotData),])+
-  xlab("")+
-  ylab("Precipitation (mm/day)")+
-  theme_bw()+
-  annotate("rect", xmin=combinedPlotData[1,1], xmax=combinedPlotData[nrow(combinedPlotData),1], ymin=0, ymax=(max(combinedPlotData$Precip, na.rm=TRUE)+2), fill="white", alpha=0.5)
+#finalPlot = ggplot(data = combinedPlotData, mapping = aes(x=Date,y=Precip))+
+  #geom_line(data=combinedPlotData[1:nrow(combinedPlotData),])+
+  #xlab("")+
+  #ylab("Precipitation (mm/day)")+
+  #theme_bw()+
+  #annotate("rect", xmin=combinedPlotData[1,1], xmax=combinedPlotData[nrow(combinedPlotData),1], #ymin=0, ymax=(max(combinedPlotData$Precip, na.rm=TRUE)+2), fill="white", alpha=0.5)
 #!! WIP: fill needs to be changed, also needs to have the lines and dots
 ```
 
