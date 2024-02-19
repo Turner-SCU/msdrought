@@ -20,15 +20,15 @@ library(MSD)
 
 The purpose of the MSD package is to take the input of a series of rainfall data and to extract some key information (such as dates, rainfall intensity, duration of a rainfall period, and more) to characterize the Mid-Summer Drought climatic phenomenon present in Central America. This vignette will walk you through the process of taking a raster input and extracting a the statistics for each cell of the raster using the terra package.
 
-```{r}
-library(MSD)
+```{r, warning=FALSE}
 library(terra)
 library(tidyr)
 library(lubridate)
 library(stringr)
 library(ggplot2)
 library(xts)
-data = system.file("data", "prcp_cropped.tif", package="MSD") #This loads the data included in the package, but you would attach your own
+data = system.file("extdata", "prcp_cropped.tif", package="MSD")
+#data = system.file("data", "prcp_cropped.tif", package="MSD") #This loads the data included in the package, but you would attach your own
 infile = terra::rast(data)
 ```
 
@@ -36,7 +36,7 @@ Now we have our raster data loaded in as "infile". Using the terra::app command,
 
 Begin by finding the range of dates for the raster data, as these values are needed for the package to understand the statistics. Data processing begins by filtering the data using a bartlett noise filter, then apply the msdStats function to the data.
 
-```{r}
+```{r, warning=FALSE}
 # Find the key dates related to the MSD
 # msdDates = msdDates(x, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
 allDates = terra::time(infile)
@@ -46,10 +46,17 @@ dates = msdDates(formattedDates)
 # Use the terra::app function to apply the bartlett noise filter (msdFilter) to the raster
 # msdFilter = msdFilter(x, window)
 filtered <- terra::app(infile, msdFilter, window=31, quantity=2)
+terra::time(filtered) <- terra::time(infile)
+plot(filtered[[1:6]])
+```
 
+```{r, warning=FALSE}
 # Use the terra::app function to apply the bartlett noise filter (msdFilter) to the raster
 # msdStats = msdStats(x, dates, fcn)
 intensity <- terra::app(filtered, msdStats, dates, fcn="intensity")
+year1 <- as.numeric(format.Date(formattedDates[1],"%Y"))
+year2 <- as.numeric(format.Date(formattedDates[length(formattedDates)],"%Y"))
+terra::time(intensity, tstep="years") <-  year1:year2
 ```
 
 From this, we have achieved our goal of finding all the intensity values for every cell of the raster data set. This data can be viewed via the terra::plot function.
