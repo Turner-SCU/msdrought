@@ -57,7 +57,6 @@ msdGraph<-function(x, year, peakwindow1 = "05-01", minwindow1 = "06-01", minwind
   mw2 = as.Date(paste(year, minwindow2, sep = "-"))
   mw1 = as.Date(paste(year, minwindow1, sep = "-"))
   pw2 = as.Date(paste(year, peakwindow2, sep = "-"))
-
 #-----------------------------------------------------------------------------------------------------------------------------------------
 #Assign individual variables to each important column value from the yearStats dataframe (from msdMain)
   durationVal = as.numeric(yearStats[2])

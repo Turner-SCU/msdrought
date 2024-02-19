@@ -64,9 +64,6 @@ msdStats  <-  function(x, dates, fcn){
     min1 <- min(data[valleys[date1<=valleys & valleys<=date2]],na.rm=TRUE)
     #checking for min valley between the outer dates
     min2 <- min(data[valleys[date3<= valleys & valleys<=date4]],na.rm=TRUE)
-
-#    mindate <- which.max(data == min1) #finding the index of min  #!! USE WHICH.MIN/WHICH.MAX
-#    mindate2 <- which.max(data == min2) #finding the index of min2  #!! USE WHICH.MIN/WHICH.MAX
     mindex <- which.min(data[valleys[date1<=valleys & valleys<=date2]])
     mindate <- valleys[date1<=valleys & valleys<=date2][mindex]
     mindex2 <- which.min(data[valleys[date3<= valleys & valleys<=date4]])
@@ -103,7 +100,7 @@ msdStats  <-  function(x, dates, fcn){
       }else if (anyNA(max1)==TRUE){
         output[years] <- NA
       }else if (anyNA(max2)==TRUE){
-        output[years] <- NA
+        output[years] <- NA #!! This is the case for 1981, what should happen here?
       }else if (max1==0){
         output[years] <- NA
       }else if (max2==0){

@@ -60,25 +60,21 @@ msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDa
   years = seq(from = year1, to = year1+nyears, by = 1)
   yearsFrame = data.frame(years)
   checkNA = cbind(yearsFrame, durationValue, intensityValue, firstMaxValue, secondMaxValue, minValue)
-  checkNA = na.omit(checkNA)
   colnames(checkNA) = c("Years", "durationValue", "intensityValue", "firstMaxValue","secondMaxValue", "minValue")
 
   origin = timeVector[1]
 
   countDaysFrame = data.frame(1:length(x))
   firstMaxFrame = data.frame(match(x, checkNA$firstMaxValue))
-  firstMaxFinal = cbind(countDaysFrame, firstMaxFrame) %>%
-    na.omit()
+  firstMaxFinal = cbind(countDaysFrame, firstMaxFrame)
   firstMaxDate = as.character(origin + lubridate::days(firstMaxFinal$X1.length.x.))
 
   secondMaxFrame = data.frame(match(x, checkNA$secondMaxValue))
-  secondMaxFinal = cbind(countDaysFrame, secondMaxFrame) %>%
-    na.omit()
+  secondMaxFinal = cbind(countDaysFrame, secondMaxFrame)
   secondMaxDate = as.character(origin + lubridate::days(secondMaxFinal$X1.length.x.))
 
   minFrame = data.frame(match(x,checkNA$minValue))
-  minFinal = cbind(countDaysFrame, minFrame) %>%
-    na.omit()
+  minFinal = cbind(countDaysFrame, minFrame)
   minDate = as.character(origin + lubridate::days(minFinal$X1.length.x.))
 
   combined = cbind(checkNA$Years, checkNA$durationValue, checkNA$intensityValue, checkNA$firstMaxValue, firstMaxDate, checkNA$secondMaxValue, secondMaxDate, checkNA$minValue, minDate)
