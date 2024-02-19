@@ -25,7 +25,6 @@ The purpose of the MSD package is to take the input of a series of rainfall data
 We will begin by loading in the relevant packages and the raster data we plan to use. In order to get this data to function with the MSD package's functions, we'll need to extract a single point of spatial data in the form of a timeseries. This will be done using the "terra" package. The "tidyr" package will be useful for streamlining the code. If the data you plan to analyze is in the form of an xtimeseries (xts), you only need to load the package and proceed to the next step.
 
 ```{r}
-library(MSD)
 library(terra)
 library(tidyr)
 library(lubridate)

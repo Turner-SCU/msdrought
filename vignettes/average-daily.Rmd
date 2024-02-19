@@ -23,7 +23,6 @@ The MSD package is designed to analyze one year of data at a time. For the AGU '
 The first step is to extract the relevant data from a SpatRaster.
 
 ```{r}
-library(MSD)
 library(terra)
 library(tidyr)
 library(lubridate)

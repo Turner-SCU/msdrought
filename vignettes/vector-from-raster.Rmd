@@ -22,7 +22,6 @@ In general, the MSD Package works best when the data from a specific point in a 
 
 ```{r}
 # Load the necessary packages and the included data, for the purpose of demonstration
-library(MSD)
 library(terra)
 library(tidyr)
 library(lubridate)
