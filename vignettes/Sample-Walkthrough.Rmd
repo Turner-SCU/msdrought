@@ -2,7 +2,7 @@
 title: "Sample-Walkthrough"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Sample-Statistics}
+  %\VignetteIndexEntry{Sample-Walkthrough}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
