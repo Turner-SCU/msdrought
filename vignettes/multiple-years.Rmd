@@ -109,5 +109,6 @@ Now we can view the MSD data for all the years of rainfall data we have. If you 
 Let's view our combined plot!
 
 ```{r fig.height=5, fig.width=5}
-plot(finalPlot)
+#plot(finalPlot)
+#!! WIP
 ```
