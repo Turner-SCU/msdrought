@@ -29,10 +29,6 @@
 #-----------------------------------------------------------------------------------------------------------------------------------------
 msdGraph<-function(x, year, peakwindow1 = "05-01", minwindow1 = "06-01", minwindow2 = "08-31", peakwindow2 = "10-31", quantity=2, window=31, timeVector=0){
 #-----------------------------------------------------------------------------------------------------------------------------------------
-#Calculate all stats for all years of the provided data, then select only the relevant year's data.
-  allStats = msdMain(x, peakwindow1, minwindow2, minwindow1, peakwindow2, quantity, window, timeVector)
-  yearStats = subset(allStats, years == year)
-#-----------------------------------------------------------------------------------------------------------------------------------------
 #Assemble the base timeseries to be plotted (if the input "x" is not already a timeseries)
   if (inherits(x, "timeseries")) {
     timeseriesFull = x
@@ -42,6 +38,9 @@ msdGraph<-function(x, year, peakwindow1 = "05-01", minwindow1 = "06-01", minwind
     datesSeq = NULL #!!!
     timeseriesFull = xts(x, datesSeq)
   }
+#Calculate all stats for all years of the provided data, then select only the relevant year's data.
+  allStats = msdMain(x, peakwindow1, minwindow2, minwindow1, peakwindow2, quantity, window, timeVector)
+  yearStats = subset(allStats, years == year)
 #Subset the timeseries to only be the year (365 days) of interest
   allDates = seq(from = as.Date(time(timeseriesFull[1])), to = as.Date(time(timeseriesFull[length(timeseriesFull)])), by = 1)
   yearsOnly = format(allDates, "%Y")
