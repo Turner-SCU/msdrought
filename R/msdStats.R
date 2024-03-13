@@ -1,7 +1,6 @@
 #' @title Main Mid Summer Drought Calculation Function
 #'
 #' @description This function calculates the different statistics of the mid summer drought from a Time Series.
-#'
 #' The input must be in the form of daily data, with the first data point being January 1st of a respective year.
 #'
 #' @usage msdStats(x, dates, fcn)

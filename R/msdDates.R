@@ -1,8 +1,9 @@
 #' @title Finding indices for Dates Relevant to the MSD Calculations
 #'
-#' @description This function pulls the indices associated with dates that correspond
-#' with the Mid Summer Drought, and is used in conjunction with the MSD function.
-#' It also pulls the first and last day of each calendar year.
+#' @description This function pulls the indices associated with the dates that correspond
+#' with the Mid Summer Drought, as well as the indices that indicate first and last day of each year.
+#' This function is used in conjunction with the MSD function.
+#'
 #'
 #' @usage msdDates(x, peakwindow1, minwindow1, minwindow2, peakwindow2)
 #'
@@ -12,7 +13,7 @@
 #' @param minwindow2        desired date in MMDD format to end search for minimum
 #' @param peakwindow2       desired date in MMDD format to end search for late peak
 #'
-#' @return Date vector containing each year's beginning date, end date, and critical MSD dates
+#' @return Vector containing the indices corresponding to each year's beginning date, end date, and the critical MSD dates
 #'
 #' @examples
 #' x <- seq(from = as.Date("1981-01-01"), to = as.Date("1985-12-31"), by = "day")

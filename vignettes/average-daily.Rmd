@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 library(MSD)
 ```
 
-The MSD package is designed to analyze one year of data at a time. For the AGU '23 conference, a graphic was made that showcased the trends of the average rainfall across a set of years. That is, each day's rainfall data across multiple years were averaged, then analyzed. For example, in a data set with precipitation data from 1981 to 1985, every day of the year (from January 1st to December 31st) had its rainfall data averaged (example: the precipitation values of 1-1-81, 1-1-82, 1-1-83, 1-1-84, and 1-1-85 were averaged), then put into a dummy xts to be analyzed. This vignette shows how that graphic was created.
+The MSD package is designed to analyze one year of data at a time. For the AGU '23 conference, a graphic was made that showcased the trends of the average rainfall across a set of years. Each day's rainfall data across multiple years were averaged, then analyzed. For example, in a data set with precipitation data from 1981 to 1985, every day of the year (from January 1st to December 31st) had its rainfall data averaged (example: the precipitation values of 1-1-81, 1-1-82, 1-1-83, 1-1-84, and 1-1-85 were averaged), then put into a dummy xts to be analyzed. This vignette shows how that graphic was created.
 
 The first step is to extract the relevant data from a SpatRaster.
 

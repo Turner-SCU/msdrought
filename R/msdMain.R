@@ -1,12 +1,13 @@
 #' @title Mid Summer Drought Function
 #'
-#' @description Generates all relevant statistics for the Mid Summer Drought
+#' @description Generates all relevant statistics for the Mid Summer Drought by running the msdStats function for every
+#' applicable metric. The output of msdMain is a dataframe containing every msdStats output for the available years of data.
 #'
 #' @usage msdMain(x, firstStartDate, firstEndDate,
 #' secondStartDate, secondEndDate, quantity,
 #' window, timeVector)
 #'
-#' @param x                 Vector or TimeSeries
+#' @param x                 xts or vector of data
 #' @param firstStartDate    desired date in MMDD format to begin analysis (window 1)
 #' @param firstEndDate      desired date in MMDD format to end analysis (window 1)
 #' @param secondStartDate   desired date in MMDD format to begin analysis (window 2)
@@ -34,9 +35,6 @@ msdMain<-function(x, firstStartDate="05-01", firstEndDate="06-01", secondStartDa
   } else if (inherits(x, "xts") == TRUE) {
   timeVector = stats::time(x)
   dates = msdDates(timeVector, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
-  } else if (inherits(x, "SpatRaster") == TRUE) {
-    timeVector = terra::time(x)
-    dates = msdDates(timeVector, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
   } else if (timeVector == 0){
       print("Error: no dates vector present")
       stop
