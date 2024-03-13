@@ -1,22 +1,21 @@
 #' @title Mid Summer Drought Time Series Graphs
 #'
-#' @description Plots the Time Series of Mid Summer Drought data
-#'
-#' @description The input must be in the form of daily data, with the first data point being January 1st of a respective year.
+#' @description Plots the Time Series of Mid Summer Drought data. The input must be in the form of daily data,
+#' with the first data point being January 1st of a respective year.
 #'
 #' @usage msdGraph(x, year, peakwindow1, minwindow2,
 #' minwindow1, peakwindow2, quantity,
 #' window, timeVector)
 #'
-#' @param x               Vector or TimeSeries
-#' @param year            Year of interest
+#' @param x               vector of data or xts
+#' @param year            year of interest
 #' @param peakwindow1     desired date in MMDD format to begin analysis (window 1)
 #' @param minwindow2      desired date in MMDD format to end analysis (window 1)
 #' @param minwindow1      desired date in MMDD format to begin analysis (window 2)
 #' @param peakwindow2     desired date in MMDD format to end analysis (window 2)
-#' @param quantity        Amount of times the filter is run
-#' @param window          Size of filter
-#' @param timeVector      Vector of dates (not needed for TimeSeries inputs)
+#' @param quantity        amount of times the filter is run
+#' @param window          size of filter
+#' @param timeVector      vector of dates (not needed for xts inputs)
 #'
 #' @return Graph of Time Series Data
 #'
@@ -111,13 +110,8 @@ msdGraph<-function(x, year, peakwindow1 = "05-01", minwindow1 = "06-01", minwind
 
   if (color1 == "white") {
     output = output + annotate("text", x=timeseriesFrame[30,1], y=max(firstMaxVal, secondMaxVal), label= "No MSD", size = 5)
-
-  } else if (color1 == "lightblue") {
+  } else (color1 == "lightblue") {
     output + annotate("text", x=timeseriesFrame[30,1], y=max(firstMaxVal, secondMaxVal), label= "MSD", size = 5)
-
-  } else {
-    print("Error! MSD neither existing nor nonexistent.")
   }
-
   return(output)
 }
