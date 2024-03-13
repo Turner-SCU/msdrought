@@ -111,7 +111,7 @@ msdGraph<-function(x, year, peakwindow1 = "05-01", minwindow1 = "06-01", minwind
   if (color1 == "white") {
     output = output + annotate("text", x=timeseriesFrame[30,1], y=max(firstMaxVal, secondMaxVal), label= "No MSD", size = 5)
   } else {
-    output + annotate("text", x=timeseriesFrame[30,1], y=max(firstMaxVal, secondMaxVal), label= "MSD", size = 5)
+    output = output + annotate("text", x=timeseriesFrame[30,1], y=max(firstMaxVal, secondMaxVal), label= "MSD", size = 5)
   }
   return(output)
 }
