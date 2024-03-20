@@ -2,49 +2,4 @@
 
 
 
-# MSD
-
-<!-- badges: start -->
-
-<!-- badges: end -->
-
-The MSD R package contains functions for calculating characteristics of a mid-summer drought (MSD), a phenomenon of decreased rainfall during a typical rainy season.
-The MSD is a feature of rainfall in much of Central America, but is also found in other locations, typically those with a Mediterranean climate.
-The details are described in "The Mesoamerican mid-summer drought: the impact of its definition on occurrences and recent changes", HESS, Maurer et al. (2022) '<https://hess.copernicus.org/articles/26/1425/2022/>'.
-
-## Installation
-
-You can install the development version of MSD from [GitHub](https://github.com/Turner-SCU/MSD)
-
-``` r
-# install.packages("devtools")
-devtools::install_github("Turner-SCU/MSD")
-```
-
-## Example
-
-These are the steps required to create useful MSD data:
-
-1)  **Begin with a timeseries or spatraster of precipitation data over time.**
-
-    At the moment, the only applicable data is a vector of date and precipitation information.
-    This will be changed.
-
-2)  **Filter this data using the msdFilter function.**
-
-    A bartlett noise filter is applied to the data in order to smooth the precipitation data over time via weighted average
-
-3)  **Use the msdDates function to extract relevant dates for the calculations.**
-
-    There are two sets of necessary dates when calculating the MSD statistics: the critical periods and the start and end of the year.
-    This function determines both and stores them as a single vector.
-    The following function breaks the two types of dates apart, so it is important to not change the output of the msdDates function before feeding it into the subsequent msd function.
-
-4)  **Supply the msd function with precipitation data, the data from msdDates, and a selected parameter to calculate.**
-
-    The precipitation data may be filtered using the msdFilter function.
-    In order for this function to provide useful data, the input from msdDates must be unchanged from its original output.
-    The following parameters are applicable to the MSD calculation: Duration, Intensity, firstMax, secondMax, min, and mindex.
-
-
-```{r example}library(MSD)rainData = data_provided#Filter the infile data with a bartlett window of 31. Repeat 2xfilteredData = msdFilter(rainData, window = 31, quantity = 2)#Grab the appropriate dates, either from a file or by manually assigning themsomeDates <- seq(from = as.Date("1981-01-01"), to = as.Date("1985-12-31"), by = "day")dates = msdDates(someDates, firstStartDate="05-01",firstEndDate="08-31", secondStartDate ="06-01",secondEndDate="10-31")#Put everything all together!duration = msd(filteredData, dates, duration)intensity = msd(filteredData, dates, intensity)firstMax = msd(filteredData, dates, firstMax)secondMax = msd(filteredData, dates, secondMax)minimum = msd(filteredData, dates, min)mindex = msd(filteredData, dates, mindex)#You have now calculated the useful parameters for the Mid-Summer Drought!```
+# MSD<!-- badges: start --><!-- badges: end -->The MSD R package contains functions for calculating characteristics of a mid-summer drought (MSD), a phenomenon of decreased rainfall during a typical rainy season.The MSD is a feature of rainfall in much of Central America, but is also found in other locations, typically those with a Mediterranean climate.The details are described in "The Mesoamerican mid-summer drought: the impact of its definition on occurrences and recent changes", HESS, Maurer et al. (2022) '<https://hess.copernicus.org/articles/26/1425/2022/>'.## InstallationYou can install the development version of MSD from [GitHub](https://github.com/Turner-SCU/MSD)``` r# install.packages("devtools")devtools::install_github("Turner-SCU/MSD")```## ExampleThese are the steps required to create useful MSD data:1)  **Begin with a xts or spatraster of precipitation data over time.**    Please view the sample-walkthrough or the raster-sample vignettes for information on how to properly format the data and how to proceed    with utilizing this package. 2)  **Filter this data using the msdFilter function.**    A bartlett noise filter is applied to the data in order to smooth the precipitation data over time via weighted average3)  **Use the msdDates function to extract relevant dates for the calculations.**    There are two sets of necessary dates when calculating the MSD statistics: the critical periods and the start and end of the year.    This function determines both and stores them as a single vector.    The following function (msdStats) breaks the two types of dates apart, so it is important to not change the output    of the msdDates function before feeding it into the subsequent msd function.4)  **Supply the msdStats function with precipitation data, the data from msdDates, and a selected parameter to calculate.**    The precipitation data must be filtered using the msdFilter function.    In order for this function to provide useful data, the input from msdDates must be unchanged from its original output.    The following parameters are applicable to the MSD calculation: duration, intensity, firstMaxValue, secondMaxValue, min, and mindex.    5)  **Alternatively, use the msdMain function to calculate every relevant statistics related to the MSD phenomenon**        The msdMain function runs the msdStats function for every parameter and every year. This output is much more comprehensive if you are    looking to characterize multiple years of data, or are just wanting to understand one year's parameters all at once.    6)  **Create a plot of one year of rainfall data to visualize the MSD phenomenon and its parameters**    Using the msdGraph function, a visual plot of the filtered rainfall data, its key dates, and the peaks and valleys used to characterize    the drought can be created.```{r example}library(MSD)#-------------------------------------------------------------------------------------------------------------------------------------------# Load in the data that will be analyzed.data("timeseries")x = timeseries#-------------------------------------------------------------------------------------------------------------------------------------------# msdDates = (times, peakWindow1 = "05-01", minWindow1 = "06-01", minWindow2 = "08-31", peakWindow2 = "10-31")keyDatesTS = msdDates(time(x))#-------------------------------------------------------------------------------------------------------------------------------------------# msdFilter = msdFilter(x, window)filterTS = apply(x, MARGIN = 2, FUN = msdFilter, window = 31, quantity = 2)#-------------------------------------------------------------------------------------------------------------------------------------------# msdStats = msdStats(x, dates, fcn)duration <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="duration")intensity <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="intensity")firstMaxValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="firstMaxValue")secondMaxValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="secondMaxValue")min <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="min")#-------------------------------------------------------------------------------------------------------------------------------------------# msdMain = msdMain(x, firstStartDate, firstEndDate, secondStartDate, secondEndDate, window, quantity)allStats = msdMain(x)#-------------------------------------------------------------------------------------------------------------------------------------------# msdGraph = msdGraph(x, year, firstStartDate, firstEndDate, secondStartDate, secondEndDate, window, quantity)graph1981 = msdGraph(x, 1981)plot(graph1981)```
