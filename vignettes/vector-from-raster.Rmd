@@ -28,8 +28,8 @@ library(lubridate)
 library(stringr)
 library(ggplot2)
 library(xts)
-data = system.file("extdata", "prcp_cropped.tif", package="MSD") #This loads the data included in the package, but you would attach your own
-infile = terra::rast(data)
+data <- system.file("extdata", "prcp_cropped.tif", package = "MSD") # This loads the data included in the package, but you would attach your own
+infile <- terra::rast(data)
 ```
 
 Now we have our raster data loaded in as "infile". Using the terra::app command, we can apply a function to each cell of the data. Begin by finding the range of dates for the raster data, as these values are needed for the package to understand the statistics. Data processing begins by filtering the data using a bartlett noise filter, then apply the msdStats function to the data.
@@ -37,36 +37,36 @@ Now we have our raster data loaded in as "infile". Using the terra::app command,
 ```{r}
 # Find the key dates related to the MSD
 # msdDates = msdDates(x, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
-allDates = terra::time(infile)
-formattedDates = as.Date(allDates)
-critDates = msdDates(formattedDates)
+allDates <- terra::time(infile)
+formattedDates <- as.Date(allDates)
+critDates <- msdDates(formattedDates)
 
 # Use the terra::app function to apply the bartlett noise filter (msdFilter) to the raster
 # msdFilter = msdFilter(x, window)
-filtered <- terra::app(infile, msdFilter, window=31, quantity=2)
+filtered <- terra::app(infile, msdFilter, window = 31, quantity = 2)
 
 # Use the terra::app function to apply the bartlett noise filter (msdFilter) to the raster
 # msdStats = msdStats(x, dates, fcn)
-intensityPlots <- terra::app(filtered, msdStats, critDates, fcn="intensity")
-durationPlots <- terra::app(filtered, msdStats, critDates, fcn="duration")
+intensityPlots <- terra::app(filtered, msdStats, critDates, fcn = "intensity")
+durationPlots <- terra::app(filtered, msdStats, critDates, fcn = "duration")
 ```
 
 The "intensityPlots" and "durationPlots" rasters contain the intensity and duration values for every geographical location for each of the 5 years of data contained in the original dataset. Now that we have all the intensity and duration values, we will extract a single point's data from the new rasters.
 
 ```{r}
 # Set up the desired location's longitude and latitude values
-lon = -86.2621555581 #Longitude of the spatial point we're interested in analyzing
-lat = 13.3816217871 #Lattitude of the spatial point we're interested in analyzing
-lonLat = data.frame(lon=lon,lat=lat)
+lon <- -86.2621555581 # Longitude of the spatial point we're interested in analyzing
+lat <- 13.3816217871 # Lattitude of the spatial point we're interested in analyzing
+lonLat <- data.frame(lon = lon, lat = lat)
 
 # Set up precipitation data by extracting the data located at our longitude and lattitude
-location = vect(lonLat, crs = "+proj=longlat +datum=WGS84")
-locationIntensity = terra::extract(intensityPlots, location, method = 'bilinear') %>%
-  subset(select = -ID) %>% 
+location <- vect(lonLat, crs = "+proj=longlat +datum=WGS84")
+locationIntensity <- terra::extract(intensityPlots, location, method = "bilinear") %>%
+  subset(select = -ID) %>%
   t()
 
-locationDuration = terra::extract(durationPlots, location, method = 'bilinear') %>%
-  subset(select = -ID) %>% 
+locationDuration <- terra::extract(durationPlots, location, method = "bilinear") %>%
+  subset(select = -ID) %>%
   t()
 ```
 
@@ -74,15 +74,15 @@ Now we have converted the "intensityPlots" and "durationPlots" rasters to numeri
 
 ```{r}
 # Pull the years from the data, for the purpose of organizing the data
-allYears = terra::time(infile)
-firstYear = lubridate::year(allYears[1])
-lastYear = lubridate::year(allYears[length(allYears)])
-yearsSeq = firstYear:lastYear
+allYears <- terra::time(infile)
+firstYear <- lubridate::year(allYears[1])
+lastYear <- lubridate::year(allYears[length(allYears)])
+yearsSeq <- firstYear:lastYear
 
 # Combine the years, intensity and duration objects, for ease of comparison
-combined = cbind(yearsSeq, locationDuration, locationIntensity) %>% 
+combined <- cbind(yearsSeq, locationDuration, locationIntensity) %>%
   as.data.frame()
-colnames(combined) = c("years","durationValue", "intensityValue")
+colnames(combined) <- c("years", "durationValue", "intensityValue")
 ```
 
 The output now closely resembles the output format that would be achieved if the location was extracted prior to analysis. Pulling the remaining stats ("firstMaxValue", "secondMaxValue", and "min") and combining those as well would result in an identical result.

@@ -29,68 +29,68 @@ library(lubridate)
 library(stringr)
 library(ggplot2)
 library(xts)
-data = system.file("extdata", "prcp_cropped.tif", package="MSD") #This loads the data included in the package, but you would attach your own
-infile = terra::rast(data)
+data <- system.file("extdata", "prcp_cropped.tif", package = "MSD") # This loads the data included in the package, but you would attach your own
+infile <- terra::rast(data)
 
 # Make a SpatRast for one point
-lon = -86.2621555581 #El Bramadero lon (from NicaAgua)
-lat = 13.3816217871 #El Bramadero lat (from NicaAgua)
-lonLat = data.frame(lon=lon,lat=lat)
+lon <- -86.2621555581 # El Bramadero lon (from NicaAgua)
+lat <- 13.3816217871 # El Bramadero lat (from NicaAgua)
+lonLat <- data.frame(lon = lon, lat = lat)
 
 # Set up precipitation data
-location = terra::vect(lonLat, crs = "+proj=longlat +datum=WGS84")
-precip = terra::extract(infile, location, method = 'bilinear') %>%
+location <- terra::vect(lonLat, crs = "+proj=longlat +datum=WGS84")
+precip <- terra::extract(infile, location, method = "bilinear") %>%
   subset(select = -ID) %>%
   t()
-precip[precip < 0] <- 0 #replace any negative (errant) values with zeroes
-precip = as.vector(precip)
+precip[precip < 0] <- 0 # replace any negative (errant) values with zeroes
+precip <- as.vector(precip)
 ```
 
 Because we will be using the msdGraph function, a year value will need to be provided. We will create a dummy year that will be used for the sake of plotting. This can be any year, but it is easiest to just use the first year in the data set.
 
 ```{r}
 # Set up dates (time) data for ONE year (365 days)
-allTimes = terra::time(infile) %>%
-  as.Date() %>% 
+allTimes <- terra::time(infile) %>%
+  as.Date() %>%
   data.frame()
-timeFrame = as.Date(c(allTimes[1,1]:allTimes[365,1])) %>% 
+timeFrame <- as.Date(c(allTimes[1, 1]:allTimes[365, 1])) %>%
   data.frame()
 # Make a Dataframe for each year
-chunkLength = 365
-divYears = (split(precip,ceiling(seq_along(precip) / chunkLength)))
-divYearsFrame = data.frame(divYears)
+chunkLength <- 365
+divYears <- (split(precip, ceiling(seq_along(precip) / chunkLength)))
+divYearsFrame <- data.frame(divYears)
 
-averagePrecip = c()
+averagePrecip <- c()
 for (i in 1:nrow(divYearsFrame)) {
-  daySum = sum(divYearsFrame[i,])
-  averagePrecip = rbind(averagePrecip, daySum)
+  daySum <- sum(divYearsFrame[i, ])
+  averagePrecip <- rbind(averagePrecip, daySum)
 }
-nyears = round(length(precip)/365)
-averagePrecip = averagePrecip/nyears #(average over number of years)
+nyears <- round(length(precip) / 365)
+averagePrecip <- averagePrecip / nyears # (average over number of years)
 ```
 
 Now, an averaged xts object can be created. This will display the data set's average rainfall over the dummy year.
 
 ```{r}
 # Assemble the Timeseries
-timeseriesFrame = cbind(timeFrame, averagePrecip)
-colnames(timeseriesFrame) = c("Date", "Precipitation")
-x = xts(timeseriesFrame$Precipitation, timeseriesFrame$Date) #This produces the "xts" screenshot
+timeseriesFrame <- cbind(timeFrame, averagePrecip)
+colnames(timeseriesFrame) <- c("Date", "Precipitation")
+x <- xts(timeseriesFrame$Precipitation, timeseriesFrame$Date) # This produces the "xts" screenshot
 ```
 
 Now, perform the MSD calculations and plot the averaged graph!
 
 ```{r}
 # Perform MSD calculations with the new xts
-keyDatesTS = msdDates(time(x))
-filterTS = apply(x, MARGIN = 2, FUN = msdFilter, window = 31, quantity = 2)
-duration <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="duration")
-intensity <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="intensity")
-firstMaxValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="firstMaxValue")
-secondMaxValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="secondMaxValue")
-minValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="min")
-allStats = msdMain(x)
-graph1981 = msdGraph(x, 1981)
+keyDatesTS <- msdDates(time(x))
+filterTS <- apply(x, MARGIN = 2, FUN = msdFilter, window = 31, quantity = 2)
+duration <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn = "duration")
+intensity <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn = "intensity")
+firstMaxValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn = "firstMaxValue")
+secondMaxValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn = "secondMaxValue")
+minValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn = "min")
+allStats <- msdMain(x)
+graph1981 <- msdGraph(x, 1981)
 plot(graph1981)
 ```
 

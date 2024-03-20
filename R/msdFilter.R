@@ -18,22 +18,22 @@
 #'
 #' @examples
 #' # using a Time Series
-#' #r<-msdFilter(x, window = 31)
+#' # r<-msdFilter(x, window = 31)
 #'
 #' @export
 #'
 #-----------------------------------------------------------------------------------------------------------------------------------------
 msdFilter <- function(x, window = 31, quantity = 2) {
-  #constructs a Bartlett vector with the size of the bartlett filter
+  # constructs a Bartlett vector with the size of the bartlett filter
   bartlett_window <- c(signal::bartlett(window))
-  #creates a sum of the bartlett window to construct an average
+  # creates a sum of the bartlett window to construct an average
   bartlett_sum <- sum(bartlett_window)
-  weights <- bartlett_window/bartlett_sum
+  weights <- bartlett_window / bartlett_sum
 
-  #apply filter weighted on the average and divided by the sum of the bartlett window to smooth out the data
+  # apply filter weighted on the average and divided by the sum of the bartlett window to smooth out the data
   filtered_data <- as.vector(x) # coerce to vector if it is a timeseries
   for (i in 1:quantity) {
-    filtered_data <- stats::filter(filtered_data, weights, method="convolution", circular = TRUE)
+    filtered_data <- stats::filter(filtered_data, weights, method = "convolution", circular = TRUE)
   }
   return(as.vector(filtered_data))
 }

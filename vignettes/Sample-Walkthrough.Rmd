@@ -31,41 +31,41 @@ library(lubridate)
 library(stringr)
 library(ggplot2)
 library(xts)
-data = system.file("extdata", "prcp_cropped.tif", package="MSD") #This loads the data included in the package, but you would attach your own
+data <- system.file("extdata", "prcp_cropped.tif", package = "MSD") # This loads the data included in the package, but you would attach your own
 
 # Extract 1 spatial point from the raster data
-infile = terra::rast(data)
-lon = -86.2621555581 #Longitude of the spatial point we're interested in analyzing
-lat = 13.3816217871 #Lattitude of the spatial point we're interested in analyzing
-lonLat = data.frame(lon=lon,lat=lat)
+infile <- terra::rast(data)
+lon <- -86.2621555581 # Longitude of the spatial point we're interested in analyzing
+lat <- 13.3816217871 # Lattitude of the spatial point we're interested in analyzing
+lonLat <- data.frame(lon = lon, lat = lat)
 
 # Set up precipitation data by extracting the data located at our longitude and lattitude
-location = vect(lonLat, crs = "+proj=longlat +datum=WGS84")
-precip = terra::extract(infile, location, method = 'bilinear') %>%
+location <- vect(lonLat, crs = "+proj=longlat +datum=WGS84")
+precip <- terra::extract(infile, location, method = "bilinear") %>%
   subset(select = -ID) %>%
   t()
-precip[precip < 0] <- 0 #replace any negative (errant) values with zeroes
-precipFrame = data.frame(precip)
+precip[precip < 0] <- 0 # replace any negative (errant) values with zeroes
+precipFrame <- data.frame(precip)
 
 # Set up dates (time) data which will be used in creating our time series
-timeFrame = terra::time(infile) %>%
+timeFrame <- terra::time(infile) %>%
   as.Date() %>%
   data.frame()
-startDate = as.Date(as.character(timeFrame[1,1]))
-endDate = as.Date(as.character(timeFrame[nrow(timeFrame),1]))
-datesSequence = seq(from = startDate, to = endDate, by = 1)
-timeseriesFrame = cbind(timeFrame, precipFrame)
-colnames(timeseriesFrame) = c("Date", "Precipitation")
+startDate <- as.Date(as.character(timeFrame[1, 1]))
+endDate <- as.Date(as.character(timeFrame[nrow(timeFrame), 1]))
+datesSequence <- seq(from = startDate, to = endDate, by = 1)
+timeseriesFrame <- cbind(timeFrame, precipFrame)
+colnames(timeseriesFrame) <- c("Date", "Precipitation")
 
 # Make the data into an xtimeseries that the package recognizes
-x = xts(timeseriesFrame$Precipitation, timeseriesFrame$Date)
+x <- xts(timeseriesFrame$Precipitation, timeseriesFrame$Date)
 ```
 
 At this point, we taken a raster of data and extracted from it a series of precipitation values and a series of time for a single location. This data can now be used with the MSD package and its functions. Alternatively, as mentioned above, you could directly load in timeseries data. The workflow for that is much simpler than that of loading and preparing a raster.
 
 ```{r}
-data("timeseries") #This loads the data included in the package, but you would attach your own
-x = timeseries
+data("timeseries") # This loads the data included in the package, but you would attach your own
+x <- timeseries
 ```
 
 These two processes both end with data in the form of a timeseries that the package can interpret and perform calculations on.
@@ -77,12 +77,12 @@ Before we calculate these pieces of data, however, we will need to understand th
 ```{r}
 # Use the msdDates function to extract the key dates related to the window of the MSD
 # msdDates = msdDates(x, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
-keyDatesTS = msdDates(time(x))
+keyDatesTS <- msdDates(time(x))
 # Note: The windows (between the start and end dates) can be user-defined, but leaving the field blank uses the parameters determined by the founders of this package
 
 # Filter the data using a bartlett noise filter by using the msdFilter function
 # msdFilter = msdFilter(x, window)
-filterTS = apply(x, MARGIN = 2, FUN = msdFilter, window = 31, quantity = 2)
+filterTS <- apply(x, MARGIN = 2, FUN = msdFilter, window = 31, quantity = 2)
 # Note: The founders of this package recommend filtering the data twice, but this is left up to the user to decide
 ```
 
@@ -91,11 +91,11 @@ Now that we have the key dates and a filtered timeseries, it is time to calculat
 ```{r}
 # Use msdStats and r's built-in apply function to apply the intensity calculation across the filtered timeseries data
 # msdStats = msdStats(x, dates, fcn)
-durationValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="duration")
-intensityValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="intensity")
-firstMaxValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="firstMaxValue")
-secondMaxValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="secondMaxValue")
-minValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="min")
+durationValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn = "duration")
+intensityValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn = "intensity")
+firstMaxValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn = "firstMaxValue")
+secondMaxValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn = "secondMaxValue")
+minValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn = "min")
 ```
 
 After completing this step, we will have a numeric list of all the statistics values for every year of data.
@@ -107,7 +107,7 @@ msdMain is a function that calculates all of the relevant statistics at once and
 ```{r}
 # msdMain takes the input parameters from their basic form and calculates the relevant statistics
 # msdMain = msdMain(x, firstStartDate, firstEndDate, secondStartDate, secondEndDate, window, quantity)
-allStats = msdMain(x)
+allStats <- msdMain(x)
 ```
 
 msdGraph is used to plot the timeseries and perform an analysis on the calculated data and parameters to determine if a single year in question represents a year with a Mid-Summer Drought or not. Below, we'll use 1982 as an example, as there was a Mid-Summer Drought during that year.
@@ -115,9 +115,8 @@ msdGraph is used to plot the timeseries and perform an analysis on the calculate
 ```{r fig.height=5, fig.width=5}
 # Use msdGraph to calculate the statistics and analyze them to determine if an MSD was present or not during the course of one year
 # msdGraph = msdGraph(x, year, firstStartDate, firstEndDate, secondStartDate, secondEndDate, window, quantity)
-graph1982 = msdGraph(x, 1982)
+graph1982 <- msdGraph(x, 1982)
 plot(graph1982)
-
 ```
 
 And that is all the important information required to understand and use the MSD package!
