@@ -18,7 +18,7 @@
 #'
 #' @examples
 #' # using a Time Series
-#' # r<-msdFilter(x, window = 31)
+#' # r<-msdFilter(x, window = 31, quantity = 2)
 #'
 #' @export
 #'

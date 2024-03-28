@@ -4,12 +4,14 @@
 \alias{msdFilter}
 \title{msdFilter -- A triangular Filter for smoothing data}
 \usage{
-msdFilter(x, window)
+msdFilter(x, window, quantity)
 }
 \arguments{
 \item{x}{RasterBrick or TimeSeries}
 
-\item{window}{Size of Filter}
+\item{window}{Size of Filter [Default = 31]}
+
+\item{quantity}{Number of passes to apply filter [Default = 2]}
 }
 \value{
 RasterBrick or TimeSeries of Yearly data
@@ -23,7 +25,7 @@ and calculate a weighted average based on how far away the points are from
 the point of interest.
 }
 \examples{
-# using Spatrast or a Time Series
-#r<-msdFilter(x, window = 31)
+# using a Time Series
+# r <- msdFilter(x, window = 31, quantity = 2)
 
 }

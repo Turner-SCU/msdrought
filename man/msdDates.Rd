@@ -4,7 +4,7 @@
 \alias{msdDates}
 \title{Pulling Dates Relevant to the MSD Calculations}
 \usage{
-msdDates(x, peakwindow1, minwindow1, minwindow2, secondEndDate)
+msdDates(x, peakwindow1, minwindow1, minwindow2, peakwindow2)
 }
 \arguments{
 \item{x}{Date vector}
@@ -26,6 +26,7 @@ It also pulls the first and last day of each calendar year provided.
 }
 \examples{
 x <- seq(from = as.Date("1981-01-01"), to = as.Date("1985-12-31"), by = "day")
-output <- msdDates(x, peakwindow1 = "05-01", minwindow1 = "06-01", minwindow2 = "08-31", peakwindow2 = "10-31")
+output <- msdDates(x, peakwindow1 = "05-01", minwindow1 = "06-01",
+          minwindow2 = "08-31", peakwindow2 = "10-31")
 
 }
