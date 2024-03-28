@@ -4,9 +4,9 @@
 \alias{msdMain}
 \title{Mid Summer Drought Function}
 \usage{
-msdMain(x, firstStartDate, firstEndDate,
-secondStartDate, secondEndDate, quantity,
-window, time)
+msdMain(x, peakwindow1, minwindow1,
+minwindow2, peakwindow2, quantity,
+window, timeVector)
 }
 \arguments{
 \item{x}{Vector or TimeSeries}
