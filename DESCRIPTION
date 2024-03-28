@@ -27,12 +27,12 @@ Imports:
     stats,
     stringr,
     tidyr,
-    tools
+    tools,
+    xts
 Suggests:
     knitr,
     rmarkdown,
-    terra,
-    xts
+    terra
 RoxygenNote: 7.2.1
 URL: https://github.com/Turner-SCU/MSD
 BugReports: https://github.com/Turner-SCU/MSD/issues
