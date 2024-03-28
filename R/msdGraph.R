@@ -97,9 +97,9 @@ msdGraph <- function(x, year, peakwindow1 = "05-01", minwindow1 = "06-01", minwi
     ggplot2::theme_bw() +
     ggplot2::annotate("rect", xmin = timeseriesFrame[1, 1], xmax = timeseriesFrame[length(tsDates), 1], ymin = 0, ymax = (max(firstMaxVal, secondMaxVal) + 2), fill = color1[1], alpha = 0.5) +
     ggplot2::geom_line(data = timeseriesFrame[1:nrow(timeseriesFrame), ]) +
-    ggplot2::geom_point(data = firstMax, mapping = aes(x = as.Date(Date), y = Precipitation), size = 2, color = "red") +
-    ggplot2::geom_point(data = secondMax, mapping = aes(x = as.Date(Date), y = Precipitation), size = 2, color = "red") +
-    ggplot2::geom_point(data = theMin, mapping = aes(x = as.Date(Date), y = Precipitation), size = 2, color = "blue") +
+    ggplot2::geom_point(data = firstMax, mapping = ggplot2::aes(x = as.Date(Date), y = Precipitation), size = 2, color = "red") +
+    ggplot2::geom_point(data = secondMax, mapping = ggplot2::aes(x = as.Date(Date), y = Precipitation), size = 2, color = "red") +
+    ggplot2::geom_point(data = theMin, mapping = ggplot2::aes(x = as.Date(Date), y = Precipitation), size = 2, color = "blue") +
     ggplot2::geom_vline(xintercept = pw1, color = "red") +
     ggplot2::geom_vline(xintercept = mw2, color = "blue") +
     ggplot2::geom_vline(xintercept = mw1, color = "blue") +

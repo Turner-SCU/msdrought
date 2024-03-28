@@ -75,7 +75,7 @@ msdMain <- function(x, peakwindow1 = "05-01", minwindow1 = "06-01", minwindow2 =
 
   minFrame <- data.frame(match(x, checkNA$minValue))
   minFinal <- cbind(countDaysFrame, minFrame)
-  minFinal <- na.omit(minFinal)
+  minFinal <- stats::na.omit(minFinal)
   minDate <- as.character(origin + lubridate::days(minFinal$X1.length.x.))
 
   combined <- cbind(checkNA$Years, checkNA$durationValue, checkNA$intensityValue, checkNA$firstMaxValue, firstMaxDate, checkNA$secondMaxValue, secondMaxDate, checkNA$minValue, minDate)
