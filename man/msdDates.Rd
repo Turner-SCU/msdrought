@@ -4,18 +4,18 @@
 \alias{msdDates}
 \title{Pulling Dates Relevant to the MSD Calculations}
 \usage{
-msdDates(x, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
+msdDates(x, peakwindow1, minwindow1, minwindow2, secondEndDate)
 }
 \arguments{
 \item{x}{Date vector}
 
-\item{firstStartDate}{desired date in MMDD format to begin analysis (window 1)}
+\item{peakwindow1}{desired date in MMDD format to begin search for early peak}
 
-\item{firstEndDate}{desired date in MMDD format to end analysis (window 1)}
+\item{minwindow1}{desired date in MMDD format to begin search for minimum}
 
-\item{secondStartDate}{desired date in MMDD format to begin analysis (window 2)}
+\item{minwindow2 }{desired date in MMDD format to end search for minimum}
 
-\item{secondEndDate}{desired date in MMDD format to end analysis (window 2)}
+\item{peakwindow2}{desired date in MMDD format to end search for late peak}
 }
 \value{
 Date vector containing each year's beginning date, end date, and critical MSD dates
@@ -26,7 +26,6 @@ It also pulls the first and last day of each calendar year provided.
 }
 \examples{
 x <- seq(from = as.Date("1981-01-01"), to = as.Date("1985-12-31"), by = "day")
-msdDates(x, firstStartDate="05-01",firstEndDate="08-31",
-secondStartDate ="06-01",secondEndDate="10-31")
+output <- msdDates(x, peakwindow1 = "05-01", minwindow1 = "06-01", minwindow2 = "08-31", peakwindow2 = "10-31")
 
 }
