@@ -35,13 +35,13 @@ msdGraph <- function(x, year, peakwindow1 = "05-01", minwindow1 = "06-01", minwi
     timeseriesFull <- x
   } else {
     datesSeq <- NULL # !!!
-    timeseriesFull <- xts(x, datesSeq)
+    timeseriesFull <- xts::xts(x, datesSeq)
   }
   # Calculate all stats for all years of the provided data, then select only the relevant year's data.
   allStats <- msdMain(x, peakwindow1, minwindow2, minwindow1, peakwindow2, quantity, window, timeVector)
   yearStats <- subset(allStats, years == year)
   # Subset the timeseries to only be the year (365 days) of interest
-  allDates <- seq(from = as.Date(time(timeseriesFull[1])), to = as.Date(time(timeseriesFull[length(timeseriesFull)])), by = 1)
+  allDates <- seq(from = as.Date(stats::time(timeseriesFull[1])), to = as.Date(stats::time(timeseriesFull[length(timeseriesFull)])), by = 1)
   yearsOnly <- format(allDates, "%Y")
   validDates <- (year == yearsOnly)
   tsDates <- allDates[validDates == TRUE]
@@ -93,7 +93,7 @@ msdGraph <- function(x, year, peakwindow1 = "05-01", minwindow1 = "06-01", minwi
   }
   color1 <- colors(DIsum)
   #-----------------------------------------------------------------------------------------------------------------------------------------
-  output <- ggplot2::ggplot(data = timeseriesFrame, mapping = aes(x = Date, y = Precipitation)) +
+  output <- ggplot2::ggplot(data = timeseriesFrame, mapping = ggplot2::aes(x = Date, y = Precipitation)) +
     ggplot2::theme_bw() +
     ggplot2::annotate("rect", xmin = timeseriesFrame[1, 1], xmax = timeseriesFrame[length(tsDates), 1], ymin = 0, ymax = (max(firstMaxVal, secondMaxVal) + 2), fill = color1[1], alpha = 0.5) +
     ggplot2::geom_line(data = timeseriesFrame[1:nrow(timeseriesFrame), ]) +
@@ -107,6 +107,6 @@ msdGraph <- function(x, year, peakwindow1 = "05-01", minwindow1 = "06-01", minwi
     ggplot2::xlab("") +
     ggplot2::ylab("Precipitation (mm/day)") +
     ggplot2::scale_y_continuous(breaks = seq(0, (max(firstMaxVal, secondMaxVal) + 2), by = 5), limits = c(0, (max(firstMaxVal, secondMaxVal) + 2)), expand = c(0, 0)) +
-    ggplot2::theme(text = element_text(size = 20))
+    ggplot2::theme(text = ggplot2::element_text(size = 20))
   return(output)
 }
