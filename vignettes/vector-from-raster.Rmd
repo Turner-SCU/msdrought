@@ -14,6 +14,13 @@ knitr::opts_chunk$set(
 )
 ```
 
+```{r set knitr options, echo = FALSE}
+# set some knitr options
+knitr::opts_chunk$set(echo = FALSE
+                      , message = FALSE
+                      , warning = FALSE)
+```
+
 ```{r setup}
 library(MSD)
 ```
