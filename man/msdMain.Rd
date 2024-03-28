@@ -11,19 +11,19 @@ window, time)
 \arguments{
 \item{x}{Vector or TimeSeries}
 
-\item{firstStartDate}{desired date in MMDD format to begin analysis (window 1)}
+\item{peakwindow1}{desired date in MMDD format to begin analysis (window 1)}
 
-\item{firstEndDate}{desired date in MMDD format to end analysis (window 1)}
+\item{minwindow1}{desired date in MMDD format to end analysis (window 1)}
 
-\item{secondStartDate}{desired date in MMDD format to begin analysis (window 2)}
+\item{minwindow2}{desired date in MMDD format to begin analysis (window 2)}
 
-\item{secondEndDate}{desired date in MMDD format to end analysis (window 2)}
+\item{peakwindow2}{desired date in MMDD format to end analysis (window 2)}
 
-\item{quantity}{Amount of times the filter is run}
+\item{quantity}{amount of times the filter is run}
 
-\item{window}{Size of filter}
+\item{window}{size of filter}
 
-\item{time}{Vector of dates (not needed for TimeSeries inputs)}
+\item{timeVector}{vector of dates (not needed for xts inputs)}
 }
 \value{
 Data frame of all relevant MSD Statistics
@@ -33,7 +33,7 @@ Generates all relevant statistics for the Mid Summer Drought
 }
 \examples{
 # using timeseries (ts)
-# output = msdMain(ts, firstStartDate="05-01", firstEndDate="08-31",
-# secondStartDate ="06-01", secondEndDate="10-31", quantity = 2, window = 31)
+# output = msdMain(ts, peakwindow1="05-01", minwindow1="08-31",
+# minwindow2 ="06-01", peakwindow2="10-31", quantity = 2, window = 31)
 
 }

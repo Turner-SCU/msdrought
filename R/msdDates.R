@@ -42,10 +42,10 @@ msdDates <- function(x, peakwindow1 = "05-01", minwindow1 = "06-01", minwindow2 
   }
   #----------------------------------------------------------------------------------------------------------------------------------------------
   # sort the indices to assure compatibility for the msdStats function
-  kDates <- c(pw1, mw1, pw2, mw2) %>%
-    sort(decreasing = FALSE)
-  kYears <- c(jan01, dec31) %>%
-    sort(decreasing = FALSE)
+  kDates <- c(pw1, mw1, pw2, mw2)
+  kDates <- sort(kDates, decreasing = FALSE)
+  kYears <- c(jan01, dec31)
+  kYears <- sort(kYears, decreasing = FALSE)
   k <- as.vector(c(kDates, kYears))
   #----------------------------------------------------------------------------------------------------------------------------------------------
   return(k)
