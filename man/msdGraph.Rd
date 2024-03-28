@@ -4,28 +4,28 @@
 \alias{msdGraph}
 \title{Mid Summer Drought Time Series Graphs}
 \usage{
-msdGraph(x, year, firstStartDate, firstEndDate,
-secondStartDate, secondEndDate, quantity,
-window, time)
+msdGraph(x, year, peakwindow1, minwindow1,
+minwindow2, peakwindow2, quantity,
+window, timeVector)
 }
 \arguments{
-\item{x}{Vector or TimeSeries}
+\item{x}{vector of data or xts}
 
-\item{year}{Year of interest}
+\item{year}{year of interest}
 
-\item{firstStartDate}{desired date in MMDD format to begin analysis (window 1)}
+\item{peakwindow1}{desired date in MMDD format to begin analysis (window 1)}
 
-\item{firstEndDate}{desired date in MMDD format to end analysis (window 1)}
+\item{minwindow1}{desired date in MMDD format to end analysis (window 1)}
 
-\item{secondStartDate}{desired date in MMDD format to begin analysis (window 2)}
+\item{minwindow2}{desired date in MMDD format to begin analysis (window 2)}
 
-\item{secondEndDate}{desired date in MMDD format to end analysis (window 2)}
+\item{peakwindow2}{desired date in MMDD format to end analysis (window 2)}
 
-\item{quantity}{Amount of times the filter is run}
+\item{quantity}{amount of times the filter is run}
 
-\item{window}{Size of filter}
+\item{window}{size of filter}
 
-\item{time}{Vector of dates (not needed for TimeSeries inputs)}
+\item{timeVector}{vector of dates (not needed for xts inputs)}
 }
 \value{
 Graph of Time Series Data
@@ -36,7 +36,7 @@ Plots the Time Series of Mid Summer Drought data
 The input must be in the form of daily data, with the first data point being January 1st of a respective year.
 }
 \examples{
-# graph = msdGraph(x, year, firstStartDate="05-01", firstEndDate="08-31",
-# secondStartDate ="06-01", secondEndDate="10-31", quantity = 2, window = 31)
+# graph = msdGraph(x, year, peakwindow1="05-01", minwindow1="06-01",
+# minwindow2 ="08-31", peakwindow2="10-31", quantity = 2, window = 31)
 
 }

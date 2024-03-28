@@ -3,15 +3,15 @@
 #' @description Plots the Time Series of Mid Summer Drought data. The input must be in the form of daily data,
 #' with the first data point being January 1st of a respective year.
 #'
-#' @usage msdGraph(x, year, peakwindow1, minwindow2,
-#' minwindow1, peakwindow2, quantity,
+#' @usage msdGraph(x, year, peakwindow1, minwindow1,
+#' minwindow2, peakwindow2, quantity,
 #' window, timeVector)
 #'
 #' @param x               vector of data or xts
 #' @param year            year of interest
 #' @param peakwindow1     desired date in MMDD format to begin analysis (window 1)
-#' @param minwindow2      desired date in MMDD format to end analysis (window 1)
-#' @param minwindow1      desired date in MMDD format to begin analysis (window 2)
+#' @param minwindow1      desired date in MMDD format to end analysis (window 1)
+#' @param minwindow2      desired date in MMDD format to begin analysis (window 2)
 #' @param peakwindow2     desired date in MMDD format to end analysis (window 2)
 #' @param quantity        amount of times the filter is run
 #' @param window          size of filter
@@ -21,8 +21,8 @@
 #'
 #'
 #' @examples
-#' # graph = msdGraph(x, year, peakwindow1="05-01", minwindow2="08-31",
-#' # minwindow1 ="06-01", peakwindow2="10-31", quantity = 2, window = 31)
+#' # graph = msdGraph(x, year, peakwindow1="05-01", minwindow1="06-01",
+#' # minwindow2 ="08-31", peakwindow2="10-31", quantity = 2, window = 31)
 #'
 #' @export
 #-----------------------------------------------------------------------------------------------------------------------------------------
