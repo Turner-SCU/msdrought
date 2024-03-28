@@ -7,13 +7,6 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
-
 ```{r set knitr options, echo = FALSE}
 # set some knitr options
 knitr::opts_chunk$set(echo = FALSE
