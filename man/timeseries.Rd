@@ -17,7 +17,7 @@ An xts object with precipitation data over a series of five years:
 <https://www.chc.ucsb.edu/data/chirps>
 }
 \usage{
-data(timeseries)
+timeseries
 }
 \description{
 A subset of data from the UCSB CHIRPS data set
