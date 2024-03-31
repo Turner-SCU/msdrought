@@ -3,7 +3,7 @@
 \docType{data}
 \name{timeseries}
 \alias{timeseries}
-\title{World Health Organization TB data}
+\title{MSD package included timeseries data}
 \format{
 ## `timeseries`
 An xts object with precipitation data over a series of five years:
@@ -17,10 +17,9 @@ An xts object with precipitation data over a series of five years:
 <https://www.chc.ucsb.edu/data/chirps>
 }
 \usage{
-timeseries
+data(timeseries)
 }
 \description{
-A subset of data from the World Health Organization Global Tuberculosis
-Report ...
+A subset of data from the UCSB CHIRPS data set
 }
 \keyword{datasets}
