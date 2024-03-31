@@ -4,12 +4,11 @@
 #' Report ...
 #'
 #' @format ## `timeseries`
-#' A data frame with 7,240 rows and 60 columns:
+#' An xts object with precipitation data over a series of five years:
 #' \describe{
-#'   \item{country}{Country name}
-#'   \item{iso2, iso3}{2 & 3 letter ISO country codes}
-#'   \item{year}{Year}
+#'   \item{Date}{date in YYYY-MM-DD format}
+#'   \item{Precipitation}{daily precipitation in millimeters (mm)}
 #'   ...
 #' }
-#' @source <https://www.who.int/teams/global-tuberculosis-programme/data>
+#' @source <https://www.chc.ucsb.edu/data/chirps>
 "timeseries"
