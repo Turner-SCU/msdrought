@@ -47,8 +47,9 @@ filtered <- terra::app(infile, msdFilter, window = 31, quantity = 2)
 
 # Use the terra::app function to apply the bartlett noise filter (msdFilter) to the raster
 # msdStats = msdStats(x, dates, fcn)
-intensityPlots <- terra::app(filtered, msdStats, critDates, fcn = "intensity")
-durationPlots <- terra::app(filtered, msdStats, critDates, fcn = "duration")
+intensityPlots <- suppressWarnings(terra::app(filtered, msdStats, critDates, fcn = "intensity"))
+durationPlots <- suppressWarnings(terra::app(filtered, msdStats, critDates, fcn = "duration"))
+# suppressWarnings hides irrelevant messages that result from the msdFilter output
 ```
 
 The "intensityPlots" and "durationPlots" rasters contain the intensity and duration values for every geographical location for each of the 5 years of data contained in the original dataset. Now that we have all the intensity and duration values, we will extract a single point's data from the new rasters.
