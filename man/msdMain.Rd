@@ -9,7 +9,7 @@ minwindow2, peakwindow2, quantity,
 window, timeVector)
 }
 \arguments{
-\item{x}{Vector or TimeSeries}
+\item{x}{xts or vector of data}
 
 \item{peakwindow1}{desired date in MMDD format to begin analysis (window 1)}
 
@@ -29,7 +29,8 @@ window, timeVector)
 Data frame of all relevant MSD Statistics
 }
 \description{
-Generates all relevant statistics for the Mid Summer Drought
+Generates all relevant statistics for the Mid Summer Drought by running the msdStats function for every
+applicable metric. The output of msdMain is a dataframe containing every msdStats output for the available years of data.
 }
 \examples{
 # using timeseries (ts)

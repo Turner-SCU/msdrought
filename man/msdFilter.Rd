@@ -4,17 +4,17 @@
 \alias{msdFilter}
 \title{msdFilter -- A triangular Filter for smoothing data}
 \usage{
-msdFilter(x, window, quantity)
+msdFilter(x, window = 31, quantity = 2)
 }
 \arguments{
-\item{x}{RasterBrick or TimeSeries}
+\item{x}{TimeSeries or numeric vector}
 
 \item{window}{Size of Filter [Default = 31]}
 
 \item{quantity}{Number of passes to apply filter [Default = 2]}
 }
 \value{
-RasterBrick or TimeSeries of Yearly data
+Vector of Yearly data
 }
 \description{
 The filter will take a weighted average of a specified number of points
@@ -26,6 +26,6 @@ the point of interest.
 }
 \examples{
 # using a Time Series
-# r <- msdFilter(x, window = 31, quantity = 2)
+# r<-msdFilter(x, window = 31, quantity = 2)
 
 }

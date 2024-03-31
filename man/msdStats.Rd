@@ -7,7 +7,7 @@
 msdStats(x, dates, fcn)
 }
 \arguments{
-\item{x}{RasterBrick or TimeSeries}
+\item{x}{Filtered xts data (from msdFilter)}
 
 \item{dates}{Vector of Dates (from the msdDates function)}
 
@@ -18,13 +18,11 @@ Options are 'duration', 'intensity', 'firstMaxValue', 'secondMaxValue', 'min', '
 SpatRaster or TimeSeries of Yearly data
 }
 \description{
-This function calculates the different statistics of the mid summer drought from a RasterBrick or a Time Series.
-
+This function calculates the different statistics of the mid summer drought from a Time Series.
 The input must be in the form of daily data, with the first data point being January 1st of a respective year.
-If x is a SpatRaster, then the output is a SpatRaster with a data point for each year.
 }
 \examples{
 # using spatRaster
-# r<-terra::app(raster, msdStats, dates = d1, fcn="duration")
+# r <- terra::app(raster, msdStats, dates = d1, fcn="duration")
 
 }

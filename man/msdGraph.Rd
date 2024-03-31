@@ -31,9 +31,8 @@ window, timeVector)
 Graph of Time Series Data
 }
 \description{
-Plots the Time Series of Mid Summer Drought data
-
-The input must be in the form of daily data, with the first data point being January 1st of a respective year.
+Plots the Time Series of Mid Summer Drought data. The input must be in the form of daily data,
+with the first data point being January 1st of a respective year.
 }
 \examples{
 # graph = msdGraph(x, year, peakwindow1="05-01", minwindow1="06-01",
