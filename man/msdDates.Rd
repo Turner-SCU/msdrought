@@ -2,7 +2,7 @@
 % Please edit documentation in R/msdDates.R
 \name{msdDates}
 \alias{msdDates}
-\title{Pulling Dates Relevant to the MSD Calculations}
+\title{Finding indices for Dates Relevant to the MSD Calculations}
 \usage{
 msdDates(x, peakwindow1, minwindow1, minwindow2, peakwindow2)
 }
@@ -13,20 +13,20 @@ msdDates(x, peakwindow1, minwindow1, minwindow2, peakwindow2)
 
 \item{minwindow1}{desired date in MMDD format to begin search for minimum}
 
-\item{minwindow2 }{desired date in MMDD format to end search for minimum}
+\item{minwindow2}{desired date in MMDD format to end search for minimum}
 
 \item{peakwindow2}{desired date in MMDD format to end search for late peak}
 }
 \value{
-Date vector containing each year's beginning date, end date, and critical MSD dates
+Vector containing the indices corresponding to each year's beginning date, end date, and the critical MSD dates
 }
 \description{
-This function pulls the dates that correspond with the Mid Summer Drought, and is used in conjuction with the MSD function.
-It also pulls the first and last day of each calendar year provided.
+This function pulls the indices associated with the dates that correspond
+with the Mid Summer Drought, as well as the indices that indicate first and last day of each year.
+This function is used in conjunction with the MSD function.
 }
 \examples{
 x <- seq(from = as.Date("1981-01-01"), to = as.Date("1985-12-31"), by = "day")
-output <- msdDates(x, peakwindow1 = "05-01", minwindow1 = "06-01",
-          minwindow2 = "08-31", peakwindow2 = "10-31")
+output <- msdDates(x, peakwindow1 = "05-01", minwindow1 = "06-01", minwindow2 = "08-31", peakwindow2 = "10-31")
 
 }
