@@ -27,6 +27,7 @@ This function is used in conjunction with the MSD function.
 }
 \examples{
 x <- seq(from = as.Date("1981-01-01"), to = as.Date("1985-12-31"), by = "day")
-output <- msdDates(x, peakwindow1 = "05-01", minwindow1 = "06-01", minwindow2 = "08-31", peakwindow2 = "10-31")
+output <- msdDates(x, peakwindow1 = "05-01", minwindow1 = "06-01",
+                    minwindow2 = "08-31", peakwindow2 = "10-31")
 
 }
