@@ -19,20 +19,20 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: false
 Imports:
-    dplyr,
     ggplot2,
     lubridate,
     quantmod,
     signal,
     stats,
-    stringr,
-    tidyr,
-    tools,
     xts
 Suggests:
+    dplyr,
     knitr,
     rmarkdown,
-    terra
+    stringr,
+    terra,
+    tidyr,
+    tools
 RoxygenNote: 7.2.1
 URL: https://github.com/Turner-SCU/MSD
 BugReports: https://github.com/Turner-SCU/MSD/issues
