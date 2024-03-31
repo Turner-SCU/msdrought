@@ -12,6 +12,6 @@
 #' }
 #' @source <https://www.chc.ucsb.edu/data/chirps>
 "timeseries"
-#' \usage{
+#' @usage{
   data(timeseries)
 #'}
