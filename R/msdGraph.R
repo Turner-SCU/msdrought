@@ -28,6 +28,11 @@
 #-----------------------------------------------------------------------------------------------------------------------------------------
 msdGraph <- function(x, year, peakwindow1 = "05-01", minwindow1 = "06-01", minwindow2 = "08-31", peakwindow2 = "10-31", quantity = 2, window = 31, timeVector = 0) {
   #-----------------------------------------------------------------------------------------------------------------------------------------
+  # Define variables as NULL values to begin with
+  years <- NULL
+  Date <- NULL
+  Precipitation <- NULL
+  #-----------------------------------------------------------------------------------------------------------------------------------------
   # Assemble the base timeseries to be plotted (if the input "x" is not already a timeseries)
   if (inherits(x, "timeseries")) {
     timeseriesFull <- x
