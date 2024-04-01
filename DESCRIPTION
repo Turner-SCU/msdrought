@@ -33,7 +33,7 @@ Suggests:
     terra,
     tidyr,
     tools
-RoxygenNote: 7.2.1
+RoxygenNote: 7.3.1
 URL: https://github.com/Turner-SCU/MSD
 BugReports: https://github.com/Turner-SCU/MSD/issues
 VignetteBuilder: knitr
