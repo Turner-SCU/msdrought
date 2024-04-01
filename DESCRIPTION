@@ -3,7 +3,7 @@ Title: Calculate characteristics of a seasonal mid-summer drought
 Version: 0.0.1.0
 Authors@R: 
   c(person("Kenneth", "Joseph", email = "knjoseph@scu.edu", role = c("aut")),
-    person("Maurer", "Ed", email = "emaurer@scu.edu", role = c("aut", "cre")),
+    person("Maurer", "Ed", email = "emaurer@scu.edu", role = c("aut", "cre", "cph")),
     person("Avila", "Alex", email = "aaavila@scu.edu", role = c("aut")),
     person("Uyeda", "Turner", email = "tuyeda@scu.edu", role = c("aut")))
 Description: Functions for calculating characteristics of a mid-summer drought 
