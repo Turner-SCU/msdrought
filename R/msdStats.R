@@ -10,7 +10,7 @@
 #' @param fcn       Specify what values to be pulled from the function.
 #' Options are 'duration', 'intensity', 'firstMaxValue', 'secondMaxValue', 'min', 'mindex'.
 #'
-#' @return SpatRaster or TimeSeries of Yearly data
+#' @returns SpatRaster or TimeSeries of Yearly data
 #'
 #' @examples
 #' # using spatRaster

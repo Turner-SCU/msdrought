@@ -17,7 +17,7 @@
 #' @param window          size of filter
 #' @param timeVector      vector of dates (not needed for xts inputs)
 #'
-#' @return Graph of Time Series Data
+#' @returns Graph of Time Series Data
 #'
 #'
 #' @examples

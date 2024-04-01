@@ -16,7 +16,7 @@
 #' @param window            size of filter
 #' @param timeVector        vector of dates (not needed for xts inputs)
 #'
-#' @return Data frame of all relevant MSD Statistics
+#' @returns Data frame of all relevant MSD Statistics
 #'
 #'
 #' @examples

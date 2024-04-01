@@ -13,7 +13,7 @@
 #' @param window      Size of Filter [Default = 31]
 #' @param quantity    Number of passes to apply filter [Default = 2]
 #'
-#' @return Vector of Yearly data
+#' @returns Vector of Yearly data
 #'
 #'
 #' @examples

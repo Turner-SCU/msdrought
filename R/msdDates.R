@@ -13,7 +13,7 @@
 #' @param minwindow2        desired date in MMDD format to end search for minimum
 #' @param peakwindow2       desired date in MMDD format to end search for late peak
 #'
-#' @return Vector containing the indices corresponding to each year's beginning date, end date, and the critical MSD dates
+#' @returns Vector containing the indices corresponding to each year's beginning date, end date, and the critical MSD dates
 #'
 #' @examples
 #' x <- seq(from = as.Date("1981-01-01"), to = as.Date("1985-12-31"), by = "day")
