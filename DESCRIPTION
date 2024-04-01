@@ -1,5 +1,5 @@
 Package: MSD
-Title: Calculate characteristics of a seasonal mid-summer drought
+Title: Calculate Characteristics of a Seasonal Mid-Summer Drought
 Version: 1.0.0
 Authors@R: 
   c(person("Kenneth", "Joseph", email = "knjoseph@scu.edu", role = c("aut")),
