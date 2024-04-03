@@ -93,5 +93,3 @@ allStats <- msdMain(x)
 graph1981 <- msdGraph(x, 1981)
 plot(graph1981)
 ```
-
-Note that the first 31 days and the final 31 days will not have values due to the behavior of the msdFilter function with a single "year" of data.
