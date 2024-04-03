@@ -86,7 +86,7 @@ filterTS <- apply(x, MARGIN = 2, FUN = msdFilter, window = 31, quantity = 2)
 # Note: The founders of this package recommend filtering the data twice, but this is left up to the user to decide
 ```
 
-Now that we have the key dates and a filtered timeseries, it is time to calculate the statistics related to the MSD. We will see an output of 1 value per year of data. Because the timeseries we've created from the raster is for 5 years of data (from 1981 to 1985) we will see 5 values of each parameter.
+Now that we have the key dates and a filtered timeseries, it is time to calculate the statistics related to the MSD. We will see an output of 1 value per year of data. Because the timeseries we've created from the raster is for 2 years of data (1981 and 1982) we will see 2 values of each parameter.
 
 ```{r}
 # Use msdStats and r's built-in apply function to apply the intensity calculation across the filtered timeseries data

@@ -52,7 +52,7 @@ durationPlots <- suppressWarnings(terra::app(filtered, msdStats, critDates, fcn 
 # suppressWarnings hides irrelevant messages that result from the msdFilter output
 ```
 
-The "intensityPlots" and "durationPlots" rasters contain the intensity and duration values for every geographical location for each of the 5 years of data contained in the original dataset. Now that we have all the intensity and duration values, we will extract a single point's data from the new rasters.
+The "intensityPlots" and "durationPlots" rasters contain the intensity and duration values for every geographical location for both of the years of data contained in the original dataset. Now that we have all the intensity and duration values, we will extract a single point's data from the new rasters.
 
 ```{r}
 # Set up the desired location's longitude and latitude values
@@ -71,7 +71,7 @@ locationDuration <- terra::extract(durationPlots, location, method = "bilinear")
   t()
 ```
 
-Now we have converted the "intensityPlots" and "durationPlots" rasters to numeric objects called "locationIntensity" and "locationDuration", which represent the intensity and duration values for the provided coordinates across all 5 years of data. If a different location's data were desired, all we would need to do is swap out the lon and lat values we provided and run the previous chunk of code again. For ease of comparison to the "Sample-Walkthrough" vignette, we'll combine the two objects together. If we had repeated the process for all 5 msdStats parameters ("duration", "intensity", "firstMaxValue", "secondMaxValue", or "min"), we could achieve the same output as the "Sample-Walkthrough" vignette.
+Now we have converted the "intensityPlots" and "durationPlots" rasters to numeric objects called "locationIntensity" and "locationDuration", which represent the intensity and duration values for the provided coordinates across both years of data. If a different location's data were desired, all we would need to do is swap out the lon and lat values we provided and run the previous chunk of code again. For ease of comparison to the "Sample-Walkthrough" vignette, we'll combine the two objects together. If we had repeated the process for all 5 msdStats parameters ("duration", "intensity", "firstMaxValue", "secondMaxValue", or "min"), we could achieve the same output as the "Sample-Walkthrough" vignette.
 
 ```{r}
 # Pull the years from the data, for the purpose of organizing the data
