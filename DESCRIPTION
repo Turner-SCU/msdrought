@@ -13,7 +13,7 @@ Description: Functions for calculating characteristics of a mid-summer drought
     The details are described in "The Mesoamerican mid-summer drought: the 
     impact of its definition on occurrences and recent changes", HESS, Maurer 
     et al. (2022) '<https://hess.copernicus.org/articles/26/1425/2022/>'.
-    Github repository can be found at '<https://github.com/Turner-SCU/MSD>'.
+    GitHub repository can be found at '<https://github.com/Turner-SCU/MSD>'.
 Depends: R (>= 3.6.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
