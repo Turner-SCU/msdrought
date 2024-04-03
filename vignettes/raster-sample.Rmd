@@ -46,7 +46,7 @@ dates <- msdDates(formattedDates)
 # msdFilter = msdFilter(x, window)
 filtered <- terra::app(infile, msdFilter, window = 31, quantity = 2)
 terra::time(filtered) <- terra::time(infile)
-plot(filtered[[1:6]])
+plot(filtered)
 ```
 
 ```{r, warning=FALSE}
