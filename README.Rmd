@@ -28,11 +28,10 @@ The details are described in "The Mesoamerican mid-summer drought: the impact of
 
 ## Installation
 
-You can install the development version of msdrought from [GitHub](https://github.com/Turner-SCU/MSD)
+You can install the msdrought package from [CRAN](https://cran.r-project.org/) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("Turner-SCU/MSD")
+install.packages("msdrought")
 ```
 
 ## Example
