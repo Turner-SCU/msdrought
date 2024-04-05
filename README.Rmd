@@ -40,8 +40,7 @@ These are the steps required to create useful MSD data:
 
 1)  **Begin with a xts or spatraster of precipitation data over time.**
 
-    Please view the sample-walkthrough or the raster-sample vignettes for information on how to properly format the data and how to proceed
-    with utilizing this package. 
+    Please view the sample-walkthrough or the raster-sample vignettes for information on how to properly format the data and how to proceed with utilizing this package.
 
 2)  **Filter this data using the msdFilter function.**
 
@@ -51,24 +50,22 @@ These are the steps required to create useful MSD data:
 
     There are two sets of necessary dates when calculating the MSD statistics: the critical periods and the start and end of the year.
     This function determines both and stores them as a single vector.
-    The following function (msdStats) breaks the two types of dates apart, so it is important to not change the output
-    of the msdDates function before feeding it into the subsequent msd function.
+    The following function (msdStats) breaks the two types of dates apart, so it is important to not change the output of the msdDates function before feeding it into the subsequent msd function.
 
 4)  **Supply the msdStats function with precipitation data, the data from msdDates, and a selected parameter to calculate.**
 
     The precipitation data must be filtered using the msdFilter function.
     In order for this function to provide useful data, the input from msdDates must be unchanged from its original output.
     The following parameters are applicable to the MSD calculation: duration, intensity, firstMaxValue, secondMaxValue, min, and mindex.
-    
+
 5)  **Alternatively, use the msdMain function to calculate every relevant statistics related to the MSD phenomenon**
-    
-    The msdMain function runs the msdStats function for every parameter and every year. This output is much more comprehensive if you are
-    looking to characterize multiple years of data, or are just wanting to understand one year's parameters all at once.
-    
+
+    The msdMain function runs the msdStats function for every parameter and every year.
+    This output is much more comprehensive if you are looking to characterize multiple years of data, or are just wanting to understand one year's parameters all at once.
+
 6)  **Create a plot of one year of rainfall data to visualize the MSD phenomenon and its parameters**
 
-    Using the msdGraph function, a visual plot of the filtered rainfall data, its key dates, and the peaks and valleys used to characterize
-    the drought can be created.
+    Using the msdGraph function, a visual plot of the filtered rainfall data, its key dates, and the peaks and valleys used to characterize the drought can be created.
 
 ```{r example}
 library(msdrought)
