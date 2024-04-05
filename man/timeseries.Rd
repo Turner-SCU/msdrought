@@ -3,7 +3,7 @@
 \docType{data}
 \name{timeseries}
 \alias{timeseries}
-\title{MSD package included timeseries data}
+\title{msdrought package included timeseries data}
 \format{
 ## `timeseries`
 An xts object with precipitation data over a series of five years:
