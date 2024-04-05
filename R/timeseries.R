@@ -1,4 +1,4 @@
-#' MSD package included timeseries data
+#' MSDrought package included timeseries data
 #'
 #' A subset of data from the UCSB CHIRPS data set
 #'

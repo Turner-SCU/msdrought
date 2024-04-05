@@ -17,12 +17,12 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library(MSD)
+library(msdrought)
 ```
 
-The purpose of the MSD package is to take the input of a series of rainfall data and to extract some key information (such as dates, rainfall intensity, duration of a rainfall period, and more) in order to characterize the Mid-Summer Drought climatic phenomenon present in Central America. This vignette will walk you through the process of taking a raster input and extracting a the statistics for the entire timeseries of the provided data.
+The purpose of the msdrought package is to take the input of a series of rainfall data and to extract some key information (such as dates, rainfall intensity, duration of a rainfall period, and more) in order to characterize the Mid-Summer Drought climatic phenomenon present in Central America. This vignette will walk you through the process of taking a raster input and extracting a the statistics for the entire timeseries of the provided data.
 
-We will begin by loading in the relevant packages and the raster data we plan to use. In order to get this data to function with the MSD package's functions, we'll need to extract a single point of spatial data in the form of a timeseries. This will be done using the "terra" package. The "tidyr" package will be useful for streamlining the code. If the data you plan to analyze is in the form of an xtimeseries (xts) object, you only need to load the package and proceed to the next step.
+We will begin by loading in the relevant packages and the raster data we plan to use. In order to get this data to function with the msdrought package's functions, we'll need to extract a single point of spatial data in the form of a timeseries. This will be done using the "terra" package. The "tidyr" package will be useful for streamlining the code. If the data you plan to analyze is in the form of an xtimeseries (xts) object, you only need to load the package and proceed to the next step.
 
 ```{r}
 library(terra)
@@ -77,7 +77,7 @@ Before we calculate these pieces of data, however, we will need to understand th
 ```{r}
 # Use the msdDates function to extract the key dates related to the window of the MSD
 # msdDates = msdDates(x, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
-keyDatesTS <- msdDates(time(x))
+keyDatesTS <- msdrought::msdDates(time(x))
 # Note: The windows (between the start and end dates) can be user-defined, but leaving the field blank uses the parameters determined by the founders of this package
 
 # Filter the data using a bartlett noise filter by using the msdFilter function
@@ -107,7 +107,7 @@ msdMain is a function that calculates all of the relevant statistics at once and
 ```{r}
 # msdMain takes the input parameters from their basic form and calculates the relevant statistics
 # msdMain = msdMain(x, firstStartDate, firstEndDate, secondStartDate, secondEndDate, window, quantity)
-allStats <- msdMain(x)
+allStats <- msdrought::msdMain(x)
 ```
 
 msdGraph is used to plot the timeseries and perform an analysis on the calculated data and parameters to determine if a single year in question represents a year with a Mid-Summer Drought or not. Below, we'll use 1982 as an example, as there was a Mid-Summer Drought during that year.
@@ -115,7 +115,7 @@ msdGraph is used to plot the timeseries and perform an analysis on the calculate
 ```{r fig.height=5, fig.width=5}
 # Use msdGraph to calculate the statistics and analyze them to determine if an MSD was present or not during the course of one year
 # msdGraph = msdGraph(x, year, firstStartDate, firstEndDate, secondStartDate, secondEndDate, window, quantity)
-graph1982 <- msdGraph(x, 1982)
+graph1982 <- msdrought::msdGraph(x, 1982)
 plot(graph1982)
 ```
 

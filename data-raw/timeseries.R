@@ -1,4 +1,4 @@
-# Steps to produce a timeseries (ts) of data for the MSD package
+# Steps to produce a timeseries (ts) of data for the MSDrought package
 #
 # Data origin: University of California, Santa Barbara Climate Hazards Group InfraRed Precipitation with Station data (CHIRPS)
 # Daily precipitation data recorded from 1981 to 1985, trimmed to only highlight Nicaragua

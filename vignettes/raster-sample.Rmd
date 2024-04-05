@@ -15,10 +15,10 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library(MSD)
+library(msdrought)
 ```
 
-The purpose of the MSD package is to take the input of a series of rainfall data and to extract some key information (such as dates, rainfall intensity, duration of a rainfall period, and more) to characterize the Mid-Summer Drought climatic phenomenon present in Central America. This vignette will walk you through the process of taking a raster input and extracting a the statistics for each cell of the raster using the terra package.
+The purpose of the msdrought package is to take the input of a series of rainfall data and to extract some key information (such as dates, rainfall intensity, duration of a rainfall period, and more) to characterize the Mid-Summer Drought climatic phenomenon present in Central America. This vignette will walk you through the process of taking a raster input and extracting a the statistics for each cell of the raster using the terra package.
 
 ```{r, warning=FALSE}
 library(terra)
@@ -40,7 +40,7 @@ Begin by finding the range of dates for the raster data, as these values are nee
 # msdDates = msdDates(x, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
 allDates <- terra::time(infile)
 formattedDates <- as.Date(allDates)
-dates <- msdDates(formattedDates)
+dates <- msdrought::msdDates(formattedDates)
 
 # Use the terra::app function to apply the bartlett noise filter (msdFilter) to the raster
 # msdFilter = msdFilter(x, window)

@@ -15,10 +15,10 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library(MSD)
+library(msdrought)
 ```
 
-The MSD package is designed to analyze one year of data at a time. For the AGU '23 conference, a graphic was made that showcased the trends of the average rainfall across a set of years. Each day's rainfall data across multiple years were averaged, then analyzed. For example, in a data set with precipitation data from 1981 to 1985, every day of the year (from January 1st to December 31st) had its rainfall data averaged (example: the precipitation values of 1-1-81, 1-1-82, 1-1-83, 1-1-84, and 1-1-85 were averaged), then put into a dummy xts to be analyzed. This vignette shows how that graphic was created.
+The msdrought package is designed to analyze one year of data at a time. For the AGU '23 conference, a graphic was made that showcased the trends of the average rainfall across a set of years. Each day's rainfall data across multiple years were averaged, then analyzed. For example, in a data set with precipitation data from 1981 to 1985, every day of the year (from January 1st to December 31st) had its rainfall data averaged (example: the precipitation values of 1-1-81, 1-1-82, 1-1-83, 1-1-84, and 1-1-85 were averaged), then put into a dummy xts to be analyzed. This vignette shows how that graphic was created.
 
 The first step is to extract the relevant data from a SpatRaster.
 
@@ -82,14 +82,14 @@ Now, perform the MSD calculations and plot the averaged graph!
 
 ```{r}
 # Perform MSD calculations with the new xts
-keyDatesTS <- msdDates(time(x))
+keyDatesTS <- msdrought::msdDates(time(x))
 filterTS <- apply(x, MARGIN = 2, FUN = msdFilter, window = 31, quantity = 2)
 duration <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn = "duration")
 intensity <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn = "intensity")
 firstMaxValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn = "firstMaxValue")
 secondMaxValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn = "secondMaxValue")
 minValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn = "min")
-allStats <- msdMain(x)
-graph1981 <- msdGraph(x, 1981)
+allStats <- msdrought::msdMain(x)
+graph1981 <- msdrought::msdGraph(x, 1981)
 plot(graph1981)
 ```

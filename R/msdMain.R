@@ -30,15 +30,15 @@ msdMain <- function(x, peakwindow1 = "05-01", minwindow1 = "06-01", minwindow2 =
   # msdDates
   if (inherits(x, "timeseries") == TRUE) {
     timeVector <- stats::time(x)
-    dates <- msdDates(timeVector, peakwindow1, minwindow1, minwindow2, peakwindow2)
+    dates <- msdrought::msdDates(timeVector, peakwindow1, minwindow1, minwindow2, peakwindow2)
   } else if (inherits(x, "xts") == TRUE) {
     timeVector <- stats::time(x)
-    dates <- msdDates(timeVector, peakwindow1, minwindow1, minwindow2, peakwindow2)
+    dates <- msdrought::msdDates(timeVector, peakwindow1, minwindow1, minwindow2, peakwindow2)
   } else if (timeVector == 0) {
     print("Error: no dates vector present")
     stop
   } else {
-    dates <- msdDates(timeVector, peakwindow1, minwindow1, minwindow2, peakwindow2)
+    dates <- msdrought::msdDates(timeVector, peakwindow1, minwindow1, minwindow2, peakwindow2)
   }
   #-------------------------------------------------------------------------------------------------------------------------------------------------
   # msdFilter

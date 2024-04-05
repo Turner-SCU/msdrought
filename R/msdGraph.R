@@ -43,7 +43,7 @@ msdGraph <- function(x, year, peakwindow1 = "05-01", minwindow1 = "06-01", minwi
     timeseriesFull <- xts::xts(x, datesSeq)
   }
   # Calculate all stats for all years of the provided data, then select only the relevant year's data.
-  allStats <- msdMain(x, peakwindow1, minwindow2, minwindow1, peakwindow2, quantity, window, timeVector)
+  allStats <- msdrought::msdMain(x, peakwindow1, minwindow2, minwindow1, peakwindow2, quantity, window, timeVector)
   yearStats <- subset(allStats, years == year)
   # Subset the timeseries to only be the year (365 days) of interest
   allDates <- seq(from = as.Date(stats::time(timeseriesFull[1])), to = as.Date(stats::time(timeseriesFull[length(timeseriesFull)])), by = 1)

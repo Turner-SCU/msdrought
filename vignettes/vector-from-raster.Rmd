@@ -15,10 +15,10 @@ knitr::opts_chunk$set(echo = FALSE
 ```
 
 ```{r setup}
-library(MSD)
+library(msdrought)
 ```
 
-In general, the MSD Package works best when the data from a specific point in a raster is pulled, converted into an xts object, and then analyzed. This vignette will show an alternative approach, when an entire raster is analyzed for its duration and intensity values, then a single specific point and its corresponding data is extracted to a vector. The process for both duration and intensity (as well as any other given parameter for the msdStats function) is identical.
+In general, the msdrought Package works best when the data from a specific point in a raster is pulled, converted into an xts object, and then analyzed. This vignette will show an alternative approach, when an entire raster is analyzed for its duration and intensity values, then a single specific point and its corresponding data is extracted to a vector. The process for both duration and intensity (as well as any other given parameter for the msdStats function) is identical.
 
 ```{r}
 # Load the necessary packages and the included data, for the purpose of demonstration
@@ -39,7 +39,7 @@ Now we have our raster data loaded in as "infile". Using the terra::app command,
 # msdDates = msdDates(x, firstStartDate, firstEndDate, secondStartDate, secondEndDate)
 allDates <- terra::time(infile)
 formattedDates <- as.Date(allDates)
-critDates <- msdDates(formattedDates)
+critDates <- msdrought::msdDates(formattedDates)
 
 # Use the terra::app function to apply the bartlett noise filter (msdFilter) to the raster
 # msdFilter = msdFilter(x, window)
@@ -49,7 +49,7 @@ filtered <- terra::app(infile, msdFilter, window = 31, quantity = 2)
 # msdStats = msdStats(x, dates, fcn)
 intensityPlots <- suppressWarnings(terra::app(filtered, msdStats, critDates, fcn = "intensity"))
 durationPlots <- suppressWarnings(terra::app(filtered, msdStats, critDates, fcn = "duration"))
-# suppressWarnings hides irrelevant messages that result from the msdFilter output
+# Note: suppressWarnings hides irrelevant messages that result from the msdFilter output
 ```
 
 The "intensityPlots" and "durationPlots" rasters contain the intensity and duration values for every geographical location for both of the years of data contained in the original dataset. Now that we have all the intensity and duration values, we will extract a single point's data from the new rasters.
