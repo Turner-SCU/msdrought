@@ -3,9 +3,9 @@ Title: Calculate Characteristics of a Seasonal Mid-Summer Drought
 Version: 0.1.0
 Authors@R: 
   c(person("Kenneth", "Joseph", email = "knjoseph@scu.edu", role = c("aut")),
-    person("Maurer", "Ed", email = "emaurer@scu.edu", role = c("aut", "cre", "cph")),
-    person("Avila", "Alex", email = "aaavila@scu.edu", role = c("aut")),
-    person("Uyeda", "Turner", email = "tuyeda@scu.edu", role = c("aut")))
+    person("Ed", "Maurer", email = "emaurer@scu.edu", role = c("aut", "cre", "cph")),
+    person("Alex", "Avila", email = "aaavila@scu.edu", role = c("aut")),
+    person("Turner", "Uyeda", email = "tuyeda@scu.edu", role = c("aut")))
 Description: Functions for calculating characteristics of a mid-summer drought 
     (MSD), a phenomenon of decreased rainfall during a typical rainy season. 
     The MSD is a feature of rainfall in much of Central America, but is also
@@ -34,6 +34,6 @@ Suggests:
     tidyr,
     tools
 RoxygenNote: 7.3.1
-URL: https://github.com/Turner-SCU/msdrought
+URL: https://github.com/Turner-SCU/msdrought, https://turner-scu.github.io/msdrought/
 BugReports: https://github.com/Turner-SCU/msdrought/issues
 VignetteBuilder: knitr
