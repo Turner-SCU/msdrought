@@ -1,3 +1,4 @@
-# msdrought (development version)
+# msdrought 0.1.0
 
-* Initial CRAN submission.
+* This is the first release of msdrought.
+
