@@ -26,7 +26,7 @@
 msdDates <- function(x, peakwindow1 = "05-01", minwindow1 = "06-01", minwindow2 = "08-31", peakwindow2 = "10-31") {
   # Check that data begin on Jan 1
   if ((format(x[1], "%m-%d") != "01-01")) {
-    print("current function requires a January 1 start date\n")
+    stop("current function requires a January 1 start date\n")
   }
   #----------------------------------------------------------------------------------------------------------------------------------------------
   # find indices for all years for key dates
