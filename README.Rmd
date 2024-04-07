@@ -71,7 +71,7 @@ These are the steps required to create useful MSD data:
 library(msdrought)
 #------------------------------------------------------------------------------------------------------------------------------
 # Load in the data that will be analyzed.
-data("timeseries")
+utils::data("timeseries")
 x = timeseries
 #------------------------------------------------------------------------------------------------------------------------------
 # msdDates = (times, peakWindow1 = "05-01", minWindow1 = "06-01", minWindow2 = "08-31", peakWindow2 = "10-31")
