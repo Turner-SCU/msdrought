@@ -75,7 +75,7 @@ data("timeseries")
 x = timeseries
 #------------------------------------------------------------------------------------------------------------------------------
 # msdDates = (times, peakWindow1 = "05-01", minWindow1 = "06-01", minWindow2 = "08-31", peakWindow2 = "10-31")
-allDates = stats::time(x)
+allDates = as.Date(stats::time(x))
 keyDatesTS = msdrought::msdDates(allDates)
 #------------------------------------------------------------------------------------------------------------------------------
 # msdFilter = msdFilter(x, window)
