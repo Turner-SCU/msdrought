@@ -32,8 +32,7 @@ Suggests:
     stringr,
     terra,
     tidyr,
-    tools,
-    utils
+    tools
 RoxygenNote: 7.3.1
 URL: https://github.com/Turner-SCU/msdrought
 BugReports: https://github.com/Turner-SCU/msdrought/issues
