@@ -1,4 +1,5 @@
 url: https://turner-scu.github.io/msdrought/
 template:
   bootstrap: 5
+  bootswatch: yeti
 
