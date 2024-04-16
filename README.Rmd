@@ -69,29 +69,30 @@ These are the steps required to create useful MSD data:
 
 ```{r example}
 library(msdrought)
+library(xts)
 #------------------------------------------------------------------------------------------------------------------------------
 # Load in the data that will be analyzed.
 data("timeseries")
-x = timeseries
+x <- as.xts(timeseries)
 #------------------------------------------------------------------------------------------------------------------------------
-# msdDates = (times, peakWindow1 = "05-01", minWindow1 = "06-01", minWindow2 = "08-31", peakWindow2 = "10-31")
-keyDatesTS = msdrought::msdDates(as.Date(stats::time(x)))
+# msdDates <- (times, peakWindow1 = "05-01", minWindow1 = "06-01", minWindow2 = "08-31", peakWindow2 = "10-31")
+keyDatesTS <- msdrought::msdDates(as.Date(stats::time(x)))
 #------------------------------------------------------------------------------------------------------------------------------
-# msdFilter = msdFilter(x, window)
-filterTS = apply(x, MARGIN = 2, FUN = msdFilter, window = 31, quantity = 2)
+# msdFilter <- msdFilter(x, window = 31, quantity = 2)
+filterTS <- msdrought::msdFilter(x, window = 31, quantity = 2)
 #------------------------------------------------------------------------------------------------------------------------------
-# msdStats = msdStats(x, dates, fcn)
-duration <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="duration")
-intensity <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="intensity")
-firstMaxValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="firstMaxValue")
-secondMaxValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="secondMaxValue")
-min <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn="min")
+# msdStats <- msdStats(x, dates, fcn)
+duration <- msdrought::msdStats(filterTS, keyDatesTS, fcn = "duration")
+intensity <- msdrought::msdStats(filterTS, keyDatesTS, fcn = "intensity")
+firstMaxValue <- msdrought::msdStats(filterTS, keyDatesTS, fcn = "firstMaxValue")
+secondMaxValue <- msdrought::msdStats(filterTS, keyDatesTS, fcn = "secondMaxValue")
+min <- msdrought::msdStats(filterTS, keyDatesTS, fcn = "min")
 #------------------------------------------------------------------------------------------------------------------------------
-# msdMain = msdMain(x, firstStartDate, firstEndDate, secondStartDate, secondEndDate, window, quantity)
-allStats = msdrought::msdMain(x)
+# msdMain <- msdMain(x, firstStartDate, firstEndDate, secondStartDate, secondEndDate, window, quantity)
+allStats <- msdrought::msdMain(x)
 #------------------------------------------------------------------------------------------------------------------------------
-# msdGraph = msdGraph(x, year, firstStartDate, firstEndDate, secondStartDate, secondEndDate, window, quantity)
-graph1981 = msdrought::msdGraph(x, 1981)
+# msdGraph <- msdGraph(x, year, firstStartDate, firstEndDate, secondStartDate, secondEndDate, window, quantity)
+graph1981 <- msdrought::msdGraph(x, 1981)
 plot(graph1981)
 
 ```
