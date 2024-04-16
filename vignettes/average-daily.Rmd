@@ -83,13 +83,14 @@ Now, perform the MSD calculations and plot the averaged graph!
 ```{r}
 # Perform MSD calculations with the new xts
 keyDatesTS <- msdrought::msdDates(time(x))
-filterTS <- apply(x, MARGIN = 2, FUN = msdFilter, window = 31, quantity = 2)
-duration <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn = "duration")
-intensity <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn = "intensity")
-firstMaxValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn = "firstMaxValue")
-secondMaxValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn = "secondMaxValue")
-minValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn = "min")
+filterTS <- msdrought::msdFilter(x, window = 31, quantity = 2)
+duration <- msdrought::msdStats(filterTS, keyDatesTS, fcn = "duration")
+intensity <- msdrought::msdStats(filterTS, keyDatesTS, fcn = "intensity")
+firstMaxValue <- msdrought::msdStats(filterTS, keyDatesTS, fcn = "firstMaxValue")
+secondMaxValue <- msdrought::msdStats(filterTS, keyDatesTS, fcn = "secondMaxValue")
+min <- msdrought::msdStats(filterTS, keyDatesTS, fcn = "min")
 allStats <- msdrought::msdMain(x)
-graph1981 <- msdrought::msdGraph(x, 1981)
-plot(graph1981)
+graph1981 <- suppressWarnings(msdrought::msdGraph(x, 1981))
+suppressWarnings(plot(graph1981))
+# Note: suppressWarnings hides irrelevant messages that result from the msdGraph output
 ```

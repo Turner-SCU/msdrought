@@ -82,7 +82,7 @@ keyDatesTS <- msdrought::msdDates(time(x))
 
 # Filter the data using a bartlett noise filter by using the msdFilter function
 # msdFilter = msdFilter(x, window)
-filterTS <- apply(x, MARGIN = 2, FUN = msdFilter, window = 31, quantity = 2)
+filterTS <- msdrought::msdFilter(x, window = 31, quantity = 2)
 # Note: The founders of this package recommend filtering the data twice, but this is left up to the user to decide
 ```
 
@@ -91,11 +91,11 @@ Now that we have the key dates and a filtered timeseries, it is time to calculat
 ```{r}
 # Use msdStats and r's built-in apply function to apply the intensity calculation across the filtered timeseries data
 # msdStats = msdStats(x, dates, fcn)
-durationValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn = "duration")
-intensityValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn = "intensity")
-firstMaxValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn = "firstMaxValue")
-secondMaxValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn = "secondMaxValue")
-minValue <- apply(filterTS, MARGIN = 2, FUN = msdStats, keyDatesTS, fcn = "min")
+durationValues <- msdrought::msdStats(filterTS, keyDatesTS, fcn = "duration")
+intensityValues <- msdrought::msdStats(filterTS, keyDatesTS, fcn = "intensity")
+firstMaxValues <- msdrought::msdStats(filterTS, keyDatesTS, fcn = "firstMaxValue")
+secondMaxValues <- msdrought::msdStats(filterTS, keyDatesTS, fcn = "secondMaxValue")
+minValues <- msdrought::msdStats(filterTS, keyDatesTS, fcn = "min")
 ```
 
 After completing this step, we will have a numeric list of all the statistics values for every year of data.
