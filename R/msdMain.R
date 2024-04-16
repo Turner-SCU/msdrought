@@ -20,8 +20,7 @@
 #'
 #'
 #' @examples
-#' # using timeseries (ts)
-#' # output = msdMain(ts, peakwindow1="05-01", minwindow1="08-31",
+#' # allStats <- msdrought::msdMain(ts, peakwindow1="05-01", minwindow1="08-31",
 #' # minwindow2 ="06-01", peakwindow2="10-31", quantity = 2, window = 31)
 #'
 #' @export

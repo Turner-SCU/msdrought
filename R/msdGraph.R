@@ -21,7 +21,7 @@
 #'
 #'
 #' @examples
-#' # graph = msdGraph(x, year, peakwindow1="05-01", minwindow1="06-01",
+#' # graph = msdrought::msdGraph(x, year, peakwindow1="05-01", minwindow1="06-01",
 #' # minwindow2 ="08-31", peakwindow2="10-31", quantity = 2, window = 31)
 #'
 #' @export

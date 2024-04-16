@@ -13,8 +13,7 @@
 #' @returns SpatRaster or TimeSeries of Yearly data
 #'
 #' @examples
-#' # using spatRaster
-#' # r <- terra::app(raster, msdStats, dates = d1, fcn="duration")
+#' # durationValues <- msdrought::msdStats(filteredDataXTS, keyDates, fcn = "duration")
 #'
 #' @export
 #'
