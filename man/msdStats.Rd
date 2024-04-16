@@ -22,7 +22,6 @@ This function calculates the different statistics of the mid summer drought from
 The input must be in the form of daily data, with the first data point being January 1st of a respective year.
 }
 \examples{
-# using spatRaster
-# r <- terra::app(raster, msdStats, dates = d1, fcn="duration")
+# durationValues <- msdrought::msdStats(filteredDataXTS, keyDates, fcn = "duration")
 
 }

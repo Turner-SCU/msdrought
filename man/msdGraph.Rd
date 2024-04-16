@@ -35,7 +35,7 @@ Plots the Time Series of Mid Summer Drought data. The input must be in the form 
 with the first data point being January 1st of a respective year.
 }
 \examples{
-# graph = msdGraph(x, year, peakwindow1="05-01", minwindow1="06-01",
+# graph = msdrought::msdGraph(x, year, peakwindow1="05-01", minwindow1="06-01",
 # minwindow2 ="08-31", peakwindow2="10-31", quantity = 2, window = 31)
 
 }

@@ -26,6 +26,6 @@ the point of interest.
 }
 \examples{
 # using a Time Series
-# r<-msdFilter(x, window = 31, quantity = 2)
+# filteredData <- msdrought::msdFilter(x, window = 31, quantity = 2)
 
 }
