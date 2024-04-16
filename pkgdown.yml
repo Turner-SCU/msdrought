@@ -1,12 +1,12 @@
 pandoc: 3.1.11
-pkgdown: 2.0.7
+pkgdown: 2.0.8
 pkgdown_sha: ~
 articles:
-  Sample-Walkthrough: Sample-Walkthrough.html
   average-daily: average-daily.html
   raster-sample: raster-sample.html
+  Sample-Walkthrough: Sample-Walkthrough.html
   vector-from-raster: vector-from-raster.html
-last_built: 2024-04-07T06:22Z
+last_built: 2024-04-16T05:28Z
 urls:
   reference: https://turner-scu.github.io/msdrought/reference
   article: https://turner-scu.github.io/msdrought/articles
