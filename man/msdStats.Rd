@@ -22,6 +22,12 @@ This function calculates the different statistics of the mid summer drought from
 The input must be in the form of daily data, with the first data point being January 1st of a respective year.
 }
 \examples{
-# durationValues <- msdrought::msdStats(filteredDataXTS, keyDates, fcn = "duration")
+
+data("timeseries")
+ts <- timeseries
+dates <- zoo::index(ts)
+filteredData <- msdrought::msdFilter(ts, window = 31, quantity = 2)
+keyDates <- msdDates(dates)
+msdrought::msdStats(filteredData, keyDates, fcn = "duration")
 
 }

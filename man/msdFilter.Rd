@@ -25,7 +25,9 @@ and calculate a weighted average based on how far away the points are from
 the point of interest.
 }
 \examples{
-# using a Time Series
-# filteredData <- msdrought::msdFilter(x, window = 31, quantity = 2)
+
+dates <- seq(from = as.Date("1981-01-01"), to = as.Date("1982-12-31"), by = "day")
+ts <- xts::xts(runif(length(dates), 0, 50),dates)
+filteredData <- msdrought::msdFilter(ts, window = 31, quantity = 2)
 
 }

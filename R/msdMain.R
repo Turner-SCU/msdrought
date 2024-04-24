@@ -20,8 +20,10 @@
 #'
 #'
 #' @examples
-#' # allStats <- msdrought::msdMain(ts, peakwindow1="05-01", minwindow1="08-31",
-#' # minwindow2 ="06-01", peakwindow2="10-31", quantity = 2, window = 31)
+#'
+#' data("timeseries")
+#' ts <- timeseries
+#' df <- msdrought::msdMain(ts)
 #'
 #' @export
 #-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -34,8 +36,7 @@ msdMain <- function(x, peakwindow1 = "05-01", minwindow1 = "06-01", minwindow2 =
     timeVector <- stats::time(x)
     dates <- msdrought::msdDates(timeVector, peakwindow1, minwindow1, minwindow2, peakwindow2)
   } else if (timeVector == 0) {
-    print("Error: no dates vector present")
-    stop
+    stop("Error: no dates vector present")
   } else {
     dates <- msdrought::msdDates(timeVector, peakwindow1, minwindow1, minwindow2, peakwindow2)
   }

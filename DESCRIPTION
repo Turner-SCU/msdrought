@@ -33,6 +33,7 @@ Suggests:
     stringr,
     terra,
     tidyr,
-    tools
+    tools,
+    zoo
 RoxygenNote: 7.3.1
 VignetteBuilder: knitr
