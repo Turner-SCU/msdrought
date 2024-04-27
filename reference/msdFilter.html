@@ -101,10 +101,11 @@ the point of interest.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># using a Time Series</span></span></span>
-<span class="r-in"><span><span class="co"># filteredData &lt;- msdrought::msdFilter(x, window = 31, quantity = 2)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/zoo/man/yearmon.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"1981-01-01"</span><span class="op">)</span>, to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/zoo/man/yearmon.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"1982-12-31"</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">"day"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ts</span> <span class="op">&lt;-</span> <span class="fu">xts</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xts/man/xts.html" class="external-link">xts</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">dates</span><span class="op">)</span>, <span class="fl">0</span>, <span class="fl">50</span><span class="op">)</span>,<span class="va">dates</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">filteredData</span> <span class="op">&lt;-</span> <span class="fu">msdrought</span><span class="fu">::</span><span class="fu">msdFilter</span><span class="op">(</span><span class="va">ts</span>, window <span class="op">=</span> <span class="fl">31</span>, quantity <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -112,7 +113,7 @@ the point of interest.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Kenneth Joseph, Ed Maurer, Alex Avila, Turner Uyeda.</p>
+  <p>Developed by Turner Uyeda, Ed Maurer, Kenneth Joseph, Alex Avila.</p>
 </div>
 
 <div class="pkgdown-footer-right">

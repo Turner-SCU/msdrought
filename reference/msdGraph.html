@@ -79,23 +79,23 @@ with the first data point being January 1st of a respective year.</p>
 
 
 <dt>peakwindow1</dt>
-<dd><p>desired date in MMDD format to begin analysis (window 1)</p></dd>
+<dd><p>date in MMDD format to begin analysis (window 1)</p></dd>
 
 
 <dt>minwindow1</dt>
-<dd><p>desired date in MMDD format to end analysis (window 1)</p></dd>
+<dd><p>date in MMDD format to end analysis (window 1)</p></dd>
 
 
 <dt>minwindow2</dt>
-<dd><p>desired date in MMDD format to begin analysis (window 2)</p></dd>
+<dd><p>date in MMDD format to begin analysis (window 2)</p></dd>
 
 
 <dt>peakwindow2</dt>
-<dd><p>desired date in MMDD format to end analysis (window 2)</p></dd>
+<dd><p>date in MMDD format to end analysis (window 2)</p></dd>
 
 
 <dt>quantity</dt>
-<dd><p>amount of times the filter is run</p></dd>
+<dd><p>number of times the filter is to be run</p></dd>
 
 
 <dt>window</dt>
@@ -115,10 +115,13 @@ with the first data point being January 1st of a respective year.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># graph = msdrought::msdGraph(x, year, peakwindow1="05-01", minwindow1="06-01",</span></span></span>
-<span class="r-in"><span><span class="co"># minwindow2 ="08-31", peakwindow2="10-31", quantity = 2, window = 31)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"timeseries"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ts</span> <span class="op">&lt;-</span> <span class="va">timeseries</span></span></span>
+<span class="r-in"><span><span class="fu">msdrought</span><span class="fu">::</span><span class="fu">msdGraph</span><span class="op">(</span><span class="va">ts</span>, <span class="fl">1982</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -126,7 +129,7 @@ with the first data point being January 1st of a respective year.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Kenneth Joseph, Ed Maurer, Alex Avila, Turner Uyeda.</p>
+  <p>Developed by Turner Uyeda, Ed Maurer, Kenneth Joseph, Alex Avila.</p>
 </div>
 
 <div class="pkgdown-footer-right">
