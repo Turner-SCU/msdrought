@@ -13,7 +13,13 @@
 #' @returns SpatRaster or TimeSeries of Yearly data
 #'
 #' @examples
-#' # durationValues <- msdrought::msdStats(filteredDataXTS, keyDates, fcn = "duration")
+#'
+#' data("timeseries")
+#' ts <- timeseries
+#' dates <- zoo::index(ts)
+#' filteredData <- msdrought::msdFilter(ts, window = 31, quantity = 2)
+#' keyDates <- msdDates(dates)
+#' msdrought::msdStats(filteredData, keyDates, fcn = "duration")
 #'
 #' @export
 #'

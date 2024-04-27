@@ -33,7 +33,9 @@ Generates all relevant statistics for the Mid Summer Drought by running the msdS
 applicable metric. The output of msdMain is a dataframe containing every msdStats output for the available years of data.
 }
 \examples{
-# allStats <- msdrought::msdMain(ts, peakwindow1="05-01", minwindow1="08-31",
-# minwindow2 ="06-01", peakwindow2="10-31", quantity = 2, window = 31)
+
+data("timeseries")
+ts <- timeseries
+df <- msdrought::msdMain(ts)
 
 }

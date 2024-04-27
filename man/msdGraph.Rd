@@ -13,15 +13,15 @@ window, timeVector)
 
 \item{year}{year of interest}
 
-\item{peakwindow1}{desired date in MMDD format to begin analysis (window 1)}
+\item{peakwindow1}{date in MMDD format to begin analysis (window 1)}
 
-\item{minwindow1}{desired date in MMDD format to end analysis (window 1)}
+\item{minwindow1}{date in MMDD format to end analysis (window 1)}
 
-\item{minwindow2}{desired date in MMDD format to begin analysis (window 2)}
+\item{minwindow2}{date in MMDD format to begin analysis (window 2)}
 
-\item{peakwindow2}{desired date in MMDD format to end analysis (window 2)}
+\item{peakwindow2}{date in MMDD format to end analysis (window 2)}
 
-\item{quantity}{amount of times the filter is run}
+\item{quantity}{number of times the filter is to be run}
 
 \item{window}{size of filter}
 
@@ -35,7 +35,11 @@ Plots the Time Series of Mid Summer Drought data. The input must be in the form 
 with the first data point being January 1st of a respective year.
 }
 \examples{
-# graph = msdrought::msdGraph(x, year, peakwindow1="05-01", minwindow1="06-01",
-# minwindow2 ="08-31", peakwindow2="10-31", quantity = 2, window = 31)
+
+\dontrun{
+data("timeseries")
+ts <- timeseries
+msdrought::msdGraph(ts, 1982)
+}
 
 }

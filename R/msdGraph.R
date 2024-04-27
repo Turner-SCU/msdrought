@@ -9,24 +9,29 @@
 #'
 #' @param x               vector of data or xts
 #' @param year            year of interest
-#' @param peakwindow1     desired date in MMDD format to begin analysis (window 1)
-#' @param minwindow1      desired date in MMDD format to end analysis (window 1)
-#' @param minwindow2      desired date in MMDD format to begin analysis (window 2)
-#' @param peakwindow2     desired date in MMDD format to end analysis (window 2)
-#' @param quantity        amount of times the filter is run
+#' @param peakwindow1     date in MMDD format to begin analysis (window 1)
+#' @param minwindow1      date in MMDD format to end analysis (window 1)
+#' @param minwindow2      date in MMDD format to begin analysis (window 2)
+#' @param peakwindow2     date in MMDD format to end analysis (window 2)
+#' @param quantity        number of times the filter is to be run
 #' @param window          size of filter
 #' @param timeVector      vector of dates (not needed for xts inputs)
 #'
 #' @returns Graph of Time Series Data
 #'
-#'
 #' @examples
-#' # graph = msdrought::msdGraph(x, year, peakwindow1="05-01", minwindow1="06-01",
-#' # minwindow2 ="08-31", peakwindow2="10-31", quantity = 2, window = 31)
+#'
+#' \dontrun{
+#' data("timeseries")
+#' ts <- timeseries
+#' msdrought::msdGraph(ts, 1982)
+#' }
 #'
 #' @export
 #-----------------------------------------------------------------------------------------------------------------------------------------
-msdGraph <- function(x, year, peakwindow1 = "05-01", minwindow1 = "06-01", minwindow2 = "08-31", peakwindow2 = "10-31", quantity = 2, window = 31, timeVector = 0) {
+msdGraph <- function(x, year, peakwindow1 = "05-01", minwindow1 = "06-01",
+                     minwindow2 = "08-31", peakwindow2 = "10-31", quantity = 2,
+                     window = 31, timeVector = 0) {
   #-----------------------------------------------------------------------------------------------------------------------------------------
   # Define variables as NULL values to begin with
   years <- NULL
