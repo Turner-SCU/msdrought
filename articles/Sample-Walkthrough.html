@@ -102,14 +102,16 @@ object, you only need to load the package and proceed to the next
 step.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/" class="external-link">terra</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; terra 1.7.71</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; terra 1.7.71</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Attaching package: 'tidyr'</span></span>
 <span><span class="co">#&gt; The following object is masked from 'package:terra':</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     extract</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org" class="external-link">lubridate</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt;     extract</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org" class="external-link">lubridate</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Attaching package: 'lubridate'</span></span>
 <span><span class="co">#&gt; The following objects are masked from 'package:terra':</span></span>
@@ -117,8 +119,9 @@ step.</p>
 <span><span class="co">#&gt;     intersect, union</span></span>
 <span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     date, intersect, setdiff, union</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://stringr.tidyverse.org" class="external-link">stringr</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt;     date, intersect, setdiff, union</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://stringr.tidyverse.org" class="external-link">stringr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://joshuaulrich.github.io/xts/" class="external-link">xts</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Loading required package: zoo</span></span>
@@ -129,8 +132,9 @@ step.</p>
 <span><span class="co">#&gt;     time&lt;-</span></span>
 <span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     as.Date, as.Date.numeric</span></span>
-<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"prcp_cropped.tif"</span>, package <span class="op">=</span> <span class="st">"msdrought"</span><span class="op">)</span> <span class="co"># This loads the data included in the package, but you would attach your own</span></span>
+<span><span class="co">#&gt;     as.Date, as.Date.numeric</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"prcp_cropped.tif"</span>, package <span class="op">=</span> <span class="st">"msdrought"</span><span class="op">)</span> <span class="co"># This loads the data included in the package, but you would attach your own</span></span>
 <span></span>
 <span><span class="co"># Extract 1 spatial point from the raster data</span></span>
 <span><span class="va">infile</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
@@ -164,7 +168,7 @@ location. This data can now be used with the MSD package and its
 functions. Alternatively, as mentioned above, you could directly load in
 timeseries data. The workflow for that is much simpler than that of
 loading and preparing a raster.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"timeseries"</span><span class="op">)</span> <span class="co"># This loads the data included in the package, but you would attach your own</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">timeseries</span></span></code></pre></div>
 <p>These two processes both end with data in the form of a timeseries
@@ -174,7 +178,7 @@ These statistics include the intensity, duration, firstMaxValue,
 secondMaxValue, and the minimum rainfall points.</p>
 <p>Before we calculate these pieces of data, however, we will need to
 understand the background processes.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Use the msdDates function to extract the key dates related to the window of the MSD</span></span>
 <span><span class="co"># msdDates = msdDates(x, firstStartDate, firstEndDate, secondStartDate, secondEndDate)</span></span>
 <span><span class="va">keyDatesTS</span> <span class="op">&lt;-</span> <span class="fu">msdrought</span><span class="fu">::</span><span class="fu"><a href="../reference/msdDates.html">msdDates</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/time.html" class="external-link">time</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
@@ -189,14 +193,15 @@ to calculate the statistics related to the MSD. We will see an output of
 1 value per year of data. Because the timeseries we’ve created from the
 raster is for 2 years of data (1981 and 1982) we will see 2 values of
 each parameter.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Use msdStats and r's built-in apply function to apply the intensity calculation across the filtered timeseries data</span></span>
 <span><span class="co"># msdStats = msdStats(x, dates, fcn)</span></span>
 <span><span class="va">durationValues</span> <span class="op">&lt;-</span> <span class="fu">msdrought</span><span class="fu">::</span><span class="fu"><a href="../reference/msdStats.html">msdStats</a></span><span class="op">(</span><span class="va">filterTS</span>, <span class="va">keyDatesTS</span>, fcn <span class="op">=</span> <span class="st">"duration"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Registered S3 method overwritten by 'quantmod':</span></span>
 <span><span class="co">#&gt;   method            from</span></span>
-<span><span class="co">#&gt;   as.zoo.data.frame zoo</span></span>
-<span><span class="va">intensityValues</span> <span class="op">&lt;-</span> <span class="fu">msdrought</span><span class="fu">::</span><span class="fu"><a href="../reference/msdStats.html">msdStats</a></span><span class="op">(</span><span class="va">filterTS</span>, <span class="va">keyDatesTS</span>, fcn <span class="op">=</span> <span class="st">"intensity"</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   as.zoo.data.frame zoo</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">intensityValues</span> <span class="op">&lt;-</span> <span class="fu">msdrought</span><span class="fu">::</span><span class="fu"><a href="../reference/msdStats.html">msdStats</a></span><span class="op">(</span><span class="va">filterTS</span>, <span class="va">keyDatesTS</span>, fcn <span class="op">=</span> <span class="st">"intensity"</span><span class="op">)</span></span>
 <span><span class="va">firstMaxValues</span> <span class="op">&lt;-</span> <span class="fu">msdrought</span><span class="fu">::</span><span class="fu"><a href="../reference/msdStats.html">msdStats</a></span><span class="op">(</span><span class="va">filterTS</span>, <span class="va">keyDatesTS</span>, fcn <span class="op">=</span> <span class="st">"firstMaxValue"</span><span class="op">)</span></span>
 <span><span class="va">secondMaxValues</span> <span class="op">&lt;-</span> <span class="fu">msdrought</span><span class="fu">::</span><span class="fu"><a href="../reference/msdStats.html">msdStats</a></span><span class="op">(</span><span class="va">filterTS</span>, <span class="va">keyDatesTS</span>, fcn <span class="op">=</span> <span class="st">"secondMaxValue"</span><span class="op">)</span></span>
 <span><span class="va">minValues</span> <span class="op">&lt;-</span> <span class="fu">msdrought</span><span class="fu">::</span><span class="fu"><a href="../reference/msdStats.html">msdStats</a></span><span class="op">(</span><span class="va">filterTS</span>, <span class="va">keyDatesTS</span>, fcn <span class="op">=</span> <span class="st">"min"</span><span class="op">)</span></span></code></pre></div>
@@ -208,7 +213,7 @@ comprehensive and use the previously discussed functions to greater use.
 These functions are msdMain and msdGraph.</p>
 <p>msdMain is a function that calculates all of the relevant statistics
 at once and outputs it in a single table.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># msdMain takes the input parameters from their basic form and calculates the relevant statistics</span></span>
 <span><span class="co"># msdMain = msdMain(x, firstStartDate, firstEndDate, secondStartDate, secondEndDate, window, quantity)</span></span>
 <span><span class="va">allStats</span> <span class="op">&lt;-</span> <span class="fu">msdrought</span><span class="fu">::</span><span class="fu"><a href="../reference/msdMain.html">msdMain</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
@@ -217,7 +222,7 @@ the calculated data and parameters to determine if a single year in
 question represents a year with a Mid-Summer Drought or not. Below,
 we’ll use 1982 as an example, as there was a Mid-Summer Drought during
 that year.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Use msdGraph to calculate the statistics and analyze them to determine if an MSD was present or not during the course of one year</span></span>
 <span><span class="co"># msdGraph = msdGraph(x, year, firstStartDate, firstEndDate, secondStartDate, secondEndDate, window, quantity)</span></span>
 <span><span class="va">graph1982</span> <span class="op">&lt;-</span> <span class="fu">msdrought</span><span class="fu">::</span><span class="fu"><a href="../reference/msdGraph.html">msdGraph</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">1982</span><span class="op">)</span></span>
