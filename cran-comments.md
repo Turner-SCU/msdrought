@@ -1,6 +1,15 @@
 ## Submission of revised version: v 0.1.0 - May 21, 2024
 
-* This is a revised version for a new package that contains the requested fixes after the first submission attempt.
+* This is a revised version for a new package that contains the requested fixes after the first submission attempt. Changes included the following:
+    - Revised DESCRIPTION to avoid starting with "This package"
+    - Added single quotes around software names where they appeared
+    - Removed code lines that had been commented out
+    - Added short examples in Rd files
+              - msdFilter.Rd
+              - msdGraph.Rd
+              - msdMain.Rd
+              - msdStats.Rd
+    - Replaced print() with message() or stop() to allow user control of messages
 --------------------------------------------------------------------------------
 **From remote Windows check - devtools::check_win_devel()
 
@@ -79,7 +88,7 @@ Possibly misspelled words in DESCRIPTION:
 * DONE
 Status: 1 NOTE
 
-
+--------------------------------------------------------------------------------
 ** From remote MacOS check - devtools::check_mac_release()
 
 * using log directory ‘/Volumes/PkgBuild/work/1716257047-96630b797c7d168a/packages/big-sur-arm64/results/4.4/msdrought.Rcheck’
